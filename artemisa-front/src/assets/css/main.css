@@ -1,0 +1,298 @@
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #c2c2c2;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #4bc5fd;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #fcb84a;
+}
+
+@-moz-keyframes slidein {
+    0% {
+        left: -296px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-webkit-keyframes slidein {
+    0% {
+        left: -296px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes slidein {
+    0% {
+        left: -296px
+    }
+    100% {
+        left: 0
+    }
+}
+
+@-moz-keyframes slideout {
+    0% {
+        left: 0
+    }
+    100% {
+        left: -296px
+    }
+}
+
+@-webkit-keyframes slideout {
+    0% {
+        left: 0
+    }
+    100% {
+        left: -296px
+    }
+}
+
+@keyframes slideout {
+    0% {
+        left: 0
+    }
+    100% {
+        left: -296px
+    }
+}
+
+@-moz-keyframes bodyslidein {
+    0% {
+        left: 0
+    }
+    100% {
+        margin-left: 296px
+    }
+}
+
+@-webkit-keyframes bodyslidein {
+    0% {
+        left: 0
+    }
+    100% {
+        left: 0
+    }
+}
+
+@keyframes bodyslidein {
+    0% {
+        margin-left: 0
+    }
+    100% {
+        margin-left: 296px
+    }
+}
+
+@-moz-keyframes bodyslideout {
+    0% {
+        margin-left: 296px
+    }
+    100% {
+        margin-right: 0
+    }
+}
+
+@-webkit-keyframes bodyslideout {
+    0% {
+        margin-left: 296px
+    }
+    100% {
+        margin-left: 0
+    }
+}
+
+@keyframes bodyslideout {
+    0% {
+        margin-left: 296px
+    }
+    100% {
+        margin-left: 0
+    }
+}
+
+
+@media only screen and (min-width:768px) {
+    .r-lx {
+        -moz-animation: bodyslidein .3s forwards;
+        -o-animation: bodyslidein .3s forwards;
+        -webkit-animation: bodyslidein .3s forwards;
+        animation: bodyslidein .3s forwards;
+        -webkit-transform-style: preserve-3d;
+        transform-style: preserve-3d
+    }
+    .jp-display{display:none!important;}
+}
+
+@media only screen and (max-width:767px) {
+    #navbar{width: 100%!important;}
+    @-moz-keyframes slidein {
+        0% {
+            left: -100%
+        }
+        100% {
+            left: 0
+        }
+    }
+    @-webkit-keyframes slidein {
+        0% {
+            left: -100%
+        }
+        100% {
+            left: 0
+        }
+    }
+    @keyframes slidein {
+        0% {
+            left: -100%
+        }
+        100% {
+            left: 0
+        }
+    }
+    @-moz-keyframes slideout {
+        0% {
+            left: 0
+        }
+        100% {
+            left: -100%
+        }
+    }
+    @-webkit-keyframes slideout {
+        0% {
+            left: 0
+        }
+        100% {
+            left: -100%
+        }
+    }
+    @keyframes slideout {
+        0% {
+            left: 0
+        }
+        100% {
+            left: -100%
+        }
+    }
+    @-moz-keyframes bodyslidein {
+        0% {
+            left: 0
+        }
+        100% {
+            margin-left: 0!important
+        }
+    }
+    @-webkit-keyframes bodyslidein {
+        0% {
+            left: 0
+        }
+        100% {
+            left: 0
+        }
+    }
+    @keyframes bodyslidein {
+        0% {
+            margin-left: 0!important
+        }
+        100% {
+            margin-left: 0!important
+        }
+    }
+    @-moz-keyframes bodyslideout {
+        0% {
+            margin-left: 0!important
+        }
+        100% {
+            margin-left: 0!important
+        }
+    }
+    @-webkit-keyframes bodyslideout {
+        0% {
+            margin-left: 0!important
+        }
+        100% {
+            margin-left: 0!important
+        }
+    }
+    @keyframes bodyslideout {
+        0% {
+            margin-left: 0!important
+        }
+        100% {
+            margin-left: 0!important
+        }
+    }
+}
+
+.grid-items {
+    width: 100%;
+    min-height: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 0fr));
+    grid-gap: 30px;
+    place-content: center;
+}
+
+button.btn-round-item {
+    width: 100%;
+    height: 100%;
+    border-radius: 59px;
+    font-size: 22px;
+    padding: 50px 0;
+    text-align: center;
+    display: table;
+    cursor: pointer;
+    color: white;
+    display: block;
+}
+.dhx{min-height: 100%;display: flex;}
+.r-ln {
+    -moz-animation: slideout .3s forwards;
+    -o-animation: slideout .3s forwards;
+    -webkit-animation: slideout .3s forwards;
+    animation: slideout .3s forwards;
+    -webkit-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+}
+.navigator-footer{font-size: 10px; text-align: left; padding: 10px; background: black; color: white;}
+.was-validated .form-control:invalid, .form-control.is-invalid, .is-invalid .ck-editor__main{--ck-color-base-border:red}
+
+#container-c {
+   /* To create the column layout. */
+   display: flex;
+
+   /* To make the container relative to its children. */
+   position: relative;
+}
+
+#container-c .ck.ck-editor {
+   /* To stretch the editor to max 700px
+       (just to look nice for this example but it can be any size). */
+   width: 100%;
+   max-width: 700px;
+}
+
+#sidebar-c {
+   /* Set some size for the sidebar (it can be any). */
+   min-width: 300px;
+
+   /* Add some distance. */
+   padding: 0 10px;
+}
+#container-c .ck.ck-editor{max-width: unset;}
+input { color-scheme: light; }
+html body.swal2-height-auto{width: 100%!important; height: 100%!important;}

@@ -1,0 +1,7 @@
+{
+  "name": "artemisa-front",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

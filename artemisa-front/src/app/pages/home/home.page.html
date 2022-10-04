@@ -1,0 +1,55 @@
+<div id="navbar" class="flex-shrink-0 bg-white sidebar">
+  <div class="navbar-logo">
+    <a routerLink="/" class="d-flex align-items-center text-decoration-none text-center main-logo">
+      <img class="margin-center" src="assets/logo.png" width="100"/>
+    </a>
+  </div>
+  <div class="user-profile p-3">
+    <button type="button" class="close btn btn-outline-dark jp-display" (click)="toggleSideBar()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <img *ngIf="user?.photo" src="{{user?.photo}}" width="164" height="164"/>
+    <div class="user-name">{{user?.name}} {{user?.lastName}}</div>
+    <div class="user-email">{{user?.email}}</div>
+  </div>
+  <ul class="list-unstyled ps-0 accordion">
+    <ng-container *ngFor="let link of navLinks">
+      <ng-container *ngIf="link.rank.length === 0 || link.rank.indexOf(user?.data?.rank) > -1">
+        <li class="accordion-item" [ngClass]="(tab === link.link) || ((link.link === '' && (tab === undefined || tab === ''))) ? 'rainbow' : ''"  *ngIf="link.sublinks.length === 0; else subLinks">
+          <a class="f-li align-items-center collapsed text-decoration-none" (click)="navigate(link.link)">
+            <ion-icon name="{{link.icon}}"></ion-icon>
+            <p>{{link.name}}</p>
+          </a>
+        </li>
+        <ng-template #subLinks>
+          <li class="accordion-item" [ngClass]="">
+            <a class="f-li align-items-center collapsed text-decoration-none accordion-button" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + link.link" aria-expanded="false" aria-controls="collapseOne">
+              <ion-icon name="{{link.icon}}"></ion-icon>
+              <p>{{link.name}}</p>
+            </a>
+          </li>
+          <div class="collapse" id="{{link.link}}">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li class="normal-li" *ngFor="let sublink of link.sublinks" [ngClass]="(tab === sublink.link) ? 'rainbow' : ''">
+                <a class="f-li align-items-center collapsed text-decoration-none" (click)="navigate(sublink.link)">
+                <ion-icon name="{{sublink.icon}}"></ion-icon>
+                <p>{{sublink.name}}</p></a>
+              </li>
+            </ul>
+          </div>
+        </ng-template>
+      </ng-container>
+    </ng-container>
+  </ul>
+</div>
+<div id="main-container" class="r-lx p-0" *ngIf="user">
+  <div class="second-bar">
+    <a routerLink="/" id="second-logo" class="align-items-center text-decoration-none text-center main-logo" style="display:none">
+      <img class="margin-center" src="assets/logo.png" width="100"/>
+    </a>
+    <div id="nav-bar-button" class="opacity" (click)="toggleSideBar()"><ion-icon name="menu"></ion-icon></div>
+  </div>
+  <ion-content>
+      <ion-router-outlet></ion-router-outlet>
+  </ion-content>
+</div>

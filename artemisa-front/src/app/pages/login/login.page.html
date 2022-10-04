@@ -1,0 +1,53 @@
+<ion-content>
+  <div class="h-100 home-theme">
+    <div class="row h-100">
+      <div class="col-md-auto align-self-center mx-auto p-4">
+        <div id="container" class="p-5">
+          <div class="logo">
+            <a class="navbar-brand logo" routerLink="../" style="margin: 0 auto"><img src="assets/logo.png" width="176" alt="Logo"/></a>
+          </div>
+          <div class="pt-3 pb-3">
+            <span class="brand-f"></span>
+          </div>
+          <form [formGroup]="loginForm" (ngSubmit)="login()">
+            <div class="form-group">
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="bi bi-envelope"></i></span>
+                </div>
+                <input type="email" formControlName="email" class="form-control" [ngClass]="{'is-invalid' : loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)}" id="email" placeholder="ejemplo@hotmail.com" autocomplete="on">
+                <ng-container *ngIf="loginForm.controls['email'].invalid && (loginForm.controls['email'].dirty || loginForm.controls['email'].touched)">
+                  <div class="invalid-feedback" *ngIf="loginForm.controls['email'].errors.required">Es necesario que ingreses un correo.</div>
+                  <div class="invalid-feedback" *ngIf="loginForm.controls['email'].errors.email">Es necesario que ingreses un correo válido.</div>
+                </ng-container>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="input-group mb-2">
+                <app-show-hide-password class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text"><i class="bi bi-key"></i></span>
+                  </div>
+                  <input #input type="password" formControlName="password" class="form-control" [ngClass]="{'is-invalid' : loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)}" id="current-password" placeholder="**********" autocomplete="on">
+                  <ng-container *ngIf="loginForm.controls['password'].invalid && (loginForm.controls['password'].dirty || loginForm.controls['password'].touched)">
+                    <div class="invalid-feedback" *ngIf="loginForm.controls['password'].errors.required">Es necesario que ingreses la contraseña</div>
+                  </ng-container>
+                </app-show-hide-password>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-auto mb-2 max-w">
+                <button type="submit" class="btn btn-primary skyler">Iniciar Sesión</button>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-md-auto mb-2 max-w">
+                <small>¿Olvidaste tu contraseña? Haz click <a href="#" (click)="forgot()">aquí</a>.</small>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

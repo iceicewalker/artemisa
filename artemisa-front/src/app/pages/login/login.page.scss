@@ -1,0 +1,32 @@
+@media (min-width: 767px){
+    #container {*{max-width: 300px;}}
+}
+.video__wrap {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+}
+.video__wrap video {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.bg-container{background:url('../../../assets/bg.jpg');background-attachment: fixed; background-size: cover;position: fixed;width: 100%;height: 100%;}
+.col.index-bg img{max-width: 300px;position: absolute; right: 0; padding: 0px 25px;bottom: 0;}
+.index-bg{ background-image: linear-gradient(135deg, #fcb037, #e638c7, #00bbff); background-size: cover; background-position: center right; vertical-align: middle; display: flex; align-items: center; min-height: 100%;position: absolute; z-index: -1; left: 0; right: 0; top: 0; bottom: 0; }
+#container{background: white; border-radius: 13px;padding-left: 2rem!important; padding-right: 2rem!important;}
+@media (min-width: 768px) { #container{max-height: 90vh;background: white; border-radius: 13px;padding-left: 4rem!important; padding-right: 4rem!important;} .row.h-100 { flex-direction: row-reverse!important; } .input-group{width: 400px;width: 100%;} }
+.card:hover{ transform: scale(1.05); box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06); }
+.logo{text-align: center;}
+.brand-f{ -webkit-text-fill-color: transparent; background: linear-gradient(45deg,#000000, #898989); background-clip: text; -webkit-background-clip: text; font-size: 2rem; }
+.input-group-text {height: 100%;}
+button, input{width: 400px;}
+.input-group-prepend span {
+    border-top-right-radius: 0;background: linear-gradient(45deg, #c092fc, #36abff, #9058ff); 
+    border-bottom-right-radius: 0;-webkit-text-fill-color: #0000; background-clip: text; -webkit-background-clip: text; border: 1px solid #687cff; font-weight: 500;color:#687cff;
+}
+.input-group-prepend i{color:black}
