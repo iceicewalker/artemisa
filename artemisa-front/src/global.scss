@@ -306,3 +306,7 @@ li.pagination-next, li.pagination-previous { font-family: inherit; text-transfor
     margin-top: auto;
     border-top: 1px solid #ededed!important;
 }
+:host{
+    --ion-font-family: 'Roboto';
+}
+body{font-family: 'Roboto', sans-serif;}
