@@ -4,7 +4,6 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class Globals {
     NAVLIST = [
-        {"link": "", "name": "Home", "icon": "menu-outline", "sublinks": [], "rank": []},
         //{"link": "tsheets", "name": "Tsheets", "icon": "time-outline", "sublinks": [], "rank": []},
         {"link": "dashboard", "name": "Dashboard", "icon": "stats-chart", "sublinks": [], "rank": []},
         {"link": "customers", "name": "Clientes", "icon": "people-outline", "sublinks": [
