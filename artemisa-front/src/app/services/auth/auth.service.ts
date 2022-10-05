@@ -53,7 +53,6 @@ export class AuthService {
       // Signed in
       const user = userCredential.user;
       this.alertService.toast({ icon: 'success', title: '¡Bienvenido del vuelta!', text: 'Nos alegra volver a verte.' });
-      //this.redirectTo("home/index");
     })
     .catch((error) => {
       var errorTemp = (error.code).split("/");

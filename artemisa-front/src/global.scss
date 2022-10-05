@@ -207,7 +207,9 @@ a{cursor: pointer;}
     }
 }
 .text-right{text-align: right;}
-button.close {position: absolute;right: 15px;border-color: #00000014;}
+button.close {position: absolute;right: 15px;font-size: 25px;border:0}
+button.close:hover, .opacity:hover {opacity:.87}
+button.close:active, .opacity:active {opacity:.93}
 ion-item{--border-style: 0;--padding-end: 0;--padding-start: 0;}
 ion-range{margin: 0;padding-left: 0;padding-right: 0;}
 .ml-5 {width: 90%;margin: 0 auto;}
@@ -275,7 +277,7 @@ ion-range{margin: 0;padding-left: 0;padding-right: 0;}
     ul.list-unstyled.accordion { overflow: auto; height: 100%;margin:0;display:flex;flex-direction: column;}
     .user-profile{text-align: center;font-size: 1.2rem;text-overflow: ellipsis;white-space: pre-wrap;}
     .user-name {text-transform: uppercase;font-weight: 500;margin-top:6px}
-    .user-email {font-size: 1rem;font-weight: 300;}
+    .user-email {text-transform: uppercase;font-size: 1rem;font-weight: 300;}
     li:hover{background-color: #f7f7f7;} li:active{background-color: #e2e2e2;}
     ul.list-unstyled.ps-0.accordion, .user-profile { border-right: 1px solid #ededed; }
 }
