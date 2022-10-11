@@ -6,9 +6,55 @@
           <h4><b>Administrar Clientes</b></h4>
           <h6>En esta pestaña se podrá visualizar, modificar y eliminar clientes.</h6>
         </div>
-        <div class="col-md-12 col-lg-12 pb-3">
-
-          <div class="card">
+        <div class="col-md-12 col-lg-12">
+          <div class="row">
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>0<br/><ion-chip color="warning"> Nuevos (mes) </ion-chip></h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>0<br/><ion-chip color="success"> Nuevos (año) </ion-chip></h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>0<br/><ion-chip color="primary"> Total </ion-chip></h3>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6 pb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                    <ion-item style="width: 100%;">
+                      <ion-select style="width: 100%;" placeholder="Select the reason for the request" (ionChange)="searchInput.type = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                        <ion-select-option *ngFor="let type of types" [value]="type.name">{{type.name}}</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 pb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                    <input class="form-control" type="text" [(ngModel)] = "searchInput.nombre" placeholder="Ingrese el texto a buscar...">
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="card mb-3">
             <div class="card-body">
               <table class="table table-hover table-dynamic" style="width:100%">
                 <thead class="datatable-header">
