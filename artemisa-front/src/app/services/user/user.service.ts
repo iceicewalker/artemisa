@@ -13,18 +13,24 @@ export class UserService {
   constructor(private router: Router) {}
 
   doc(uid){
-    return doc(this.db, "users", uid);
+    return doc(this.db, "usuarios", uid);
   }
   async set(record) {
-    return await setDoc(doc(this.db, "users", record['id']), record, { merge: true });
+    return await setDoc(doc(this.db, "usuarios", record['id']), record, { merge: true });
   }
   async get(uid) {
-    return await getDoc(doc(this.db, "users", uid));
+    return await getDoc(doc(this.db, "usuarios", uid));
   }
   async getAll() {
-    return await getDocs(query(collection(this.db, "users")));
+    return await getDocs(query(collection(this.db, "usuarios")));
   }
   async delete(id){
-    return await deleteDoc(doc(this.db, "users", id));
+    return await deleteDoc(doc(this.db, "usuarios", id));
+  }
+  getQuery(){
+    return query(collection(this.db, "usuarios"));
+  }
+  getCategoryQuery(){
+    return query(collection(this.db, "categorias"));
   }
 }

@@ -8,13 +8,13 @@
     <button type="button" class="close btn jp-display" (click)="toggleSideBar()">
       <span aria-hidden="true"><ion-icon name="chevron-back-outline"></ion-icon></span>
     </button>
-    <img *ngIf="user?.photo" src="{{user?.photo}}" width="164" height="164"/>
-    <div class="user-name">{{user?.name}} {{user?.lastName}}</div>
-    <div class="user-email">{{user?.rank === 1 ? 'Administrador' : 'Empleado'}}</div>
+    <img *ngIf="user?.foto" src="{{user?.foto}}" width="164" height="164"/>
+    <div class="user-name">{{user?.nombre}} {{user?.apellido}}</div>
+    <div class="user-email">{{user?.rango === 1 ? 'Administrador' : 'Empleado'}}</div>
   </div>
   <ul class="list-unstyled ps-0 accordion">
     <ng-container *ngFor="let link of navLinks">
-      <ng-container *ngIf="link.rank.length === 0 || link.rank.indexOf(user?.data?.rank) > -1">
+      <ng-container *ngIf="link.rank.length === 0 || link.rank.indexOf(user?.rango) > -1">
         <li class="accordion-item" [ngClass]="(tab === link.link) || ((link.link === '' && (tab === undefined || tab === ''))) ? 'rainbow' : ''"  *ngIf="link.sublinks.length === 0; else subLinks">
           <a class="f-li align-items-center collapsed text-decoration-none" (click)="navigate(link.link)">
             <ion-icon name="{{link.icon}}"></ion-icon>
@@ -22,13 +22,13 @@
           </a>
         </li>
         <ng-template #subLinks>
-          <li class="accordion-item" [ngClass]="">
+          <li class="accordion-item" (click)="toggle(link.link)">
             <a class="f-li align-items-center collapsed text-decoration-none accordion-button" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + link.link" aria-expanded="false" aria-controls="collapseOne">
               <ion-icon name="{{link.icon}}"></ion-icon>
               <p>{{link.name}}</p>
             </a>
           </li>
-          <div class="collapse" id="{{link.link}}">
+          <div class="collapse" [id]="link.link">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
               <li class="normal-li" *ngFor="let sublink of link.sublinks" [ngClass]="(tab === sublink.link) ? 'rainbow' : ''">
                 <a class="f-li align-items-center collapsed text-decoration-none" (click)="navigate(sublink.link)">

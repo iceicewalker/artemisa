@@ -6,25 +6,25 @@ export class Globals {
     NAVLIST = [
         //{"link": "tsheets", "name": "Tsheets", "icon": "time-outline", "sublinks": [], "rank": []},
         {"link": "dashboard", "name": "Dashboard", "icon": "stats-chart", "sublinks": [], "rank": []},
-        {"link": "customers", "name": "Clientes", "icon": "people-outline", "sublinks": [
-          {"link": "", "name": "Ingresar Clientes", "icon": "add-outline", "rank": []},
+        {"link": "customer", "name": "Clientes", "icon": "people-outline", "sublinks": [
+          {"link": "add-customer", "name": "Ingresar Cliente", "icon": "add-outline", "rank": []},
           {"link": "customers", "name": "Administrar Clientes", "icon": "id-card-outline", "rank": []},
         ], "rank": []},
-        {"link": "categories", "name": "Categorías", "icon": "pricetag-outline", "sublinks": [
-          {"link": "", "name": "Ingresar Categorías", "icon": "add-outline", "rank": []},
-          {"link": "customers", "name": "Administrar Categorías", "icon": "pricetags-outline", "rank": []},
+        {"link": "category", "name": "Categorías", "icon": "pricetag-outline", "sublinks": [
+          {"link": "add-category", "name": "Ingresar Categoría", "icon": "add-outline", "rank": []},
+          {"link": "categories", "name": "Administrar Categorías", "icon": "pricetags-outline", "rank": []},
         ], "rank": []},
-        {"link": "inventory", "name": "Inventario", "icon": "cube-outline", "sublinks": [
-          {"link": "", "name": "Ingresar Inventario", "icon": "add-outline", "rank": []},
-          {"link": "customers", "name": "Administrar Inventario", "icon": "albums-outline", "rank": []},
+        {"link": "inventoryx", "name": "Inventario", "icon": "cube-outline", "sublinks": [
+          {"link": "add-inventory", "name": "Ingresar Inventario", "icon": "add-outline", "rank": []},
+          {"link": "inventory", "name": "Administrar Inventario", "icon": "albums-outline", "rank": []},
         ], "rank": []},
-        {"link": "orders", "name": "Pedidos", "icon": "bag-check-outline", "sublinks": [
-          {"link": "", "name": "Ingresar Pedidos", "icon": "add-outline", "rank": []},
-          {"link": "customers", "name": "Administrar Pedidos", "icon": "bag-outline", "rank": []},
+        {"link": "order", "name": "Pedidos", "icon": "bag-check-outline", "sublinks": [
+          {"link": "add-order", "name": "Ingresar Pedido", "icon": "add-outline", "rank": []},
+          {"link": "orders", "name": "Administrar Pedidos", "icon": "bag-outline", "rank": []},
         ], "rank": []},
-        {"link": "employees", "name": "Empleados", "icon": "person-outline", "sublinks": [
-          {"link": "", "name": "Ingresar Empleados", "icon": "add-outline", "rank": []},
-          {"link": "customers", "name": "Administrar Empleados", "icon": "id-card-outline", "rank": []},
+        {"link": "employee", "name": "Empleados", "icon": "person-outline", "sublinks": [
+          {"link": "add-employee", "name": "Ingresar Empleado", "icon": "add-outline", "rank": []},
+          {"link": "employees", "name": "Administrar Empleados", "icon": "id-card-outline", "rank": []},
         ], "rank": []},
         {"link": "signOut", "name": "Cerrar Sesión", "icon": "log-out-outline", "sublinks": [], "rank": []},
     ];

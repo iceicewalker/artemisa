@@ -1,0 +1,56 @@
+<ion-content id="ion-content">
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>Administrar Categorías</b></h4>
+          <h6>En esta pestaña se podrá visualizar, modificar y eliminar categorías.</h6>
+        </div>
+        <div class="col-md-12 col-lg-12 pb-3">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-hover table-dynamic" style="width:100%">
+                <thead class="datatable-header">
+                  <tr>
+                    <th>
+                      #
+                    </th>
+                    <th (click)="sort('nombre')" class="btn-style">
+                      Nombre
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'nombre'"></ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'nombre'"></ion-icon>
+                    </th>
+                    <th>
+                      Opciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="datatable-body">
+                  <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                    <td>
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>#</b></h3>
+                        {{ (i + 1) }}
+                      </ion-label></td>
+                    <td>
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
+                        <h2>{{user.nombre}} {{ user.apellido }}</h2>
+                        <h3>{{user.email}}</h3>
+                      </ion-label>
+                    </td>
+                    <td>
+                      <a class="dropdown-item" (click)="modifyUser(user)"><ion-icon name="eye-outline"></ion-icon></a>
+                      <a class="dropdown-item"> <ion-icon color="danger" name="trash-outline"></ion-icon> </a>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

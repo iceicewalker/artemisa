@@ -14,7 +14,9 @@ const routes: Routes = [
   {
     path: '',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard], data: { logged: true }
-  }
+  },
+  { path: '404', redirectTo: ''},
+  { path: '**', redirectTo: ''}
 ];
 @NgModule({
   imports: [

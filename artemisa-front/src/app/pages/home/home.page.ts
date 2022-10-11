@@ -32,10 +32,7 @@ export class HomePage implements OnInit {
     auth.onAuthStateChanged((user) => {
       if(user){
         this.user = user; 
-        onSnapshot(this.userService.doc(user.uid), (doc => { 
-          this.user = Object.assign(doc.data(),{ ref: doc.ref }); this.cdr.detectChanges();
-          console.log(this.user);
-        }))
+        onSnapshot(this.userService.doc(user.uid), (doc => { this.user = Object.assign(doc.data(),{ ref: doc.ref }); this.cdr.detectChanges(); }))
       }else{
         this.user = {};
       }
@@ -46,6 +43,9 @@ export class HomePage implements OnInit {
     jQuery('#main-container').toggleClass("r-lx");
     jQuery('#navbar').toggleClass("r-ln");
     jQuery('#second-logo').toggle("slow");
+  }
+  toggle(link){
+
   }
 
   navigate(url){

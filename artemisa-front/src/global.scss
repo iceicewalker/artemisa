@@ -139,6 +139,27 @@ a{cursor: pointer;}
 @media (max-width: 767px){
     .home-theme .logo{text-decoration: none !important;font-family: "Nordic Alternative Regular"; -webkit-text-fill-color: transparent; background: linear-gradient(45deg,#fcb037,#e638c7,#31bcfd); background-clip: text; -webkit-background-clip: text; font-size: 5rem; font-weight: bold; line-height: 1; }
     .index-bg{background:white!important;}
+    .table-dynamic {
+        display: block;
+    }
+    .table-dynamic tr{    border-bottom: 1px solid #0000000a;   }
+    .table-dynamic thead{    display: none;}
+    .table-dynamic tbody{width: 100%; display: block;}
+    .table-dynamic tr, .table-dynamic td {
+        display: block
+    }
+    .table-dynamic td { border-color: transparent; }
+    .table-dynamic tr, .table-dynamic td {
+        padding: 0px!important;
+        width: 100%!important;
+        text-align: center;
+    }
+    .table-dynamic td:first-child {
+        padding-top: 20px!important;
+    }
+    .table-dynamic td:last-child {
+        padding-bottom: 20px!important;
+    }
 }
 .footer-x{color: #00000069;font-size: 13px;}
 
@@ -195,16 +216,7 @@ a{cursor: pointer;}
         --width: 70%!important;
         --height: 80%!important;
     }
-}
-@media screen and (max-width: 767px){
-    .evaluate-modal, .email-modal{
-        height: 100%;
-        width: 100%;
-    }
-    .evaluate-modal-form{
-        height: 100%;
-        width: 100%;
-    }
+    .table-dynamic-hide{display:none}
 }
 .text-right{text-align: right;}
 button.close {position: absolute;right: 15px;font-size: 25px;border:0}
