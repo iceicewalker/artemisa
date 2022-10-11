@@ -308,3 +308,18 @@ th {
 .btn-style:active{opacity: .93;}
 .card{border-color: #0000000d!important;box-shadow: 0px 0px 3px #00000008;}
 th ion-icon {font-size: 11px;}
+.form-control{
+    border-color: #0000000d!important;
+}
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #bbbbbb;
+    opacity: 1; /* Firefox */
+  }
+  
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #bbbbbb;
+  }
+  
+::-ms-input-placeholder { /* Microsoft Edge */
+    color: #bbbbbb;
+  }

@@ -11,46 +11,46 @@
             <div class="col-md-4 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
-                  <h3>0<br/><ion-chip color="warning"> Nuevos (mes) </ion-chip></h3>
+                  <h3>0<br />
+                    <ion-chip color="warning"> Nuevos (mes) </ion-chip>
+                  </h3>
                 </div>
               </div>
             </div>
             <div class="col-md-4 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
-                  <h3>0<br/><ion-chip color="success"> Nuevos (año) </ion-chip></h3>
+                  <h3>0<br />
+                    <ion-chip color="success"> Nuevos (año) </ion-chip>
+                  </h3>
                 </div>
               </div>
             </div>
             <div class="col-md-4 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
-                  <h3>0<br/><ion-chip color="primary"> Total </ion-chip></h3>
+                  <h3>0<br />
+                    <ion-chip color="primary"> Total </ion-chip>
+                  </h3>
                 </div>
               </div>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6 pb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
-                    <ion-item style="width: 100%;">
-                      <ion-select style="width: 100%;" placeholder="Select the reason for the request" (ionChange)="searchInput.type = $event.target['value'] === 'All' ? '' : $event.target['value']">
-                        <ion-select-option *ngFor="let type of types" [value]="type.name">{{type.name}}</ion-select-option>
-                      </ion-select>
-                    </ion-item>
-                  </div>
-                </div>
+              <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                <ion-item style="width: 100%;">
+                  <ion-select style="width: 100%;" placeholder="Selecciona el campo a filtrar"
+                    (ionChange)="searchInput.type = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                    <ion-select-option *ngFor="let type of types" [value]="type.name">{{type.name}}</ion-select-option>
+                  </ion-select>
+                </ion-item>
               </div>
             </div>
             <div class="col-md-6 pb-3">
-              <div class="card">
-                <div class="card-body">
-                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
-                    <input class="form-control" type="text" [(ngModel)] = "searchInput.nombre" placeholder="Ingrese el texto a buscar...">
-                  </div>
-                </div>
+              <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                <input class="form-control" type="text" [(ngModel)]="searchInput.nombre"
+                  placeholder="Ingrese el texto a buscar...">
               </div>
             </div>
           </div>
@@ -61,28 +61,38 @@
                   <tr>
                     <th (click)="sort('documento.valor')" class="btn-style">
                       Identificación
-                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'documento.valor'"></ion-icon>
-                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'documento.valor'"></ion-icon>
+                      <ion-icon name="arrow-down-outline"
+                        *ngIf="sortDirection == 1 && orderHeader === 'documento.valor'"></ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'documento.valor'">
+                      </ion-icon>
                     </th>
                     <th (click)="sort('nombre')" class="btn-style">
                       Nombre
-                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'nombre'"></ion-icon>
-                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'nombre'"></ion-icon>
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'nombre'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'nombre'">
+                      </ion-icon>
                     </th>
                     <th (click)="sort('direccion')" class="btn-style">
                       Dirección
-                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'direccion'"></ion-icon>
-                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'direccion'"></ion-icon>
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'direccion'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'direccion'">
+                      </ion-icon>
                     </th>
                     <th (click)="sort('telefono')" class="btn-style">
                       Teléfono
-                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'telefono'"></ion-icon>
-                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'telefono'"></ion-icon>
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'telefono'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'telefono'">
+                      </ion-icon>
                     </th>
                     <th (click)="sort('categoria')" class="btn-style">
                       Categoría
-                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'categoria'"></ion-icon>
-                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'categoria'"></ion-icon>
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'categoria'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'categoria'">
+                      </ion-icon>
                     </th>
                     <th>
                       Opciones
@@ -90,13 +100,15 @@
                   </tr>
                 </thead>
                 <tbody class="datatable-body">
-                  <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                  <tr
+                    *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
                     <td>
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Identificación</b></h3>
                         {{user.documento.valor}}
                         <h3>{{user.documento.tipo}}</h3>
-                      </ion-label></td>
+                      </ion-label>
+                    </td>
                     <td>
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
@@ -113,8 +125,8 @@
                     </td>
                     <td>
                       <ion-label>
-                      <h3 class="table-dynamic-hide"><b>Teléfono</b></h3>
-                      {{ user.telefono }}
+                        <h3 class="table-dynamic-hide"><b>Teléfono</b></h3>
+                        {{ user.telefono }}
                       </ion-label>
                     </td>
                     <td>
@@ -124,8 +136,12 @@
                       </ion-label>
                     </td>
                     <td>
-                      <a class="dropdown-item" (click)="modifyUser(user)"><ion-icon name="eye-outline"></ion-icon></a>
-                      <a class="dropdown-item"> <ion-icon color="danger" name="trash-outline"></ion-icon> </a>
+                      <a class="dropdown-item" (click)="modifyUser(user)">
+                        <ion-icon name="eye-outline"></ion-icon>
+                      </a>
+                      <a class="dropdown-item">
+                        <ion-icon color="danger" name="trash-outline"></ion-icon>
+                      </a>
                     </td>
                   </tr>
                 </tbody>
