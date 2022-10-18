@@ -19,10 +19,10 @@ export class CategoriesPage implements OnInit {
   constructor(private userService: UserService) { }
 
   ngOnInit() {
-    this.loadUsers();
+    this.loadCategories();
   }
 
-  loadUsers(){
+  loadCategories(){
     const q = this.userService.getCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.users = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) })

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { deleteUser, getAuth } from "firebase/auth";
-import { doc, setDoc, getDoc, getDocs, collection, query, deleteDoc, getFirestore, where } from "firebase/firestore";
+import { doc, setDoc, getDoc, getDocs, collection, query, deleteDoc, getFirestore, where, limit, addDoc } from "firebase/firestore";
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -15,8 +15,17 @@ export class CustomerService {
   doc(uid){
     return doc(this.db, "clientes", uid);
   }
+  getByPar(par, value) {
+    return query(collection(this.db, "clientes"), where(par, "==", value), limit(1));
+  }
   async set(record) {
     return await setDoc(doc(this.db, "clientes", record['id']), record, { merge: true });
+  }
+  async add(record) {
+    delete record?.documentoTipo;
+    delete record?.documentoValor;
+    record.creacion = new Date()
+    return await addDoc(collection(this.db, "clientes"), record);
   }
   async get(uid) {
     return await getDoc(doc(this.db, "clientes", uid));

@@ -13,6 +13,7 @@
   },
   "private": true,
   "dependencies": {
+    "@angular/animations": "^14.2.6",
     "@angular/common": "^14.0.0",
     "@angular/core": "^14.0.0",
     "@angular/forms": "^14.0.0",
@@ -33,6 +34,7 @@
     "ngx-filter-pipe": "^2.1.2",
     "ngx-order-pipe": "^2.2.0",
     "ngx-pagination": "^6.0.2",
+    "ngx-spinner": "^14.0.0",
     "rxjs": "~6.6.0",
     "save": "^2.9.0",
     "sweetalert2": "^11.4.37",

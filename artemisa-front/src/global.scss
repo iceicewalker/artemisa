@@ -32,11 +32,11 @@
 body{font-family: 'Roboto', sans-serif;}
 h2#swal2-title { margin-bottom: 5px; }
 div#swal2-html-container { margin-top: 0; }
-.rainbow{background: linear-gradient(45deg, #8db633, #50d999);border: 0; }
+.rainbow{background: linear-gradient(45deg, #005dd1, #a380f7);border: 0; }
 .skyline {background: linear-gradient(45deg, #00f3ff, #50aeff, #5cedff);border: 0;}
 .red {background: linear-gradient(45deg, #ff0000, #ff5050, #ff5555);border: 0;}
-.rainbow:hover{background: linear-gradient(45deg,#a2d13c,#61f373); }
-.rainbow:active{background: linear-gradient(45deg,#719523,#3de151);}
+.rainbow:hover{background: linear-gradient(45deg, #1dadf1, #ba9efd); }
+.rainbow:active{background: linear-gradient(45deg, #0350b1, #8e65f3);}
 .rainbow-txt{ background: linear-gradient(45deg, #fcb037, #e638c7, #31bcfd); border: 0;-webkit-text-fill-color: transparent;background-clip: text; -webkit-background-clip: text;  }
 .rainbow-txt:hover{ background: linear-gradient(45deg, #fcb84a, #fc4edc, #4bc5fd);-webkit-text-fill-color: transparent;background-clip: text; -webkit-background-clip: text;  }
 .rainbow-txt:active{ background: linear-gradient(45deg, #e9a231, #d633b8, #26aae7);-webkit-text-fill-color: transparent;background-clip: text; -webkit-background-clip: text;  }
@@ -193,7 +193,7 @@ a{cursor: pointer;}
 @media screen and (min-width: 768px){
     .evaluate-modal {
         --width: 70%!important;
-        --height: 95%!important;
+        --height: 80%!important;
     }
     .evaluate-modal-form{
         position: absolute;
@@ -324,3 +324,7 @@ li.pagination-next, li.pagination-previous { font-family: inherit; text-transfor
     --ion-font-family: 'Roboto';
 }
 body{font-family: 'Roboto', sans-serif;}
+.options-btn{display: grid;
+    grid-auto-flow: column;
+    width: fit-content;
+    grid-gap: 5px;}

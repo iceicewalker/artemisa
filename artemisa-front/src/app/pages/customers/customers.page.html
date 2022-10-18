@@ -11,7 +11,7 @@
             <div class="col-md-4 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
-                  <h3>0<br />
+                  <h3>{{counter.m}}<br />
                     <ion-chip color="warning"> Nuevos (mes) </ion-chip>
                   </h3>
                 </div>
@@ -20,7 +20,7 @@
             <div class="col-md-4 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
-                  <h3>0<br />
+                  <h3>{{counter.y}}<br />
                     <ion-chip color="success"> Nuevos (año) </ion-chip>
                   </h3>
                 </div>
@@ -29,7 +29,7 @@
             <div class="col-md-4 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
-                  <h3>0<br />
+                  <h3>{{counter.t}}<br />
                     <ion-chip color="primary"> Total </ion-chip>
                   </h3>
                 </div>
@@ -100,13 +100,12 @@
                   </tr>
                 </thead>
                 <tbody class="datatable-body">
-                  <tr
-                    *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                  <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
                     <td>
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Identificación</b></h3>
-                        {{user.documento.valor}}
-                        <h3>{{user.documento.tipo}}</h3>
+                        {{user.documento?.valor}}
+                        <h3><small>{{user.documento?.tipo === 0 ? "Cédula" : (user.documento?.tipo === 1 ? 'RUC' : 'Otro') }}</small></h3>
                       </ion-label>
                     </td>
                     <td>
@@ -136,12 +135,10 @@
                       </ion-label>
                     </td>
                     <td>
-                      <a class="dropdown-item" (click)="modifyUser(user)">
-                        <ion-icon name="eye-outline"></ion-icon>
-                      </a>
-                      <a class="dropdown-item">
-                        <ion-icon color="danger" name="trash-outline"></ion-icon>
-                      </a>
+                      <div class="options-btn">
+                        <button type="button" class="btn btn-primary skyler" (click)="modify(user)"><ion-icon name="pencil-outline"></ion-icon></button>
+                        <button type="button" class="btn btn-danger redline" (click)="delete(user)"><ion-icon name="trash-outline"></ion-icon></button>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

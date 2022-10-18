@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class LoginPage implements OnInit {
 
   loginForm: FormGroup;
-  constructor( private cdr: ChangeDetectorRef, private fb: FormBuilder, private alertService: AlertService, private authService: AuthService, private modalController: ModalController) {
+  constructor(private cdr: ChangeDetectorRef, private fb: FormBuilder, private alertService: AlertService, private authService: AuthService, private modalController: ModalController) {
     this.createLoginForm();
   }
 
