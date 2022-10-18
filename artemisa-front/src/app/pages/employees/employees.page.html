@@ -84,9 +84,11 @@
                         {{user?.rango === 1 ? 'Administrador' : 'Empleado'}}
                       </ion-label>
                     </td>
-                    <td>
-                      <a class="dropdown-item" (click)="modifyUser(user)"><ion-icon name="eye-outline"></ion-icon></a>
-                      <a class="dropdown-item"> <ion-icon color="danger" name="trash-outline"></ion-icon> </a>
+                    <td class="align-middle">
+                      <div class="options-btn">
+                        <button type="button" class="btn btn-primary skyler" (click)="modify(user)"><ion-icon name="pencil-outline"></ion-icon></button>
+                        <button type="button" class="btn btn-danger redline" (click)="delete(user)"><ion-icon name="trash-outline"></ion-icon></button>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

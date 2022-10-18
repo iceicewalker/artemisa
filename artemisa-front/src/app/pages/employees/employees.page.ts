@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 import { onSnapshot } from 'firebase/firestore';
+import { AlertService } from 'src/app/services/alert/alert.service';
 import { UserService } from 'src/app/services/user/user.service';
+import { AddEmployeePage } from '../add-employee/add-employee.page';
 
 @Component({
   selector: 'app-employees',
@@ -16,7 +19,7 @@ export class EmployeesPage implements OnInit {
   searchInput: any = { nombre: '', apellido: '' };
   users: any;
   
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService,  private alertService: AlertService, private modal: ModalController) { }
 
   ngOnInit() {
     this.loadUsers();
@@ -29,8 +32,32 @@ export class EmployeesPage implements OnInit {
     });
   }
 
-  modifyUser(user){
+  async modify(user){
+    const modal = await this.modal.create({
+      component: AddEmployeePage,
+      componentProps: {data: user},
+      cssClass: 'evaluate-modal'
+    });
+    modal.present();
+  } 
 
+  delete(user){
+    this.alertService.fire({
+      title: '¿Estás seguro de borrar el empleado?',
+      text: 'Esta acción no se puede revertir.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userService.delete(user.id).then((r) => {
+          this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El empleado se ha eliminado con éxito.' });
+        })
+      }
+    });
   }
 
   sort(headerName){

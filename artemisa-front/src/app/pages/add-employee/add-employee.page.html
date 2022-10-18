@@ -3,65 +3,133 @@
     <div class="container pb-5 pt-3">
       <div class="row pb-3">
         <div class="col-md-12 col-lg-12 pb-3">
-          <h4><b>Agregar Empleado</b></h4>
-          <h6>Completa todos los campos correctamente para ingresar un nuevo empleado.</h6>
+          <h4><b>{{data ? "Modificar" : "Agregar"}} Empleado</b></h4>
+          <h6>{{data ? "Completa todos los campos correctamente para modificar al empleado." : "Completa todos los campos correctamente para ingresar un nuevo empleado."}}</h6>
         </div>
         <div class="col-md-12 col-lg-12">
           <div class="card mb-3">
             <div class="card-body">
-              <form class="row">
+              <form class="row" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="mb-3 col-lg-4 col-ms-4">
-                  <label for="inputEmail" class="form-label">Tipo de documento</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Selecciona el tipo de documento">
-                  <div id="emailHelp" class="form-text">Tipo de documento de identidad (Ej: RUC o CI).</div>
+                  <label for="input" class="form-label">Tipo de documento</label>
+                  <select class="form-select" placeholder="Selecciona el tipo de documento" formControlName="documentoTipo" aria-label="Tipo de documento" [ngClass]="{'is-invalid' : form.controls['documentoTipo'].invalid && (form.controls['documentoTipo'].dirty || form.controls['documentoTipo'].touched)}">
+                    <option selected value="">Selecciona el tipo de documento</option>
+                    <option value="0">Cédula</option>
+                    <option value="1">RUC</option>
+                    <option value="2">Otro</option>
+                  </select>
+                  <div class="form-text">Tipo de documento de identidad (Ej: RUC o CI).</div>
+                  <ng-container *ngIf="form.controls['documentoTipo'].invalid && (form.controls['documentoTipo'].dirty || form.controls['documentoTipo'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['documentoTipo'].errors.required">Es necesario que selecciones el tipo de documento.</div>
+                  </ng-container>
                 </div>
                 <div class="mb-3 col-lg-8 col-ms-8">
-                  <label for="inputEmail" class="form-label">Documento</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="XXXXXXXXXX">
-                  <div id="emailHelp" class="form-text">Documento de identidad (Ej: 1710000091).</div>
+                  <label for="input" class="form-label">Documento</label>
+                  <input type="text" formControlName="documentoValor" class="form-control" aria-describedby="help" placeholder="XXXXXXXXXX" [ngClass]="{'is-invalid' : form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)}">
+                  <div class="form-text">Documento de identidad (Ej: 1710000091).</div>
+                  <ng-container *ngIf="form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['documentoValor'].errors.required">Es necesario que ingreses el documento.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['documentoValor'].errors.documentNotValid">El documento no es válido.</div>
+                  </ng-container>
                 </div>
                 <div class="mb-3 col-lg-6 col-ms-12">
-                  <label for="inputEmail" class="form-label">Nombre</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Juan">
-                  <div id="emailHelp" class="form-text">Nombre del cliente (Ej: Juan).</div>
+                  <label for="input" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" aria-describedby="help" placeholder="Juan" formControlName="nombre" [ngClass]="{'is-invalid' : form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)}">
+                  <div class="form-text">Nombre del empleado (Ej: Juan).</div>
+                  <ng-container *ngIf="form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['nombre'].errors.required">Es necesario que ingreses el nombre.</div>
+                  </ng-container>
                 </div>
                 <div class="mb-3 col-lg-6 col-ms-12">
-                  <label for="inputEmail" class="form-label">Apellido</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Perez">
-                  <div id="emailHelp" class="form-text">Apellido del cliente (Ej: Rodríguez).</div>
+                  <label for="input" class="form-label">Apellido</label>
+                  <input type="text" class="form-control" aria-describedby="help" placeholder="Perez" formControlName="apellido" [ngClass]="{'is-invalid' : form.controls['apellido'].invalid && (form.controls['apellido'].dirty || form.controls['apellido'].touched)}">
+                  <div class="form-text">Apellido del empleado (Ej: Rodríguez).</div>
+                  <ng-container *ngIf="form.controls['apellido'].invalid && (form.controls['apellido'].dirty || form.controls['apellido'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['apellido'].errors.required">Es necesario que ingreses el apellido.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-4 col-ms-6" *ngIf="!data">
+                  <label for="input" class="form-label">Contraseña</label>
+                  <app-show-hide-password class="input-group">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text"><i class="bi bi-key"></i></span>
+                    </div>
+                    <input #input type="password" formControlName="clave" class="form-control" [ngClass]="{'is-invalid' : form.controls['clave'].invalid && (form.controls['clave'].dirty || form.controls['clave'].touched)}" id="current-password" placeholder="**********" autocomplete="off">
+                    <ng-container *ngIf="form.controls['clave'].invalid && (form.controls['clave'].dirty || form.controls['clave'].touched)">
+                      <div class="invalid-feedback" *ngIf="form.controls['clave'].errors.required">Es necesario que ingreses la contraseña</div>
+                    </ng-container>
+                  </app-show-hide-password>
+                  <div class="form-text gp" (click)="generatePassword()">Generar contraseña</div>
+                </div>
+                <div class="mb-3 col-lg-4 col-ms-6">
+                  <label for="input" class="form-label">Correo</label>
+                  <input type="email" class="form-control" aria-describedby="help" placeholder="ejemplo@hotmail.com" formControlName="email" [ngClass]="{'is-invalid' : form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)}">
+                  <div class="form-text">Correo del empleado (Ej: ejemplo@hotmail.com).</div>
+                  <ng-container *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['email'].errors.required">Es necesario que ingreses un correo.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['email'].errors.email">Es necesario que ingreses un correo válido.</div>
+                  </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-4">
-                  <label for="inputEmail" class="form-label">Correo</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@hotmail.com">
-                  <div id="emailHelp" class="form-text">Correo del cliente (Ej: ejemplo@hotmail.com).</div>
-                </div>
-                <div class="mb-3 col-lg-4 col-ms-4">
-                  <label for="inputEmail" class="form-label">Teléfono</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@hotmail.com">
-                  <div id="emailHelp" class="form-text">Teléfono del cliente (Ej: 0989300000).</div>
-                </div>
-                <div class="mb-3 col-lg-4 col-ms-4">
-                  <label for="inputEmail" class="form-label">Categoría</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ejemplo@hotmail.com">
-                  <div id="emailHelp" class="form-text">Categoría para clasificar el cliente.</div>
+                  <label for="input" class="form-label">Teléfono</label>
+                  <input type="phone" class="form-control" aria-describedby="help" placeholder="0989XXXXXX" formControlName="telefono" [ngClass]="{'is-invalid' : form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)}">
+                  <div class="form-text">Teléfono del empleado (Ej: 0989300000).</div>
+                  <ng-container *ngIf="form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['telefono'].errors.required">Es necesario que ingreses un teléfono.</div>
+                  </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-12">
-                  <label for="inputEmail" class="form-label">Provincia</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Pichincha">
-                  <div id="emailHelp" class="form-text">Provincia en la que vive el cliente.</div>
+                  <label for="input" class="form-label">Provincia</label>
+                  <select (change)="setCantones()" class="form-select" aria-describedby="help" placeholder="Pichincha" formControlName="provincia" [ngClass]="{'is-invalid' : form.controls['provincia'].invalid && (form.controls['provincia'].dirty || form.controls['provincia'].touched)}">
+                    <option selected value="">Selecciona la Provincia</option>
+                    <option *ngFor="let prov of provs" [value]="prov.id">{{prov.id}}</option>
+                  </select>
+                  <div class="form-text">Provincia en la que vive el empleado.</div>
+                  <ng-container *ngIf="form.controls['provincia'].invalid && (form.controls['provincia'].dirty || form.controls['provincia'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['provincia'].errors.required">Es necesario que ingreses una Provincia.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-4 col-ms-12" *ngIf="form.value?.provincia">
+                  <label for="input" class="form-label">Cantón</label>
+                  <select class="form-select" aria-describedby="help" formControlName="canton" [ngClass]="{'is-invalid' : form.controls['canton'].invalid && (form.controls['canton'].dirty || form.controls['canton'].touched)}">
+                    <option selected value="">Selecciona el Cantón</option>
+                    <option *ngFor="let can of cantones" [value]="can">{{can}}</option>
+                  </select>
+                  <div class="form-text">Cantón en el que vive el empleado.</div>
+                  <ng-container *ngIf="form.controls['canton'].invalid && (form.controls['canton'].dirty || form.controls['canton'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['canton'].errors.required">Es necesario que selecciones un Cantón.</div>
+                  </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-12">
-                  <label for="inputEmail" class="form-label">Cantón</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Quito">
-                  <div id="emailHelp" class="form-text">Cantón en el que vive el cliente.</div>
+                  <label for="input" class="form-label">Dirección</label>
+                  <input type="email" class="form-control" aria-describedby="help" placeholder="Av. del Maestro" formControlName="direccion" [ngClass]="{'is-invalid' : form.controls['direccion'].invalid && (form.controls['direccion'].dirty || form.controls['direccion'].touched)}">
+                  <div class="form-text">Dirección del empleado para los envíos.</div>
+                  <ng-container *ngIf="form.controls['direccion'].invalid && (form.controls['direccion'].dirty || form.controls['direccion'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['direccion'].errors.required">Es necesario que ingreses una dirección.</div>
+                  </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-12">
-                  <label for="inputEmail" class="form-label">Dirección</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Av. del Maestro">
-                  <div id="emailHelp" class="form-text">Dirección del cliente para los envíos.</div>
+                  <label for="input" class="form-label">Tipo</label>
+                  <select class="form-select" aria-describedby="help" formControlName="rango" [ngClass]="{'is-invalid' : form.controls['rango'].invalid && (form.controls['rango'].dirty || form.controls['rango'].touched)}">
+                    <option selected value="">Selecciona el Rango</option>
+                    <option *ngFor="let rank of ranks" [value]="rank.id">{{rank.name}}</option>
+                  </select>
+                  <div class="form-text">Rango de acceso del usuario.</div>
+                  <ng-container *ngIf="form.controls['rango'].invalid && (form.controls['rango'].dirty || form.controls['rango'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['rango'].errors.required">Es necesario que selecciones un rango.</div>
+                  </ng-container>
+                </div>
+                <div class="photo-update pt-3 pb-3">
+                  <label for="input" class="form-label">Foto</label>
+                  <label for="file" class="input-file-btn">
+                    <div class="newPhoto" *ngIf="form.value.foto" style="background: url({{form.value.foto}}) center center / cover;border-radius: 10px; height: 100%; left: 0px; position: absolute;top: 0px;width: 100%;z-index: 1;"></div>
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                    <div>Selecciona la foto</div>
+                  </label>
+                  <input class="file" type="file" id="file" (change)="onFileSelected($event)" autocomplete="off"/>
                 </div>
                 <div class="mb-3 col-lg-12">
-                  <button type="submit" class="btn btn-primary">Submit</button>
+                  <button type="submit" class="btn btn-primary skyler">{{data ? "Actualizar" : "Registrar"}}</button>
                 </div>
               </form>
             </div>

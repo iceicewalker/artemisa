@@ -101,40 +101,40 @@
                 </thead>
                 <tbody class="datatable-body">
                   <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
-                    <td>
+                    <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Identificación</b></h3>
                         {{user.documento?.valor}}
                         <h3><small>{{user.documento?.tipo === 0 ? "Cédula" : (user.documento?.tipo === 1 ? 'RUC' : 'Otro') }}</small></h3>
                       </ion-label>
                     </td>
-                    <td>
+                    <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
                         <h2>{{user.nombre}} {{ user.apellido }}</h2>
                         <h3>{{user.email}}</h3>
                       </ion-label>
                     </td>
-                    <td>
+                    <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Dirección</b></h3>
                         {{ user.direccion }}
                         <h3>{{user.canton}}, {{user.provincia}}</h3>
                       </ion-label>
                     </td>
-                    <td>
+                    <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Teléfono</b></h3>
                         {{ user.telefono }}
                       </ion-label>
                     </td>
-                    <td>
+                    <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Categoría</b></h3>
                         {{ user.categoria }}
                       </ion-label>
                     </td>
-                    <td>
+                    <td class="align-middle">
                       <div class="options-btn">
                         <button type="button" class="btn btn-primary skyler" (click)="modify(user)"><ion-icon name="pencil-outline"></ion-icon></button>
                         <button type="button" class="btn btn-danger redline" (click)="delete(user)"><ion-icon name="trash-outline"></ion-icon></button>

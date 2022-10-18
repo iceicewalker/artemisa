@@ -26,22 +26,24 @@
                   </tr>
                 </thead>
                 <tbody class="datatable-body">
-                  <tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
-                    <td>
+                  <tr *ngFor="let cat of cats | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                    <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>#</b></h3>
                         {{ (i + 1) }}
                       </ion-label></td>
-                    <td>
+                    <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
-                        <h2>{{user.nombre}} {{ user.apellido }}</h2>
-                        <h3>{{user.email}}</h3>
+                        <h2>{{cat.nombre}} {{ cat.apellido }}</h2>
+                        <h3>{{cat.email}}</h3>
                       </ion-label>
                     </td>
-                    <td>
-                      <a class="dropdown-item" (click)="modifyUser(user)"><ion-icon name="eye-outline"></ion-icon></a>
-                      <a class="dropdown-item"> <ion-icon color="danger" name="trash-outline"></ion-icon> </a>
+                    <td class="align-middle">
+                      <div class="options-btn">
+                        <button type="button" class="btn btn-primary skyler" (click)="modify(cat)"><ion-icon name="pencil-outline"></ion-icon></button>
+                        <button type="button" class="btn btn-danger redline" (click)="delete(cat)"><ion-icon name="trash-outline"></ion-icon></button>
+                      </div>
                     </td>
                   </tr>
                 </tbody>

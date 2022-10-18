@@ -69,10 +69,12 @@ export class AddCustomerPage implements OnInit {
   async submit(){
     this.spinner.show();
     if(this.form.valid){
-      var payload = Object.assign(this.form.value, {id: this.data['id'], documento: { tipo: Number(this.form.value?.documentoTipo), valor: this.form.value?.documentoValor }});
+      var payload = Object.assign(this.form.value, {documento: { tipo: Number(this.form.value?.documentoTipo), valor: this.form.value?.documentoValor }});
       if(this.data){
+        payload.id = this.data['id'];
         this.customerService.set(payload).then((r) => {
           this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El cliente se ha actualizado con éxito.' });
+          this.form.reset();
           this.modalController.dismiss();
           this.spinner.hide();
         }).catch((e) => {
@@ -83,8 +85,10 @@ export class AddCustomerPage implements OnInit {
         const querySnapshot = await getDocs(this.customerService.getByPar("documento.valor", payload?.documento.valor));
         if(querySnapshot.empty){
           this.customerService.add(payload).then((r) => {
-            if(r?.id)
+            if(r?.id){
               this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El cliente se ha registrado con éxito.' });
+              this.form.reset();
+            }
             else
               this.alertService.toast({ icon: 'error', title: '¡Ha ocurrido un error!', text: 'Vuelve a intentarlo en unos minutos.' })
             this.spinner.hide();
