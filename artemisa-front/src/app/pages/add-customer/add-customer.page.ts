@@ -73,6 +73,7 @@ export class AddCustomerPage implements OnInit {
       if(this.data){
         this.customerService.set(payload).then((r) => {
           this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El cliente se ha actualizado con éxito.' });
+          this.modalController.dismiss();
           this.spinner.hide();
         }).catch((e) => {
           this.alertService.toast({ icon: 'error', title: '¡Ha ocurrido un error!', text: 'Vuelve a intentarlo en unos minutos.' })
