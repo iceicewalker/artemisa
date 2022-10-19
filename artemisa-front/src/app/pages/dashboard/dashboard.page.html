@@ -1,9 +1,86 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>dashboard</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content id="ion-content">
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>Dashboard</b></h4>
+          <h6>Resumen general de todos los pedidos y clientes.</h6>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class="row">
+            <div class="col-md-12 pb-12">
+              <h5>Pedidos</h5>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>{{counter.p}}<br />
+                    <ion-chip color="warning"> Pendientes </ion-chip>
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>{{counter.c}}<br />
+                    <ion-chip color="success"> Completados </ion-chip>
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>{{counter.t}}<br />
+                    <ion-chip color="primary"> Total </ion-chip>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 col-lg-6">
+          <div class="row">
+            <div class="col-md-12 pb-12">
+              <h5>Clientes</h5>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>{{counterC.m}}<br />
+                    <ion-chip color="warning"> Nuevos (mes) </ion-chip>
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>{{counterC.y}}<br />
+                    <ion-chip color="success"> Nuevos (año) </ion-chip>
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>{{counterC.t}}<br />
+                    <ion-chip color="primary"> Total </ion-chip>
+                  </h3>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <div class="card mb-3">
+            <div class="card-body">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

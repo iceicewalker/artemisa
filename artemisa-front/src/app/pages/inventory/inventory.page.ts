@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryPage implements OnInit {
 
+  counter: any = { p: 0, c: 0, t: 0 }
   constructor() { }
 
   ngOnInit() {

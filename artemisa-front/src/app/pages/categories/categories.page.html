@@ -12,10 +12,10 @@
               <table class="table table-hover table-dynamic" style="width:100%">
                 <thead class="datatable-header">
                   <tr>
-                    <th>
+                    <th style="width:20px">
                       #
                     </th>
-                    <th (click)="sort('nombre')" class="btn-style">
+                    <th (click)="sort('nombre')" class="btn-style" style="width:100%">
                       Nombre
                       <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'nombre'"></ion-icon>
                       <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'nombre'"></ion-icon>
