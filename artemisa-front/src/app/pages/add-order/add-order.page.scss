@@ -20,6 +20,7 @@ ion-item {
 .card.selected:active {background: #000000;color: white;}
 .flex-stock {
     display: flex;
+    justify-content: center;
     align-items: center;grid-gap:5px
 }.danger{background: #fddddd;}
 .medium{background:#ffc79757;}
