@@ -14,6 +14,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxSpinnerModule,
     AddCustomerPageRoutingModule,
     ReactiveFormsModule
   ],

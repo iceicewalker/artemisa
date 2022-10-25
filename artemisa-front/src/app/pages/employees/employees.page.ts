@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { onSnapshot } from 'firebase/firestore';
+import { Globals } from 'src/app/globals';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { AddEmployeePage } from '../add-employee/add-employee.page';
@@ -16,10 +17,13 @@ export class EmployeesPage implements OnInit {
   isDescOrder: boolean = true;
   orderHeader: String ='';
   sortDirection = 1;
-  searchInput: any = { nombre: '', apellido: '' };
+  searchInput: any = { nombre: '', apellido: '', rango: '', documentoValor: '' };
+  filter: any = "";
   users: any;
+  categories = this.globals.rangos;
+  types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'Apellido', id: 'apellido'}, {name: 'Documento', id: 'documentoValor'}, {name: 'Provincia', id: 'provincia'}, {name: 'Cantón', id: 'canton'}]
   
-  constructor(private userService: UserService,  private alertService: AlertService, private modal: ModalController) { }
+  constructor(private globals: Globals, private userService: UserService,  private alertService: AlertService, private modal: ModalController) { }
 
   ngOnInit() {
     this.loadUsers();

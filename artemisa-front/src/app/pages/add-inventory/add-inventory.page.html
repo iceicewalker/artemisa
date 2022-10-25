@@ -1,9 +1,113 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>add-inventory</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content id="ion-content">
+  <ngx-spinner *ngIf="data" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>{{data ? "Modificar" : "Agregar"}} {{ myProfile ? "mi perfil" : "Empleado" }}</b></h4>
+          <h6>{{myProfile ? "Completa todos los campos correctamente para modificar tu perfil." : (data ? "Completa todos los campos correctamente para modificar al empleado." : "Completa todos los campos correctamente para ingresar un nuevo empleado.")}}</h6>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <form class="row" [formGroup]="form" (ngSubmit)="submit()">
+                <div class="mb-3 col-lg-6 col-ms-12">
+                  <label for="input" class="form-label">SKU</label>
+                  <input type="text" class="form-control" aria-describedby="help" placeholder="XXXX-XXXX-XXXX" formControlName="sku" [ngClass]="{'is-invalid' : form.controls['sku'].invalid && (form.controls['sku'].dirty || form.controls['sku'].touched)}">
+                  <div class="form-text">El número/código de referencia.</div>
+                  <ng-container *ngIf="form.controls['sku'].invalid && (form.controls['sku'].dirty || form.controls['sku'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['sku'].errors.required">Es necesario que ingreses el sku.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-6 col-ms-12">
+                  <label for="input" class="form-label">Nombre</label>
+                  <input type="text" class="form-control" aria-describedby="help" placeholder="Nombre del Producto" formControlName="nombre" [ngClass]="{'is-invalid' : form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)}">
+                  <div class="form-text">Nombre del producto (Ej: Gorra negra).</div>
+                  <ng-container *ngIf="form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['nombre'].errors.required">Es necesario que ingreses el nombre.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-6 col-ms-12">
+                  <label for="input" class="form-label">Categoría</label>
+                  <select class="form-select" aria-describedby="help" placeholder="Selecciona la categoría" formControlName="categoria" [ngClass]="{'is-invalid' : form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)}">
+                    <option selected value="">Selecciona la categoría del cliente</option>
+                    <option *ngFor="let cat of categories" [value]="cat.id">{{cat.nombre}}</option>
+                  </select>
+                  <div class="form-text">Categoría para clasificar el cliente.</div>
+                  <ng-container *ngIf="form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['categoria'].errors.required">Es necesario que selecciones una categoría.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-3 col-ms-3">
+                  <label for="input" class="form-label">Costo</label>
+                  <input currencyMask  type="text" class="form-control" aria-describedby="help" placeholder="$0.00" formControlName="costo" [ngClass]="{'is-invalid' : form.controls['costo'].invalid && (form.controls['costo'].dirty || form.controls['costo'].touched)}">
+                  <div class="form-text">Costo de compra o producción.</div>
+                  <ng-container *ngIf="form.controls['costo'].invalid && (form.controls['costo'].dirty || form.controls['costo'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['costo'].errors.required">Es necesario que ingreses el costo.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['costo'].errors.min">El costo debe ser igual o superior a {{form.controls['costo'].errors.min.min}}.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-3 col-ms-3">
+                  <label for="input" class="form-label">Precio de venta</label>
+                  <input currencyMask  type="text" class="form-control" aria-describedby="help" placeholder="$0.00" formControlName="precio" [ngClass]="{'is-invalid' : form.controls['precio'].invalid && (form.controls['precio'].dirty || form.controls['precio'].touched)}">
+                  <div class="form-text">Precio de venta al público.</div>
+                  <ng-container *ngIf="form.controls['precio'].invalid && (form.controls['precio'].dirty || form.controls['precio'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['precio'].errors.required">Es necesario que ingreses el precio de venta.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['precio'].errors.min">El precio de venta debe ser igual o superior a {{form.controls['precio'].errors.min.min}}.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-3 col-ms-3" *ngIf="!data">
+                  <label for="input" class="form-label">Stock</label>
+                  <input  type="number" class="form-control" aria-describedby="help" placeholder="100" formControlName="stock" [ngClass]="{'is-invalid' : form.controls['stock'].invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)}">
+                  <div class="form-text">Cantidades en existencia.</div>
+                  <ng-container *ngIf="form.controls['stock'].invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['stock'].errors.required">Es necesario que ingreses el stock actual.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['stock'].errors.min">El stock medio debe ser igual o superior a {{form.controls['stock'].errors.min.min}}.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-3 col-ms-3">
+                  <label for="input" class="form-label">Stock Mínimo</label>
+                  <input  type="number" class="form-control" aria-describedby="help" placeholder="100" formControlName="stockMinimo" [ngClass]="{'is-invalid' : form.controls['stockMinimo'].invalid && (form.controls['stockMinimo'].dirty || form.controls['stockMinimo'].touched)}">
+                  <div class="form-text">Cantidades mínimas que deberían tener disponibles.</div>
+                  <ng-container *ngIf="form.controls['stockMinimo'].invalid && (form.controls['stockMinimo'].dirty || form.controls['stockMinimo'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['stockMinimo'].errors.required">Es necesario que ingreses el stock mínimo.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['stockMinimo'].errors.min">El stock mínimo debe ser igual o superior a {{form.controls['stockMinimo'].errors.min.min}}</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-3 col-ms-3">
+                  <label for="input" class="form-label">Stock Medio</label>
+                  <input  type="number" class="form-control" aria-describedby="help" placeholder="100" formControlName="stockMedio" [ngClass]="{'is-invalid' : form.controls['stockMedio'].invalid && (form.controls['stockMedio'].dirty || form.controls['stockMedio'].touched)}">
+                  <div class="form-text">Cantidades mínimas que deberían tener disponibles.</div>
+                  <ng-container *ngIf="form.controls['stockMedio'].invalid && (form.controls['stockMedio'].dirty || form.controls['stockMedio'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['stockMedio'].errors.required">Es necesario que ingreses el stock medio.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['stockMedio'].errors.min">El stock medio debe ser igual o superior a {{form.controls['stockMedio'].errors.min.min}}.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-12 col-ms-12">
+                  <label for="input" class="form-label">Descripción</label>
+                  <textarea type="text" class="form-control" aria-describedby="help" placeholder="Descripción" formControlName="descripcion" [ngClass]="{'is-invalid' : form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)}"></textarea>
+                  <div class="form-text">Breve descripción del producto (puede incluir tamaños, etc).</div>
+                  <ng-container *ngIf="form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['descripcion'].errors.required">Es necesario que ingreses la descripción.</div>
+                  </ng-container>
+                </div>
+                <div class="photo-update pt-3 pb-3">
+                  <label for="input" class="form-label">Foto</label>
+                  <label for="file" class="input-file-btn">
+                    <div class="newPhoto" *ngIf="form.value.foto" style="background: url({{form.value.foto}}) center center / cover;border-radius: 10px; height: 100%; left: 0px; position: absolute;top: 0px;width: 100%;z-index: 1;"></div>
+                    <ion-icon name="cloud-upload-outline"></ion-icon>
+                    <div>Selecciona la foto</div>
+                  </label>
+                  <input class="file" type="file" id="file" (change)="onFileSelected($event)" autocomplete="off"/>
+                </div>
+                <div class="mb-3 col-lg-12">
+                  <button type="submit" class="btn btn-primary skyler">{{data ? "Actualizar" : "Registrar"}}</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

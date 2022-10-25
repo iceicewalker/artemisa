@@ -20,7 +20,6 @@ export class AddCategoryPage implements OnInit {
   constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private categoryService: CategoryService, private userService: UserService, private alertService: AlertService, private modalController: ModalController) { }
   provs = this.globals.provincias;
   categories: any = [];
-  cantones: any = [];
 
   ngOnInit() {
     this.createForm();
@@ -31,16 +30,11 @@ export class AddCategoryPage implements OnInit {
   createForm(){
     this.form = this.fb.group({ "nombre": ["", [Validators.required]] });
   }          
-
-  setCantones(){
-    this.cantones = this.provs.find((p) => p.id === this.form.value['provincia'])['datos'];
-    this.form.controls['canton'].setValue("");
-  }      
   
   async submit(){
     this.spinner.show();
     if(this.form.valid){
-      var payload = Object.assign(this.form.value);
+      var payload = Object.assign(this.form.value, {nombreMin: this.form.value['nombre'].toLowerCase()});
       if(this.data){
         payload.id = this.data['id'];
         this.categoryService.set(payload).then((r) => {
@@ -53,7 +47,7 @@ export class AddCategoryPage implements OnInit {
           this.spinner.hide();
         });
       }else{
-        const querySnapshot = await getDocs(this.categoryService.getByPar("nombre", payload?.nombre));
+        const querySnapshot = await getDocs(this.categoryService.getByPar("nombreMin", payload?.nombreMin));
         if(querySnapshot.empty){
           this.categoryService.add(payload).then((r) => {
             if(r?.id){

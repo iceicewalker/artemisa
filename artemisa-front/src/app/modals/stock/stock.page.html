@@ -1,0 +1,50 @@
+<ion-content id="ion-content">
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>{{type === 1 ? "Agregar" : "Remover"}} Stock</b></h4>
+          <h6>Completa todos los campos correctamente para actualizar el stock del producto.</h6>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <form class="row" [formGroup]="form" (ngSubmit)="submit()">
+                <div class="mb-3 col-lg-6 col-ms-6">
+                  <label for="input" class="form-label">Costo</label>
+                  <input currencyMask  type="text" class="form-control" aria-describedby="help" placeholder="$0.00" formControlName="costo" [ngClass]="{'is-invalid' : form.controls['costo'].invalid && (form.controls['costo'].dirty || form.controls['costo'].touched)}">
+                  <div class="form-text">Costo de compra o producción.</div>
+                  <ng-container *ngIf="form.controls['costo'].invalid && (form.controls['costo'].dirty || form.controls['costo'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['costo'].errors.required">Es necesario que ingreses el costo.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['costo'].errors.min">El costo debe ser igual o superior a {{form.controls['costo'].errors.min.min}}.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-6 col-ms-6">
+                  <label for="input" class="form-label">Stock</label>
+                  <input  type="number" class="form-control" aria-describedby="help" placeholder="100" formControlName="stock" [ngClass]="{'is-invalid' : form.controls['stock'].invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)}">
+                  <div class="form-text">Stock a {{type === 1 ? "agregar" : "remover"}}.</div>
+                  <ng-container *ngIf="form.controls['stock'].invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['stock'].errors.required">Es necesario que ingreses el stock actual.</div>
+                    <div class="invalid-feedback" *ngIf="form.controls['stock'].errors.min">El stock medio debe ser igual o superior a {{form.controls['stock'].errors.min.min}}.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-12 col-ms-12">
+                  <label for="input" class="form-label">Descripción</label>
+                  <input  type="text" class="form-control" aria-describedby="help" placeholder="Descripción" formControlName="descripcion" [ngClass]="{'is-invalid' : form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)}">
+                  <div class="form-text">Motivo de la actualización.</div>
+                  <ng-container *ngIf="form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['descripcion'].errors.required">Es necesario que ingreses la descripción.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-12">
+                  <button type="submit" class="btn btn-primary skyler">{{data ? "Actualizar" : "Registrar"}}</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

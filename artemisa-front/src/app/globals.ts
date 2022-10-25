@@ -20,8 +20,10 @@ export class Globals {
         {"link": "categories", "name": "Administrar Categorías", "icon": "pricetags-outline", "rank": [1]},
       ], "rank": [1]},
       {"link": "inventoryx", "name": "Inventario", "icon": "cube-outline", "sublinks": [
-        {"link": "add-inventory", "name": "Ingresar Inventario", "icon": "add-outline", "rank": [1, 2]},
+        {"link": "add-inventory", "name": "Ingresar Producto", "icon": "add-outline", "rank": [1, 2]},
         {"link": "inventory", "name": "Administrar Inventario", "icon": "albums-outline", "rank": [1, 2]},
+        {"link": "add-product-category", "name": "Ingresar Categoría", "icon": "add-outline", "rank": [1]},
+        {"link": "product-categories", "name": "Administrar Categorías", "icon": "pricetags-outline", "rank": [1]},
       ], "rank": [1, 2]},
       {"link": "order", "name": "Pedidos", "icon": "bag-check-outline", "sublinks": [
         {"link": "add-order", "name": "Ingresar Pedido", "icon": "add-outline", "rank": [1, 2]},

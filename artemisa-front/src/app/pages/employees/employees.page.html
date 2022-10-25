@@ -7,16 +7,33 @@
           <h6>En esta pestaña se podrá visualizar, modificar y eliminar empleados.</h6>
         </div>
         <div class="col-md-12 col-lg-12 pb-3">
+          <div class="row">
+            <div class="col-md-6 pb-3">
+              <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                <ion-item style="width: 100%;">
+                  <ion-select style="width: 100%;" placeholder="Selecciona el campo a filtrar" (ionChange)="filter = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                    <ion-select-option *ngFor="let cat of types" [value]="cat.id">{{cat.name}}</ion-select-option>
+                    <ion-select-option value="All">Ninguno</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </div>
+            </div>
+            <div class="col-md-6 pb-3">
+              <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                <input class="form-control" type="text" [(ngModel)]="searchInput[filter]" placeholder="Texto a buscar..." [disabled]="filter === ''">
+              </div>
+            </div>
+          </div>
           <div class="card">
             <div class="card-body">
               <table class="table table-hover table-dynamic" style="width:100%">
                 <thead class="datatable-header">
                   <tr>
                     <th style="width:64px"></th>
-                    <th (click)="sort('documento.valor')" class="btn-style">
+                    <th (click)="sort('documentoValor')" class="btn-style">
                       Identificación
-                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'documento.valor'"></ion-icon>
-                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'documento.valor'"></ion-icon>
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'documentoValor'"></ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'documentoValor'"></ion-icon>
                     </th>
                     <th (click)="sort('nombre')" class="btn-style">
                       Nombre
@@ -55,8 +72,8 @@
                     <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Identificación</b></h3>
-                        {{user.documento.valor}}
-                        <h3><small>{{user.documento.tipo === 0 ? "Cédula" : (user.documento.tipo === 1 ? 'RUC' : 'Otro') }}</small></h3>
+                        {{user.documentoValor}}
+                        <h3><small>{{user.documentoTipo === 0 || user.documentoTipo === '0' ? "Cédula" : (user.documentoTipo === 1  || user.documentoTipo === '1' ? 'RUC'  : 'Otro') }}</small></h3>
                       </ion-label></td>
                     <td class="align-middle">
                       <ion-label>

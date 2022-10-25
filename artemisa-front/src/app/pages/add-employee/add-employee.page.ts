@@ -20,6 +20,7 @@ export class AddEmployeePage implements OnInit {
 
   form: FormGroup;
   @Input() data: any = null;
+  @Input() myProfile: any = null;
   constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private userService: UserService, private alertService: AlertService, private modalController: ModalController) { }
   provs = this.globals.provincias;
   ranks = this.globals.rangos;
@@ -29,8 +30,12 @@ export class AddEmployeePage implements OnInit {
     this.createForm();
     if(this.data){
       this.form.removeControl('clave');
-      this.form.controls['documentoTipo'].setValue(this.data?.documento.tipo + "");
-      this.form.controls['documentoValor'].setValue(this.data?.documento.valor);
+      this.form.removeControl('documentoTipo');
+      this.form.removeControl('documentoValor');
+      if(this.myProfile)
+        this.form.removeControl('rango');
+      else
+        this.form.controls['rango'].setValue(this.data?.rango);
       this.form.controls['nombre'].setValue(this.data?.nombre);
       this.form.controls['apellido'].setValue(this.data?.apellido);
       this.form.controls['email'].setValue(this.data?.email);
@@ -39,7 +44,6 @@ export class AddEmployeePage implements OnInit {
       this.form.controls['provincia'].setValue(this.data?.provincia); this.setCantones();
       this.form.controls['canton'].setValue(this.data?.canton);
       this.form.controls['direccion'].setValue(this.data?.direccion);
-      this.form.controls['rango'].setValue(this.data?.rango);
     }
   }
 
@@ -67,6 +71,7 @@ export class AddEmployeePage implements OnInit {
     var n = Date.now();
     const file = event.target.files[0];
     if (file) {
+      this.spinner.show();
       const filePath = 'empleados/' + n + Math.floor(Math.random() * 100000001);;
       const fileRef = ref(storage, filePath);
       const task = uploadBytesResumable(fileRef, file);
@@ -87,11 +92,12 @@ export class AddEmployeePage implements OnInit {
         }, 
         (error) => {
           this.form.controls['foto'].setValue(""); 
+          this.spinner.hide();
           // Handle unsuccessful uploads
         }, () => {
           // Handle successful uploads on complete
           // For instance, get the download URL: https://firebasestorage.googleapis.com/...
-          getDownloadURL(task.snapshot.ref).then((downloadURL) => { this.form.controls['foto'].setValue(downloadURL); });
+          getDownloadURL(task.snapshot.ref).then((downloadURL) => { this.form.controls['foto'].setValue(downloadURL);this.spinner.hide();});
         }
       );
     } else {
@@ -107,7 +113,8 @@ export class AddEmployeePage implements OnInit {
   async submit(){
     this.spinner.show();
     if(this.form.valid){
-      var payload = Object.assign(this.form.value, {documento: { tipo: Number(this.form.value?.documentoTipo), valor: this.form.value?.documentoValor }});
+      var payload = this.form.value;
+      payload.rango = Number(payload.rango)
       if(this.data){
         payload.id = this.data['id'];
         this.userService.set(payload).then((r) => {
@@ -120,7 +127,7 @@ export class AddEmployeePage implements OnInit {
           this.spinner.hide();
         });
       }else{
-        const querySnapshot = await getDocs(this.userService.getByPar("documento.valor", payload?.documento.valor));
+        const querySnapshot = await getDocs(this.userService.getByPar("documentoValor", payload?.documento.valor));
         if(querySnapshot.empty){
           const app2 = initializeApp(environment.firebaseConfig, "Secondary");
           const auth2 = getAuth(app2);

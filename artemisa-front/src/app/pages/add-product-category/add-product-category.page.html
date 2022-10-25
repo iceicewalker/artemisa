@@ -1,0 +1,32 @@
+<ion-content id="ion-content">
+  <ngx-spinner *ngIf="data" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>{{data ? "Modificar" : "Agregar"}} Categorías de Productos</b></h4>
+          <h6>{{data ? "Completa todos los campos correctamente para modificar la categoría." : "Completa todos los campos correctamente para ingresar una nueva categoría."}}</h6>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <div class="card mb-3">
+            <div class="card-body">
+              <form class="row" [formGroup]="form" (ngSubmit)="submit()">
+                <div class="mb-3 col-lg-12 col-ms-12">
+                  <label for="input" class="form-label">Nombre</label>
+                  <input type="email" class="form-control" aria-describedby="help" placeholder="Zapatos" formControlName="nombre" [ngClass]="{'is-invalid' : form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)}">
+                  <div class="form-text">Nombre de la categoría.</div>
+                  <ng-container *ngIf="form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)">
+                    <div class="invalid-feedback" *ngIf="form.controls['nombre'].errors.required">Es necesario que ingreses el nombre de la categoría.</div>
+                  </ng-container>
+                </div>
+                <div class="mb-3 col-lg-12">
+                  <button type="submit" class="btn btn-primary skyler">{{data ? "Actualizar" : "Registrar"}}</button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

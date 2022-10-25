@@ -8,6 +8,8 @@ import { getAuth } from 'firebase/auth';
 import { onSnapshot } from '@firebase/firestore';
 import { Location } from '@angular/common';
 import * as jQuery from 'jquery';
+import { ModalController } from '@ionic/angular';
+import { AddEmployeePage } from '../add-employee/add-employee.page';
 
 @Component({
   selector: 'app-home',
@@ -19,7 +21,7 @@ export class HomePage implements OnInit {
   user: any;
   tab: string;
 
-  constructor(private alertService: AlertService, private globals: Globals, private router: Router, private userService: UserService, private authService: AuthService, private location: Location, private cdr: ChangeDetectorRef) { }
+  constructor(private modal: ModalController, private alertService: AlertService, private globals: Globals, private router: Router, private userService: UserService, private authService: AuthService, private location: Location, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(){
     this.loadUser();
@@ -38,6 +40,15 @@ export class HomePage implements OnInit {
       }
     })
   }
+
+  async modify(){
+    const modal = await this.modal.create({
+      component: AddEmployeePage,
+      componentProps: {data: this.user, myProfile: true},
+      cssClass: 'evaluate-modal'
+    });
+    modal.present();
+  } 
   
   toggleSideBar(){
     jQuery('#main-container').toggleClass("r-lx");

@@ -16,7 +16,11 @@ const routes: Routes = [
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule), canActivate: [AuthGuard], data: { logged: true }
   },
   { path: '404', redirectTo: ''},
-  { path: '**', redirectTo: ''}
+  { path: '**', redirectTo: ''},
+  {
+    path: 'product-log',
+    loadChildren: () => import('./modals/product-log/product-log.module').then( m => m.ProductLogPageModule)
+  }
 ];
 @NgModule({
   imports: [

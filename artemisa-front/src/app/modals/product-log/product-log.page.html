@@ -1,0 +1,87 @@
+<ion-content id="ion-content">
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <h4><b>Log del producto</b></h4>
+        <h6>En esta pestaña se podrá visualizar el historial del producto.</h6>
+      </div>
+      <div class="col-md-12 col-lg-12 pb-3">
+        {{ data?.movimientos ? "" : "No existen registros de este producto."}}
+        <div class="card" *ngIf="data?.movimientos">
+          <div class="card-body">
+            <table class="table table-hover table-dynamic" style="width:100%">
+              <thead class="datatable-header">
+                <tr>
+                  <th style="width:64px"></th>
+                  <th (click)="sort('stock')" class="btn-style">
+                    Stock
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'stock'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'stock'">
+                    </ion-icon>
+                  </th>
+                  <th (click)="sort('fecha')" class="btn-style">
+                    Fecha
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'fecha'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'fecha'"></ion-icon>
+                  </th>
+                  <th (click)="sort('costo')" class="btn-style">
+                    Costo
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'costo'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'costo'">
+                    </ion-icon>
+                  </th>
+                  <th (click)="sort('descripcion')" class="btn-style">
+                    Descripción
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'descripcion'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'descripcion'">
+                    </ion-icon>
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="datatable-body">
+                <ng-container *ngFor="let product of data.movimientos| paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                  <tr>
+                    <td>
+                      <ion-label>
+                        {{ i + 1 }}
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Stock</b></h3>
+                        {{product.stock}}
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Fecha</b></h3>
+                        {{product.fecha.toMillis() | date:'yyyy/MM/dd h:mm:ss a'}}
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Costo</b></h3>
+                        {{product.costo | currency}}
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Descripción</b></h3>
+                        {{ product.descripcion }}
+                      </ion-label>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

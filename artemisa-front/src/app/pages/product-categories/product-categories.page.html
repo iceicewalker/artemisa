@@ -1,0 +1,58 @@
+<ion-content id="ion-content">
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>Administrar Categorías de Productos</b></h4>
+          <h6>En esta pestaña se podrá visualizar, modificar y eliminar categorías.</h6>
+        </div>
+        <div class="col-md-12 col-lg-12 pb-3">
+          <div class="card">
+            <div class="card-body">
+              <table class="table table-hover table-dynamic" style="width:100%">
+                <thead class="datatable-header">
+                  <tr>
+                    <th style="width:20px">
+                      #
+                    </th>
+                    <th (click)="sort('nombre')" class="btn-style" style="width:100%">
+                      Nombre
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'nombre'"></ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'nombre'"></ion-icon>
+                    </th>
+                    <th>
+                      Opciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="datatable-body">
+                  <tr *ngFor="let cat of cats | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>#</b></h3>
+                        {{ (i + 1) }}
+                      </ion-label></td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
+                        <h2>{{cat.nombre}} {{ cat.apellido }}</h2>
+                        <h3>{{cat.email}}</h3>
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <div class="options-btn">
+                        <button type="button" class="btn btn-primary skyler" (click)="modify(cat)"><ion-icon name="pencil-outline"></ion-icon></button>
+                        <button type="button" class="btn btn-danger redline" (click)="delete(cat)"><ion-icon name="trash-outline"></ion-icon></button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+              <pagination-controls (pageChange)="p = $event"></pagination-controls>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

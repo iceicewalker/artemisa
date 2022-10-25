@@ -1,9 +1,169 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>inventory</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content id="ion-content">
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <h4><b>Administrar Inventario</b></h4>
+        <h6>En esta pestaña se podrá visualizar, modificar y eliminar items del inventario.</h6>
+      </div>
+      <div class="col-md-12 col-lg-12">
+        <div class="row">
+          <div class="col-md-4 pb-3">
+            <div class="card htr">
+              <div class="card-body text-center">
+                <h3>{{counter.p}}<br />
+                  <ion-chip color="warning"> Stock Bajo </ion-chip>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 pb-3">
+            <div class="card htr">
+              <div class="card-body text-center">
+                <h3>{{counter.c}}<br />
+                  <ion-chip color="success"> Stock Medio </ion-chip>
+                </h3>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 pb-3">
+            <div class="card htr">
+              <div class="card-body text-center">
+                <h3>{{counter.t}}<br />
+                  <ion-chip color="primary"> Stock Normal </ion-chip>
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-12 col-lg-12 pb-3">
+        <div class="row">
+          <div class="col-md-6 pb-3">
+            <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+              <ion-item style="width: 100%;">
+                <ion-select style="width: 100%;" placeholder="Selecciona el campo a filtrar"
+                  (ionChange)="filter = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                  <ion-select-option *ngFor="let cat of types" [value]="cat.id">{{cat.name}}</ion-select-option>
+                  <ion-select-option value="All">Ninguno</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+          </div>
+          <div class="col-md-6 pb-3">
+            <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+              <input class="form-control" type="text" [(ngModel)]="searchInput[filter]" placeholder="Texto a buscar..."
+                [disabled]="filter === ''">
+            </div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <table class="table table-hover table-dynamic" style="width:100%">
+              <thead class="datatable-header">
+                <tr>
+                  <th style="width:64px"></th>
+                  <th (click)="sort('sku')" class="btn-style">
+                    SKU
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'sku'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'sku'">
+                    </ion-icon>
+                  </th>
+                  <th (click)="sort('nombre')" class="btn-style">
+                    Nombre
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'nombre'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'nombre'"></ion-icon>
+                  </th>
+                  <th (click)="sort('stock')" class="btn-style">
+                    Stock
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'stock'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'stock'">
+                    </ion-icon>
+                  </th>
+                  <th (click)="sort('precio')" class="btn-style">
+                    Precio
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'precio'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'precio'">
+                    </ion-icon>
+                  </th>
+                  <th (click)="sort('categoryName')" class="btn-style">
+                    Categoría
+                    <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'categoryName'">
+                    </ion-icon>
+                    <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'categoryName'"></ion-icon>
+                  </th>
+                  <th>
+                    Opciones
+                  </th>
+                </tr>
+              </thead>
+              <tbody class="datatable-body">
+                <ng-container *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                  <tr [ngClass]="product.stock <= product.stockMinimo ? 'danger' : (product.stock <= product.stockMedio ? 'medium' : '')">
+                    <td>
+                      <ion-label>
+                        <ion-avatar>
+                          <img [src]="product.foto" />
+                        </ion-avatar>
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>SKU</b></h3>
+                        {{product.sku}}
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
+                        <h2>{{product.nombre}} {{ product.apellido }}</h2>
+                        <h3>{{product.email}}</h3>
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Stock</b></h3>
+                        <div class="flex-stock">
+                          <ion-icon name="remove-circle-outline" class="opacity" (click)="stock(product, -1)"></ion-icon>{{ product.stock }}<ion-icon name="add-circle-outline" class="opacity" (click)="stock(product, 1)"></ion-icon>
+                        </div>
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Precio</b></h3>
+                        {{ product.precio | currency }}
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <ion-label>
+                        <h3 class="table-dynamic-hide"><b>Categoría</b></h3>
+                        {{product?.categoryName}}
+                      </ion-label>
+                    </td>
+                    <td class="align-middle">
+                      <div class="options-btn">
+                        <button type="button" class="btn btn-primary black" (click)="logs(product)">
+                          <ion-icon name="document-text-outline"></ion-icon>
+                        </button>
+                        <button type="button" class="btn btn-primary skyler" (click)="modify(product)">
+                          <ion-icon name="pencil-outline"></ion-icon>
+                        </button>
+                        <button type="button" class="btn btn-danger redline" (click)="delete(product)">
+                          <ion-icon name="trash-outline"></ion-icon>
+                        </button>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-container>
+              </tbody>
+            </table>
+            <pagination-controls (pageChange)="p = $event"></pagination-controls>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

@@ -1,9 +1,58 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>add-order</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
+<ion-content id="ion-content">
+  <ngx-spinner *ngIf="data" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>{{data ? "Modificar" : "Agregar"}} Pedido</b></h4>
+          <h6>{{data ? "Completa todos los campos correctamente para modificar el pedido." : "Completa todos los campos correctamente para ingresar un nuevo pedido."}}</h6>
+        </div>
+        <div class="col-md-12 col-lg-12" *ngIf="stage === 0">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5>Selección de Productos</h5>
+              <div class="row">
+                <div class="col-md-6 pb-3">
+                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                    <ion-item style="width: 100%;">
+                      <ion-select style="width: 100%;" placeholder="Selecciona el campo a filtrar"
+                        (ionChange)="filter = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                        <ion-select-option *ngFor="let cat of types" [value]="cat.id">{{cat.name}}</ion-select-option>
+                        <ion-select-option value="All">Ninguno</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </div>
+                </div>
+                <div class="col-md-6 pb-3">
+                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                    <input class="form-control" type="text" [(ngModel)]="searchInput[filter]" placeholder="Texto a buscar..."
+                      [disabled]="filter === ''">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <ng-container *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                    <div class="col-md-3 pb-3 product-item opacity" [ngClass]="product.selected ? 'selected' : ''" (click)="product.selected = true">
+                      <ng-container *ngIf="product.selected">
+                        <div class="product-selected-desc">
+                          <b>Cantidad</b><br/>
+                          <div class="ps-quantity">
+                            <ion-icon name="remove-circle-outline" class="opacity"></ion-icon>{{ product.stock }}<ion-icon name="add-circle-outline" class="opacity"></ion-icon>
+                          </div>
+                        </div>
+                      </ng-container>
+                      <div class="card">
+                        <div class="card-body">
+                          <img [src]="product.foto" height="250" style="width:100%;object-fit: cover; border-radius:5px"/>
+                        </div>
+                      </div>
+                    </div>
+                </ng-container>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

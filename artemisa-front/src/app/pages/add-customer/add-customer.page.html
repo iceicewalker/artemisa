@@ -1,4 +1,5 @@
 <ion-content id="ion-content">
+  <ngx-spinner *ngIf="data" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
   <div id="page-container">
     <div class="container pb-5 pt-3">
       <div class="row pb-3">
@@ -10,7 +11,7 @@
           <div class="card mb-3">
             <div class="card-body">
               <form class="row" [formGroup]="form" (ngSubmit)="submit()">
-                <div class="mb-3 col-lg-4 col-ms-4">
+                <div class="mb-3 col-lg-4 col-ms-4" *ngIf="!data">
                   <label for="input" class="form-label">Tipo de documento</label>
                   <select class="form-select" placeholder="Selecciona el tipo de documento" formControlName="documentoTipo" aria-label="Tipo de documento" [ngClass]="{'is-invalid' : form.controls['documentoTipo'].invalid && (form.controls['documentoTipo'].dirty || form.controls['documentoTipo'].touched)}">
                     <option selected value="">Selecciona el tipo de documento</option>
@@ -23,7 +24,7 @@
                     <div class="invalid-feedback" *ngIf="form.controls['documentoTipo'].errors.required">Es necesario que selecciones el tipo de documento.</div>
                   </ng-container>
                 </div>
-                <div class="mb-3 col-lg-8 col-ms-8">
+                <div class="mb-3 col-lg-8 col-ms-8" *ngIf="!data">
                   <label for="input" class="form-label">Documento</label>
                   <input type="text" formControlName="documentoValor" class="form-control" aria-describedby="help" placeholder="XXXXXXXXXX" [ngClass]="{'is-invalid' : form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)}">
                   <div class="form-text">Documento de identidad (Ej: 1710000091).</div>
@@ -69,7 +70,7 @@
                   <label for="input" class="form-label">Categoría</label>
                   <select class="form-select" aria-describedby="help" placeholder="Selecciona la categoría" formControlName="categoria" [ngClass]="{'is-invalid' : form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)}">
                     <option selected value="">Selecciona la categoría del cliente</option>
-                    <option *ngFor="let cat of categories" [value]="cat.nombre">{{cat.nombre}}</option>
+                    <option *ngFor="let cat of categories" [value]="cat.id">{{cat.nombre}}</option>
                   </select>
                   <div class="form-text">Categoría para clasificar el cliente.</div>
                   <ng-container *ngIf="form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)">

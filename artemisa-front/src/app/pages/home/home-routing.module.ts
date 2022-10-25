@@ -55,6 +55,18 @@ const routes: Routes = [
       {
         path: 'dashboard',
         loadChildren: () => import('../dashboard/dashboard.module').then( m => m.DashboardPageModule)
+      },
+      {
+        path: 'add-product-category',
+        loadChildren: () => import('../add-product-category/add-product-category.module').then( m => m.AddProductCategoryPageModule)
+      },
+      {
+        path: 'product-categories',
+        loadChildren: () => import('../product-categories/product-categories.module').then( m => m.ProductCategoriesPageModule)
+      },
+      {
+        path: 'stock',
+        loadChildren: () => import('../../modals/stock/stock.module').then( m => m.StockPageModule)
       }
     ]
 

@@ -10,7 +10,7 @@
       <span aria-hidden="true"><ion-icon name="chevron-back-outline"></ion-icon></span>
     </button>
     <img *ngIf="user?.foto" src="{{user?.foto}}" width="164" height="164"/>
-    <div class="user-name">{{user?.nombre}} {{user?.apellido}}</div>
+    <div class="user-name">{{user?.nombre}} {{user?.apellido}}<ion-icon (click)="modify()" class="opacity" name="create-outline"></ion-icon></div>
     <div class="user-email">{{user?.rango === 1 ? 'Administrador' : 'Empleado'}}</div>
   </div>
   <ul class="list-unstyled ps-0 accordion">

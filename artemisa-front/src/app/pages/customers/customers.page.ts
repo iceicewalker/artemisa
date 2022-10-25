@@ -4,6 +4,8 @@ import { onSnapshot, query } from 'firebase/firestore';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { CustomerService } from 'src/app/services/customer/customer.service';
 import { AddCustomerPage } from '../add-customer/add-customer.page';
+import { UserService } from 'src/app/services/user/user.service';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-customers',
@@ -18,18 +20,28 @@ export class CustomersPage implements OnInit {
   sortDirection = 1;
   searchInput: any = { nombre: '', apellido: '' };
   users: any;
-  types: any = [];
+  categories: any = [];
+  filter: any = "";
+  types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'Apellido', id: 'apellido'}, {name: 'Documento', id: 'documentoValor'}, {name: 'Provincia', id: 'provincia'}, {name: 'Cantón', id: 'canton'}, {name: "Categoría", id: "categoryName"}]
   counter: any = { m: 0, y: 0, t: 0 }
-  constructor(private userService: CustomerService, private alertService: AlertService, private modal: ModalController) { }
+  constructor(private spinner: NgxSpinnerService, private userService: CustomerService, private usersService: UserService, private alertService: AlertService, private modal: ModalController) { }
 
   ngOnInit() {
-    this.loadUsers();
+    this.spinner.show();
+    this.getCategories();
   }
 
+  getCategories(){
+    const q = this.usersService.getCategoryQuery();
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      this.categories = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) });
+      this.loadUsers();
+    });
+  }
   loadUsers(){
     const q = this.userService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      this.users = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) });
+      this.users = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref, categoryName: this.categories.find((cat) => cat.id === doc.data()['categoria'])['nombre']}) });
       var currentDate = new Date();
       var curMonth = currentDate.getMonth() + 1;
       var curYear = currentDate.getFullYear();
@@ -41,6 +53,7 @@ export class CustomersPage implements OnInit {
         }
       })
       this.counter.t = this.users.length;
+      this.spinner.hide();
     });
   }
 

@@ -19,12 +19,13 @@ export class UserService {
   getByPar(par, value) {
     return query(collection(this.db, "usuarios"), where(par, "==", value), limit(1));
   }
+  getAllByPar(par, value) {
+    return query(collection(this.db, "usuarios"), where(par, "==", value), limit(1));
+  }
   async set(record) {
     return await setDoc(doc(this.db, "usuarios", record['id']), record, { merge: true });
   }
   async add(record) {
-    delete record?.documentoTipo;
-    delete record?.documentoValor;
     record.creacion = new Date()
     return await addDoc(collection(this.db, "usuarios"), record);
   }
@@ -42,6 +43,9 @@ export class UserService {
   }
   getCategoryQuery(){
     return query(collection(this.db, "categorias"));
+  }
+  getProductCategoryQuery(){
+    return query(collection(this.db, "categorias-productos"));
   }
   
   idValidator(control: FormControl): { [key: string]: boolean } | null { //Check if id is valid

@@ -7,12 +7,14 @@ import { IonicModule } from '@ionic/angular';
 import { AddCategoryPageRoutingModule } from './add-category-routing.module';
 
 import { AddCategoryPage } from './add-category.page';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    NgxSpinnerModule,
     AddCategoryPageRoutingModule,
     ReactiveFormsModule
   ],

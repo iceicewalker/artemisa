@@ -222,6 +222,7 @@ a{cursor: pointer;}
 button.close {position: absolute;right: 15px;font-size: 25px;border:0}
 button.close:hover, .opacity:hover {opacity:.87}
 button.close:active, .opacity:active {opacity:.93}
+.opacity{cursor:pointer}
 ion-item{--border-style: 0;--padding-end: 0;--padding-start: 0;}
 ion-range{margin: 0;padding-left: 0;padding-right: 0;}
 .ml-5 {width: 90%;margin: 0 auto;}
@@ -327,4 +328,5 @@ body{font-family: 'Roboto', sans-serif;}
 .options-btn{display: grid;
     grid-auto-flow: column;
     width: fit-content;
-    grid-gap: 5px;}
+    grid-gap: 5px;    margin: 0 auto;}
+ion-avatar{margin: 0 auto;}

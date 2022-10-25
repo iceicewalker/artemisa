@@ -27,8 +27,8 @@ export class AddCustomerPage implements OnInit {
     this.createForm();
     this.getCategories();
     if(this.data){
-      this.form.controls['documentoTipo'].setValue(this.data?.documento.tipo + "");
-      this.form.controls['documentoValor'].setValue(this.data?.documento.valor);
+      this.form.removeControl('documentoTipo');
+      this.form.removeControl('documentoValor');
       this.form.controls['nombre'].setValue(this.data?.nombre);
       this.form.controls['apellido'].setValue(this.data?.apellido);
       this.form.controls['email'].setValue(this.data?.email);
@@ -69,7 +69,7 @@ export class AddCustomerPage implements OnInit {
   async submit(){
     this.spinner.show();
     if(this.form.valid){
-      var payload = Object.assign(this.form.value, {documento: { tipo: Number(this.form.value?.documentoTipo), valor: this.form.value?.documentoValor }});
+      var payload = this.form.value;
       if(this.data){
         payload.id = this.data['id'];
         this.customerService.set(payload).then((r) => {
@@ -82,7 +82,7 @@ export class AddCustomerPage implements OnInit {
           this.spinner.hide();
         });
       }else{
-        const querySnapshot = await getDocs(this.customerService.getByPar("documento.valor", payload?.documento.valor));
+        const querySnapshot = await getDocs(this.customerService.getByPar("documentoValor", payload?.documentoValor));
         if(querySnapshot.empty){
           this.customerService.add(payload).then((r) => {
             if(r?.id){
