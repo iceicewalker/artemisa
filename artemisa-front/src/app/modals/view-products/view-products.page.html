@@ -1,0 +1,63 @@
+<ion-content id="ion-content">
+  <ngx-spinner *ngIf="data" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+  <div id="page-container">
+    <div class="container pb-5 pt-3">
+      <div class="row pb-3">
+        <div class="col-md-12 col-lg-12 pb-3">
+          <h4><b>Seleccionar Productos</b></h4>
+          <h6>Selecciona cada uno de los productos del pedido.</h6>
+        </div>
+        <div class="col-md-12 col-lg-12" *ngIf="stage === 0">
+          <div class="card mb-3">
+            <div class="card-body">
+              <h5>Selección de Productos</h5>
+              <div class="row">
+                <div class="col-md-6 pb-3">
+                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                    <ion-item style="width: 100%;">
+                      <ion-select style="width: 100%;" placeholder="Selecciona el campo a filtrar"
+                        (ionChange)="filter = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                        <ion-select-option *ngFor="let cat of types" [value]="cat.id">{{cat.name}}</ion-select-option>
+                        <ion-select-option value="All">Ninguno</ion-select-option>
+                      </ion-select>
+                    </ion-item>
+                  </div>
+                </div>
+                <div class="col-md-6 pb-3">
+                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                    <input class="form-control" type="text" [(ngModel)]="searchInput[filter]" placeholder="Texto a buscar..."
+                      [disabled]="filter === ''">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <ng-container *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                    <div class="col-12 col-sm-6 col-md-4 pb-3 product-item opacity" (click)="product.selected =!product.selected">
+                      <div class="card">
+                        <div class="card-body" [ngClass]="product.selected === true ? 'selected' : 'no-selected'">
+                          <div class="product-container">
+                            <img [src]="product.foto" height="250" style="width:100%;object-fit: cover; border-radius:5px"/>
+                            <div class="product-selected-desc" [ngClass]="product.stock <= product.stockMinimo ? 'danger' : (product.stock <= product.stockMedio ? 'medium' : '')">
+                              <b>Stock:</b> {{ product.stock }}
+                            </div>
+                          </div>
+                          <div class="product-info mt-2">
+                            <div><b>{{product.nombre}}</b></div>
+                            <div><small>{{product.sku}}</small></div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </ng-container>
+                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                <div class="mb-3 col-lg-12" style="text-align: center">
+                  <button type="button" class="btn btn-primary skyler" style="margin: 0 auto" (click)="selectProducts()">Seleccionar Productos</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

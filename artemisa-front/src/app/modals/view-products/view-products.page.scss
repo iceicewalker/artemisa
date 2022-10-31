@@ -20,13 +20,22 @@ ion-item {
 .card.selected:active {background: #000000;color: white;}
 .flex-stock {
     display: flex;
+    justify-content: center;
     align-items: center;grid-gap:5px
-}.danger{background: #fddddd;}
-.medium{background:#ffc79757;}
-.product-item .product-container{position:relative}
+}
 .product-selected-desc {
     position: absolute;
-    z-index: 9;
-    bottom: 0; left: 0; right: 0; text-align: center;
+    top: 6px;
+    right: 6px;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 80%;
+    box-shadow: 0px 0px 7px #0000001f;
 }
-.pa-button{position: absolute; right: -3px; top: 1px; transform: scale(0.8);}
+.danger{background: #fddddd;}
+.medium{background:#fff7c9;}
+.product-container {
+    position: relative;
+}
+.selected{background: #dbebff;}

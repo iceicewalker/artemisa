@@ -1,9 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { onSnapshot } from 'firebase/firestore';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ViewProductsPage } from 'src/app/modals/view-products/view-products.page';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { ProductService } from 'src/app/services/product/product.service';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-add-order',
@@ -21,15 +24,43 @@ export class AddOrderPage implements OnInit {
   filter: any = "";
   products: any;
   categories: any = [];
-  types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'SKU', id: 'sku'}, {name: 'Categoría', id: 'categoryName'}, {name: 'Precio', id: 'precio'}, {name: 'Costo', id: 'costo'}, {name: 'Stock', id: 'stock'}, {name: 'Descripción', id: 'descripcion'}]
   cart: any = [];
-  
-  constructor(private spinner: NgxSpinnerService, private productService: ProductService,  private alertService: AlertService, private modal: ModalController) { }
+  form: FormGroup;
+  constructor(private userService: UserService, private fb: FormBuilder, private spinner: NgxSpinnerService, private productService: ProductService,  private alertService: AlertService, private modal: ModalController) { }
 
   ngOnInit() {
+    this.createForm();
     this.spinner.show();
     this.getCategories();
   }
+
+  createForm(){
+    this.form = this.fb.group({ 
+      "documentoTipo": ["", [Validators.required]],
+      "documentoValor": ["", [Validators.required, this.userService.idValidator]],
+      "nombre": [{value: "", disabled: true}, [Validators.required]],
+      "apellido": [{value: "", disabled: true}, [Validators.required]],
+      "email": [{value: "", disabled: true}, [Validators.required]],
+      "telefono": [{value: "", disabled: true}, [Validators.required]],
+      "categoria": [{value: "", disabled: true}, [Validators.required]],
+      "provincia": [{value: "", disabled: true}, [Validators.required]],
+      "canton": [{value: "", disabled: true}, [Validators.required]],
+      "direccion": [{value: "", disabled: true}, [Validators.required]] });
+  }
+
+  submit(){
+
+  }
+
+  async selectProducts(){
+    const modal = await this.modal.create({
+      component: ViewProductsPage,
+      componentProps: {products: this.products},
+      cssClass: 'evaluate-modal'
+    });
+    modal.present();
+  }
+
   getCategories(){
     const q = this.productService.getProductCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {

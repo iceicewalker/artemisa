@@ -1,58 +1,245 @@
 <ion-content id="ion-content">
-  <ngx-spinner *ngIf="data" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
+  <ngx-spinner *ngIf="data" bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="#fff" type="ball-spin"
+    [fullScreen]="true">
+    <p style="color: white"> Cargando... </p>
+  </ngx-spinner>
   <div id="page-container">
     <div class="container pb-5 pt-3">
-      <div class="row pb-3">
-        <div class="col-md-12 col-lg-12 pb-3">
+      <div class="row">
+        <div class="col-md-12 col-lg-12">
           <h4><b>{{data ? "Modificar" : "Agregar"}} Pedido</b></h4>
-          <h6>{{data ? "Completa todos los campos correctamente para modificar el pedido." : "Completa todos los campos correctamente para ingresar un nuevo pedido."}}</h6>
+          <h6>{{data ? "Completa todos los campos correctamente para modificar el pedido." : "Completa todos los campos
+            correctamente para ingresar un nuevo pedido."}}</h6>
         </div>
-        <div class="col-md-12 col-lg-12" *ngIf="stage === 0">
-          <div class="card mb-3">
-            <div class="card-body">
-              <h5>Selección de Productos</h5>
-              <div class="row">
-                <div class="col-md-6 pb-3">
-                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
-                    <ion-item style="width: 100%;">
-                      <ion-select style="width: 100%;" placeholder="Selecciona el campo a filtrar"
-                        (ionChange)="filter = $event.target['value'] === 'All' ? '' : $event.target['value']">
-                        <ion-select-option *ngFor="let cat of types" [value]="cat.id">{{cat.name}}</ion-select-option>
-                        <ion-select-option value="All">Ninguno</ion-select-option>
-                      </ion-select>
-                    </ion-item>
-                  </div>
-                </div>
-                <div class="col-md-6 pb-3">
-                  <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
-                    <input class="form-control" type="text" [(ngModel)]="searchInput[filter]" placeholder="Texto a buscar..."
-                      [disabled]="filter === ''">
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <ng-container *ngFor="let product of products | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
-                    <div class="col-md-3 pb-3 product-item opacity" [ngClass]="product.selected ? 'selected' : ''" (click)="product.selected = true">
-                      <ng-container *ngIf="product.selected">
-                        <div class="product-selected-desc">
-                          <b>Cantidad</b><br/>
-                          <div class="ps-quantity">
-                            <ion-icon name="remove-circle-outline" class="opacity"></ion-icon>{{ product.stock }}<ion-icon name="add-circle-outline" class="opacity"></ion-icon>
-                          </div>
-                        </div>
-                      </ng-container>
-                      <div class="card">
-                        <div class="card-body">
-                          <img [src]="product.foto" height="250" style="width:100%;object-fit: cover; border-radius:5px"/>
-                        </div>
-                      </div>
-                    </div>
+      </div>
+      <form class="row" [formGroup]="form" (ngSubmit)="submit()">
+        <div class="col-md-12 col-lg-12">
+          <h5><b>Información del Cliente</b></h5>
+        </div>
+        <div class="col-md-12 col-lg-12">
+        <div class="card mt-3">
+          <div class="card-body row">
+            <div class="mb-3 col-lg-4 col-ms-4" *ngIf="!data">
+              <label for="input" class="form-label">Tipo de documento</label>
+              <select class="form-select" placeholder="Selecciona el tipo de documento" formControlName="documentoTipo"
+                aria-label="Tipo de documento"
+                [ngClass]="{'is-invalid' : form.controls['documentoTipo'].invalid && (form.controls['documentoTipo'].dirty || form.controls['documentoTipo'].touched)}">
+                <option selected value="">Selecciona el tipo de documento</option>
+                <option value="0">Cédula</option>
+                <option value="1">RUC</option>
+                <option value="2">Otro</option>
+              </select>
+              <div class="form-text">Tipo de documento de identidad (Ej: RUC o CI).</div>
+              <ng-container
+                *ngIf="form.controls['documentoTipo'].invalid && (form.controls['documentoTipo'].dirty || form.controls['documentoTipo'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['documentoTipo'].errors.required">Es necesario que
+                  selecciones el tipo de documento.</div>
+              </ng-container>
+            </div>
+            <div class="mb-3 col-lg-8 col-ms-8">
+              <label for="input" class="form-label">Documento</label>
+              <div style="position:relative">
+                <input type="text" formControlName="documentoValor" class="form-control" aria-describedby="help"
+                  placeholder="XXXXXXXXXX"
+                  [ngClass]="{'is-invalid' : form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)}">
+                <div class="pa-button"><button type="button" class="btn btn-primary skyler" (click)="searchUser()">Buscar</button></div>
+                <div class="form-text">Documento de identidad (Ej: 1710000091).</div>
+                <ng-container
+                  *ngIf="form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)">
+                  <div class="invalid-feedback" *ngIf="form.controls['documentoValor'].errors.required">Es necesario que
+                    ingreses el documento.</div>
+                  <div class="invalid-feedback" *ngIf="form.controls['documentoValor'].errors.documentNotValid">El documento
+                    no es válido.</div>
                 </ng-container>
               </div>
             </div>
+            <div class="mb-3 col-lg-6 col-ms-12">
+              <label for="input" class="form-label">Nombre</label>
+              <input type="text" class="form-control" aria-describedby="help" placeholder="Juan" formControlName="nombre"
+                [ngClass]="{'is-invalid' : form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)}">
+              <div class="form-text">Nombre del cliente (Ej: Juan).</div>
+              <ng-container
+                *ngIf="form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['nombre'].errors.required">Es necesario que ingreses el
+                  nombre.</div>
+              </ng-container>
+            </div>
+            <div class="mb-3 col-lg-6 col-ms-12">
+              <label for="input" class="form-label">Apellido</label>
+              <input type="text" class="form-control" aria-describedby="help" placeholder="Perez" formControlName="apellido"
+                [ngClass]="{'is-invalid' : form.controls['apellido'].invalid && (form.controls['apellido'].dirty || form.controls['apellido'].touched)}">
+              <div class="form-text">Apellido del cliente (Ej: Rodríguez).</div>
+              <ng-container
+                *ngIf="form.controls['apellido'].invalid && (form.controls['apellido'].dirty || form.controls['apellido'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['apellido'].errors.required">Es necesario que ingreses el
+                  apellido.</div>
+              </ng-container>
+            </div>
+            <div class="mb-3 col-lg-4 col-ms-4">
+              <label for="input" class="form-label">Correo</label>
+              <input type="email" class="form-control" aria-describedby="help" placeholder="ejemplo@hotmail.com"
+                formControlName="email"
+                [ngClass]="{'is-invalid' : form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)}">
+              <div class="form-text">Correo del cliente (Ej: ejemplo@hotmail.com).</div>
+              <ng-container
+                *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['email'].errors.required">Es necesario que ingreses un
+                  correo.</div>
+                <div class="invalid-feedback" *ngIf="form.controls['email'].errors.email">Es necesario que ingreses un
+                  correo válido.</div>
+              </ng-container>
+            </div>
+            <div class="mb-3 col-lg-4 col-ms-4">
+              <label for="input" class="form-label">Teléfono</label>
+              <input type="phone" class="form-control" aria-describedby="help" placeholder="0989XXXXXX"
+                formControlName="telefono"
+                [ngClass]="{'is-invalid' : form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)}">
+              <div class="form-text">Teléfono del cliente (Ej: 0989300000).</div>
+              <ng-container
+                *ngIf="form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['telefono'].errors.required">Es necesario que ingreses un
+                  teléfono.</div>
+              </ng-container>
+            </div>
+            <div class="mb-3 col-lg-4 col-ms-12">
+              <label for="input" class="form-label">Provincia</label>
+              <select (change)="setCantones()" class="form-select" aria-describedby="help" placeholder="Pichincha"
+                formControlName="provincia"
+                [ngClass]="{'is-invalid' : form.controls['provincia'].invalid && (form.controls['provincia'].dirty || form.controls['provincia'].touched)}">
+                <option selected value="">Selecciona la Provincia</option>
+                <option *ngFor="let prov of provs" [value]="prov.id">{{prov.id}}</option>
+              </select>
+              <div class="form-text">Provincia en la que vive el cliente.</div>
+              <ng-container
+                *ngIf="form.controls['provincia'].invalid && (form.controls['provincia'].dirty || form.controls['provincia'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['provincia'].errors.required">Es necesario que ingreses
+                  una Provincia.</div>
+              </ng-container>
+            </div>
+            <div class="mb-3 col-lg-4 col-ms-12" *ngIf="form.value?.provincia">
+              <label for="input" class="form-label">Cantón</label>
+              <select class="form-select" aria-describedby="help" formControlName="canton"
+                [ngClass]="{'is-invalid' : form.controls['canton'].invalid && (form.controls['canton'].dirty || form.controls['canton'].touched)}">
+                <option selected value="">Selecciona el Cantón</option>
+                <option *ngFor="let can of cantones" [value]="can">{{can}}</option>
+              </select>
+              <div class="form-text">Cantón en el que vive el cliente.</div>
+              <ng-container
+                *ngIf="form.controls['canton'].invalid && (form.controls['canton'].dirty || form.controls['canton'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['canton'].errors.required">Es necesario que selecciones
+                  un Cantón.</div>
+              </ng-container>
+            </div>
+            <div class="mb-3 col-lg-4 col-ms-12">
+              <label for="input" class="form-label">Dirección</label>
+              <input type="email" class="form-control" aria-describedby="help" placeholder="Av. del Maestro"
+                formControlName="direccion"
+                [ngClass]="{'is-invalid' : form.controls['direccion'].invalid && (form.controls['direccion'].dirty || form.controls['direccion'].touched)}">
+              <div class="form-text">Dirección del cliente para los envíos.</div>
+              <ng-container
+                *ngIf="form.controls['direccion'].invalid && (form.controls['direccion'].dirty || form.controls['direccion'].touched)">
+                <div class="invalid-feedback" *ngIf="form.controls['direccion'].errors.required">Es necesario que ingreses
+                  una dirección.</div>
+              </ng-container>
+            </div>
           </div>
         </div>
-      </div>
+        </div>
+        <div class="mb-3 col-lg-12">
+          <h5><b>Información del Pedido</b></h5>
+          <button type="button" class="btn btn-primary skyler" (click)="selectProducts()">Agregar Productos</button>
+          <div class="card mt-3">
+            <div class="card-body">
+              <table class="table table-hover table-dynamic" style="width:100%">
+                <thead class="datatable-header">
+                  <tr>
+                    <th style="width:64px"></th>
+                    <th (click)="sort('nombre')" class="btn-style">
+                      Nombre
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'nombre'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'nombre'"></ion-icon>
+                    </th>
+                    <th (click)="sort('stock')" class="btn-style">
+                      Cantidad
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'stock'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'stock'">
+                      </ion-icon>
+                    </th>
+                    <th (click)="sort('precio')" class="btn-style">
+                      Precio
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'precio'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'precio'">
+                      </ion-icon>
+                    </th>
+                    <th (click)="sort('categoryName')" class="btn-style">
+                      Subtotal
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'categoryName'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'categoryName'"></ion-icon>
+                    </th>
+                    <th>
+                      Opciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="datatable-body">
+                  <ng-container *ngFor="let product of products | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                    <tr [ngClass]="product.stock <= product.stockMinimo ? 'danger' : (product.stock <= product.stockMedio ? 'medium' : '')">
+                      <td>
+                        <ion-label>
+                          <ion-avatar>
+                            <img [src]="product.foto" />
+                          </ion-avatar>
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
+                          <h2>{{product.nombre}}</h2>
+                        </ion-label>
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b><small>SKU</small></b></h3>
+                          <small>{{product.sku}}</small>
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Cantidad</b></h3>
+                          <div class="flex-stock">
+                            <ion-icon name="remove-circle-outline" class="opacity" (click)="stock(product, -1)"></ion-icon>{{ product.stock }}<ion-icon name="add-circle-outline" class="opacity" (click)="stock(product, 1)"></ion-icon>
+                          </div>
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Precio</b></h3>
+                          {{ product.precio | currency }}
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Subtotal</b></h3>
+                          {{product?.precio * product?.stock | currency}}
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <div class="options-btn">
+                          <button type="button" class="btn btn-danger redline" (click)="delete(product)">
+                            <ion-icon name="trash-outline"></ion-icon>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </ion-content>

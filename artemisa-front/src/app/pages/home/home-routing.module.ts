@@ -10,7 +10,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('../customers/customers.module').then( m => m.CustomersPageModule)
+        loadChildren: () => import('../dashboard/dashboard.module').then( m => m.DashboardPageModule)
       },
       {
         path: 'customers',

@@ -50,7 +50,7 @@ export class InventoryPage implements OnInit {
         let cat = this.categories.find((cat) => cat.id === doc.data()['categoria'])
         if(doc.data()['stock'] <= doc.data()['stockMinimo'])
           this.counter.p++;
-        else if(doc.data()['stock'] <= doc.data()['stockMinimo'])
+        else if(doc.data()['stock'] <= doc.data()['stockMedio'])
           this.counter.c++;
         else 
           this.counter.t++;
