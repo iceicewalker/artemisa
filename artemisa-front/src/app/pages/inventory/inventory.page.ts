@@ -88,7 +88,7 @@ export class InventoryPage implements OnInit {
 
   delete(product){
     this.alertService.fire({
-      title: '¿Estás seguro de borrar el Producto?',
+      title: '¿Estás seguro de borrar el producto?',
       text: 'Esta acción no se puede revertir.',
       icon: 'warning',
       showCancelButton: true,
@@ -99,7 +99,7 @@ export class InventoryPage implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
         this.productService.delete(product.id).then((r) => {
-          this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El Producto se ha eliminado con éxito.' });
+          this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El producto se ha eliminado con éxito.' });
         })
       }
     });
