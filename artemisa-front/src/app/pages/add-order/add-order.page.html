@@ -42,7 +42,11 @@
                 <input type="text" formControlName="documentoValor" class="form-control" aria-describedby="help"
                   placeholder="XXXXXXXXXX"
                   [ngClass]="{'is-invalid' : form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)}">
-                <div class="pa-button"><button type="button" class="btn btn-primary skyler" (click)="searchUser()">Buscar</button></div>
+                <div class="pa-button">
+                  <button type="button" *ngIf="form.value['id']" class="btn btn-primary black" (click)="modify()" style="margin-right:5px"><ion-icon name="pencil-outline"></ion-icon></button>
+                  <button type="button" *ngIf="!form.value['id']" class="btn btn-primary black" (click)="add()" style="margin-right:5px"><ion-icon name="add-outline"></ion-icon></button>
+                  <button type="button" class="btn btn-primary skyler" (click)="searchUser()">Buscar</button>
+                </div>
                 <div class="form-text">Documento de identidad (Ej: 1710000091).</div>
                 <ng-container
                   *ngIf="form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)">
@@ -116,7 +120,7 @@
                   una Provincia.</div>
               </ng-container>
             </div>
-            <div class="mb-3 col-lg-4 col-ms-12" *ngIf="form.value?.provincia">
+            <div class="mb-3 col-lg-4 col-ms-12">
               <label for="input" class="form-label">Cantón</label>
               <select class="form-select" aria-describedby="help" formControlName="canton"
                 [ngClass]="{'is-invalid' : form.controls['canton'].invalid && (form.controls['canton'].dirty || form.controls['canton'].touched)}">
@@ -236,6 +240,10 @@
                   </ng-container>
                 </tbody>
               </table>
+              <ng-container *ngIf="(products | filterBy: searchInput)?.length === 0">
+                <div class="text-center">No se han seleccionado productos.</div>
+              </ng-container>
+              <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
             </div>
           </div>
         </div>

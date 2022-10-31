@@ -21,6 +21,7 @@ export class AddCustomerPage implements OnInit {
   provs = this.globals.provincias;
   categories: any = [];
   cantones: any = [];
+  @Input() newUser: any = null;
 
   ngOnInit() {
     this.spinner.show();
@@ -37,6 +38,10 @@ export class AddCustomerPage implements OnInit {
       this.form.controls['provincia'].setValue(this.data?.provincia); this.setCantones();
       this.form.controls['canton'].setValue(this.data?.canton);
       this.form.controls['direccion'].setValue(this.data?.direccion);
+    }
+    if(this.newUser){
+      this.form.controls['documentoTipo'].setValue(this.newUser?.documentoTipo);
+      this.form.controls['documentoValor'].setValue(this.newUser?.documentoValor);
     }
   }
 
@@ -75,7 +80,7 @@ export class AddCustomerPage implements OnInit {
         this.customerService.set(payload).then((r) => {
           this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El cliente se ha actualizado con éxito.' });
           this.form.reset();
-          this.modalController.dismiss();
+          this.modalController.dismiss({ data: Object.assign(payload, {id: this.data?.id, documentoTipo: this.data?.documentoTipo, documentoValor: this.data?.documentoValor})});
           this.spinner.hide();
         }).catch((e) => {
           this.alertService.toast({ icon: 'error', title: '¡Ha ocurrido un error!', text: 'Vuelve a intentarlo en unos minutos.' })
@@ -86,8 +91,13 @@ export class AddCustomerPage implements OnInit {
         if(querySnapshot.empty){
           this.customerService.add(payload).then((r) => {
             if(r?.id){
-              this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El cliente se ha registrado con éxito.' });
-              this.form.reset();
+              if(this.newUser){
+                this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El cliente se ha registrado con éxito.' });
+                this.modalController.dismiss({newUser: Object.assign(payload, {id: r?.id})});
+              }else{
+                this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El cliente se ha registrado con éxito.' });
+                this.form.reset();
+              }
             }
             else
               this.alertService.toast({ icon: 'error', title: '¡Ha ocurrido un error!', text: 'Vuelve a intentarlo en unos minutos.' })

@@ -22,8 +22,6 @@ export class CustomerService {
     return await setDoc(doc(this.db, "clientes", record['id']), record, { merge: true });
   }
   async add(record) {
-    delete record?.documentoTipo;
-    delete record?.documentoValor;
     record.creacion = new Date()
     return await addDoc(collection(this.db, "clientes"), record);
   }
