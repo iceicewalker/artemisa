@@ -15,7 +15,6 @@ export class OrderService {
     return await setDoc(doc(this.db, "pedidos", record['id']), record, { merge: true });
   }
   async add(record) {
-    record.creacion = new Date()
     return await addDoc(collection(this.db, "pedidos"), record);
   }
   async get(uid) {

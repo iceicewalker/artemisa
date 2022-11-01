@@ -1,0 +1,50 @@
+.ctx-f{
+    display: flex;align-items: flex-start;grid-gap: 10px
+}
+@media (max-width: 767px){
+    .ctx-f{display: grid;}
+}
+.card-header-white .card-icon{
+    box-shadow: 0px 0px 3px 0px #cbcbcb;
+    background-color:white!important;
+}
+.card-icon img{object-fit: contain;}
+.card-header-etsy .card-icon{
+    background-color: #eb6909;
+}
+.card-header-amazon .card-icon{
+    background-color: #252122;
+}
+.mat-button-base {margin: 8px 8px 8px 0;}
+.m-0{margin:0!important}
+.text-right{text-align: right;}
+.text-alert{color: orange!important;}
+.last-orders-table{width:100%;font-size: 0.825rem;}
+.last-orders-table tr th{padding: 4px 10px;}
+.last-orders-table tr td{padding: 0px 10px;}
+.squares{ text-align: center; display: grid; grid-auto-flow: column; width: 100%; grid-gap: 16px; place-content: center;}
+.squares div{ width: 25px; height: 25px; }
+.ebay{ background: #1b62ac; }
+.amazon{ background: #252122; }
+.etsy{ background: #eb6909; }
+.website{ background: #49a44d; }
+.table-scroll {  width: 100%;max-height: 163px;overflow: overlay;}
+.resume-table{width: 100%;}
+/* width */
+.resume-table ::-webkit-scrollbar { width: 6px; }
+/* Track */
+.resume-table ::-webkit-scrollbar-track { background: #f1f1f1; }
+/* Handle */
+.resume-table ::-webkit-scrollbar-thumb { background: #888; }
+/* Handle on hover */
+.resume-table ::-webkit-scrollbar-thumb:hover { background: #555; }
+.resume-table td {
+        width: 33.33% ;
+}
+.resume-table table{table-layout: fixed ; width: 100% ;}
+.resume-table .tlo{ border-top: 1px solid #888888}
+tr {text-align: right;}
+table th:last-child, table td:last-child{width: 60px;}
+div#chart {
+    overflow: hidden;
+}

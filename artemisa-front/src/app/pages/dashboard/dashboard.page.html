@@ -1,10 +1,41 @@
 <ion-content id="ion-content">
+  <ngx-spinner bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
   <div id="page-container">
     <div class="container pb-5 pt-3">
       <div class="row pb-3">
         <div class="col-md-12 col-lg-12 pb-3">
           <h4><b>Dashboard</b></h4>
           <h6>Resumen general de todos los pedidos y clientes.</h6>
+        </div>
+        <div class="col-md-12 col-lg-12">
+          <div class="card mb-3">
+            <div class="card-body ctx-f">
+              <mat-form-field appearance="fill" style="width:100%;flex:1">
+                <mat-label>Selecciona el rango de fechas</mat-label>
+                <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+                  <input matStartDate formControlName="start" placeholder="Fecha de inicio">
+                  <input matEndDate formControlName="end" placeholder="Fecha de fin">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Fecha de inicio no válida</mat-error>
+                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Fecha de fin no válida</mat-error>
+              </mat-form-field>
+              <button type="button" class="btn btn-primary skyline" style="height: 60px;" (click)="filter()">Filtrar</button>
+              <button type="button" class="btn btn-primary redline" style="height: 60px;" (click)="clear()">Limpiar</button>
+            </div>
+            <div class="row p-3" style="padding-top:0!important">
+              <div class="col-md-12 col-lg-12 buttons-container">
+                  <button mat-stroked-button color="primary" type="button" (click)="setDate(0)">Últimos 7 días</button>
+                  <button mat-stroked-button color="primary" type="button" (click)="setDate(1)">Este mes</button>
+                  <button mat-stroked-button color="primary" type="button" (click)="setDate(5)">Último mes</button>
+                  <button mat-stroked-button color="primary" type="button" (click)="setDate(2)">Últimos 3 meses</button>
+                  <button mat-stroked-button color="primary" type="button" (click)="setDate(3)">Últimos 6 meses</button>
+                  <button mat-stroked-button color="primary" type="button" (click)="setDate(4)">Último año</button>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col-md-12 col-lg-12">
           <div class="col-md-12 pb-12">
@@ -49,6 +80,27 @@
             </div>
           </div>
         </div>
+        <div class="col-md-12 col-lg-12" *ngIf="chartLoaded">
+          <div class="card">
+            <div class="card-body">
+              <div id="chart">
+                <apx-chart
+                [series]="chartOptions.series"
+                [chart]="chartOptions.chart"
+                [dataLabels]="chartOptions.dataLabels"
+                [plotOptions]="chartOptions.plotOptions"
+                [yaxis]="chartOptions.yaxis"
+                [legend]="chartOptions.legend"
+                [fill]="chartOptions.fill"
+                [stroke]="chartOptions.stroke"
+                [tooltip]="chartOptions.tooltip"
+                [xaxis]="chartOptions.xaxis"
+              ></apx-chart>
+              </div>
+            </div>
+          </div>
+        </div>
+        
         <div class="col-md-12 col-lg-12">
           <div class="row">
             <div class="col-md-12 pb-12">
@@ -114,13 +166,6 @@
                   </h3>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-12 col-lg-12">
-          <div class="card mb-3">
-            <div class="card-body">
-              
             </div>
           </div>
         </div>

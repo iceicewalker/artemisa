@@ -17,9 +17,10 @@ import { FilterPipeModule } from 'ngx-filter-pipe';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';import {trigger,state,style,animate,transition}from '@angular/animations';
 // Import library module
 import { NgxSpinnerModule } from "ngx-spinner";
+import { NgApexchartsModule } from 'ng-apexcharts';
 @NgModule({
   declarations: [AppComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, NgxPaginationModule, HttpClientModule, OrderModule, FilterPipeModule, BrowserAnimationsModule, NgxCurrencyModule, NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }) ],
+  imports: [NgApexchartsModule, BrowserModule, IonicModule.forRoot(), AppRoutingModule, NgxPaginationModule, HttpClientModule, OrderModule, FilterPipeModule, BrowserAnimationsModule, NgxCurrencyModule, NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }) ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, Globals],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
