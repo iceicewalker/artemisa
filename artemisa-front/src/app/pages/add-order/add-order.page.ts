@@ -68,6 +68,7 @@ export class AddOrderPage implements OnInit {
         this.form.controls['descripcion'].disable();
         this.products = this.data?.productos;
         this.products.forEach((p) => {p.selected = true});
+        this.calculate();
       }
     }
     this.spinner.show();
@@ -234,6 +235,9 @@ export class AddOrderPage implements OnInit {
       cssClass: 'evaluate-modal'
     });
     modal.present();
+    modal.onDidDismiss().then(() => {
+      this.calculate();
+    })
   }
 
   getCategories(){
@@ -293,7 +297,7 @@ export class AddOrderPage implements OnInit {
   calculate(){
     this.total.total = 0;
     this.total.iva = 0;
-    this.products.forEach((prod) => { this.total.total += prod?.precio * prod?.cantidad; })
+    this.products.forEach((prod) => { if(prod.selected){ this.total.total += prod?.precio * prod?.cantidad;  } })
     this.total.iva = Math.round(this.total.total * this.total.ivaPorcentaje * 100) / 100;
     this.total.total *= (1 + this.total.ivaPorcentaje);
     this.total.total = Math.round(this.total.total * 100) / 100;
