@@ -3,6 +3,7 @@ import { getDoc, onSnapshot } from 'firebase/firestore';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CustomerService } from 'src/app/services/customer/customer.service';
 import { OrderService } from 'src/app/services/order/order.service';
+import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -13,17 +14,36 @@ export class DashboardPage implements OnInit {
 
   counter: any = { p: 0, c: 0, t: 0, cc: 0 }
   counterC: any = { m: 0, y: 0, t: 0 }
+  counterP: any = { p: 0, c: 0, t: 0 }
   orders: any = [];
   users: any = [];
-  constructor(private spinner: NgxSpinnerService, private orderService: OrderService, private userService: CustomerService) { }
+  products: any = [];
+  constructor(private productService: ProductService, private spinner: NgxSpinnerService, private orderService: OrderService, private userService: CustomerService) { }
 
   ngOnInit() {
     this.loadOrders();
     this.loadUsers();
+    this.loadProducts();
+  }
+
+  loadProducts(){
+    const q = this.productService.getQuery();
+    const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      this.products = querySnapshot.docs.map((doc) => {
+        if(doc.data()['stock'] <= doc.data()['stockMinimo'])
+          this.counterP.p++;
+        else if(doc.data()['stock'] <= doc.data()['stockMedio'])
+          this.counterP.c++;
+        else 
+          this.counterP.t++;
+        return Object.assign(doc.data(), { id: doc.id, ref: doc.ref}) 
+      })
+      this.spinner.hide();
+    });
   }
 
   loadUsers(){
-    const q = this.userService.getQuery();
+    const q = this.userService.getQuery();  
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.users = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref}) });
       var currentDate = new Date();
