@@ -118,7 +118,7 @@
                       <td class="align-middle">
                         <ion-label>
                           <h3 class="table-dynamic-hide"><b>Fecha</b></h3>
-                          {{order?.fecha?.seconds * 1000 | date: 'fullDate'}}
+                          {{order?.fecha?.seconds * 1000 | date: 'shortDate'}}
                         </ion-label>
                       </td>
                       <td class="align-middle">
@@ -129,6 +129,9 @@
                       </td>
                       <td class="align-middle">
                         <div class="options-btn">
+                          <button *ngIf="order?.estado !== 2" type="button" class="btn btn-primary black" (click)="invoice(order)">
+                            <ion-icon name="document-text-outline"></ion-icon>
+                          </button>
                           <button type="button" class="btn btn-primary skyler" (click)="modify(order)">
                             <ion-icon name="pencil-outline"></ion-icon>
                           </button>

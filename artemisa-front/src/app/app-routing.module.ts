@@ -23,6 +23,10 @@ const routes: Routes = [
   },  {
     path: 'view-products',
     loadChildren: () => import('./modals/view-products/view-products.module').then( m => m.ViewProductsPageModule)
+  },
+  {
+    path: 'invoice',
+    loadChildren: () => import('./modals/invoice/invoice.module').then( m => m.InvoicePageModule)
   }
 
 ];

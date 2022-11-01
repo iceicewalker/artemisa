@@ -30,10 +30,10 @@
                 <div class="mb-3 col-lg-6 col-ms-12">
                   <label for="input" class="form-label">Categoría</label>
                   <select class="form-select" aria-describedby="help" placeholder="Selecciona la categoría" formControlName="categoria" [ngClass]="{'is-invalid' : form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)}">
-                    <option selected value="">Selecciona la categoría del cliente</option>
+                    <option selected value="">Selecciona la categoría del producto</option>
                     <option *ngFor="let cat of categories" [value]="cat.id">{{cat.nombre}}</option>
                   </select>
-                  <div class="form-text">Categoría para clasificar el cliente.</div>
+                  <div class="form-text">Categoría para clasificar el producto.</div>
                   <ng-container *ngIf="form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)">
                     <div class="invalid-feedback" *ngIf="form.controls['categoria'].errors.required">Es necesario que selecciones una categoría.</div>
                   </ng-container>

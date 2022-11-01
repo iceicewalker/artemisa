@@ -1,0 +1,80 @@
+<ion-content>
+    <div class="container pb-5 pt-3">
+      <div id="content" #content style="width: 100%; padding: 12px; text-align: right;">
+        <button type="button" class="btn btn-primary skyler" (click)="captureScreen()">Descargar</button>
+      </div>
+  </div>
+  <div id="contentToConvert" class="container">
+    <div id="page-container">
+      <div class="container pb-5 pt-3">
+        <div class="row pb-3">
+          <div class="col-md-6 col-lg-6 pb-3" style="text-align:center">
+            <img class="margin-center" src="assets/logo.png" width="128" /><br />
+            <div class="tt-1">
+              ARTEMISA MODA
+            </div>
+            <div class="tt-1">
+              Contribuyente Régimen Simplificado
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-6 pb-3">
+            <div class="bubble">
+              <table style="width:100%">
+                <tr>
+                  <td style="width:50%;border-top: 0;"><strong>R.U.C.</strong></td>
+                  <td style="width:50%;border-top: 0;">1725094146001</td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="width:100%;text-align: center;text-transform: uppercase;">
+                    <h4>Nota de Venta</h4>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="width:50%"><strong>AUT. SRI:</strong></td>
+                  <td style="width:50%">XXXXXXXXXX</td>
+                </tr>
+              </table>
+            </div>
+          </div>
+          <div class="col-md-12 col-lg-12 pb-3">
+            <hr style="opacity: 1; height: 2px;background:black" />
+          </div>
+          <div class="col-md-12 col-lg-12 pb-3">
+            <table style="width:100%">
+              <tr>
+                <td style="width:25%;border-top: 0;"><strong>Sr(a):</strong></td>
+                <td style="width:25%;border-top: 0;">{{data?.usuarioData?.nombre}} {{data?.usuarioData?.apellido}}</td>
+                <td style="width:25%;border-top: 0;"><strong>R.U.C/C.I:</strong></td>
+                <td style="width:25%;border-top: 0;">{{data?.usuarioData?.documentoValor}}</td>
+              </tr>
+              <tr>
+                <td colspan="2" style="width:50%"><strong>Fecha de Emisión:</strong></td>
+                <td colspan="2" style="width:50%">{{data?.fecha?.seconds * 1000 | date: 'dd/MM/yyyy'}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-md-12 col-lg-12 pb-3">
+            <table style="width:100%">
+              <tr>
+                <th>CANT.</th>
+                <th>DESCRIPCIÓN</th>
+                <th>P. UNITARIO</th>
+                <th>V. TOTAL</th>
+              </tr>
+              <tr *ngFor="let pro of data?.productos">
+                <td>{{pro.cantidad}}</td>
+                <td>{{pro.nombre}}</td>
+                <td>{{pro.precio | number : '1.2-2'}}</td>
+                <td>{{pro.precio * pro.cantidad | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
+                <td colspan="3" style="text-align:right"><strong>VALOR TOTAL:</strong></td>
+                <td colspan="2">{{data?.total.total | number : '1.2-2'}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ion-content>

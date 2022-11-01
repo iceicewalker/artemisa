@@ -1,0 +1,29 @@
+table {
+    border-collapse:separate;
+    border:solid black 2px;
+    border-radius:6px;
+    padding:0;
+}
+td, th {
+    border-left:solid black 2px;
+    border-top:solid black 2px;
+    padding: 3px 9px;
+}
+
+th {
+    border-top: none;
+}
+
+td:first-child, th:first-child {
+     border-left: none;
+}
+
+.tt-1 {
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+}
+
+img.margin-center {
+    text-align: center;
+}

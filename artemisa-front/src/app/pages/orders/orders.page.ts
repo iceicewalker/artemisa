@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { getDoc, onSnapshot, query } from 'firebase/firestore';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { InvoicePage } from 'src/app/modals/invoice/invoice.page';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { CustomerService } from 'src/app/services/customer/customer.service';
 import { OrderService } from 'src/app/services/order/order.service';
@@ -48,7 +49,6 @@ export class OrdersPage implements OnInit {
         querySnapshot.then((r) => { if(r.exists()){ payload.usuarioData = Object.assign(r.data(), { id: r.id }); } })
         return payload;
       })
-      console.log(this.orders);
       this.spinner.hide();
     });
   }
@@ -90,5 +90,14 @@ export class OrdersPage implements OnInit {
       this.sortDirection =2
     this.orderHeader = headerName;
   }
-
+  
+  async invoice(order){
+    const modal = await this.modal.create({
+      component: InvoicePage,
+      componentProps: {data: order},
+      cssClass: 'evaluate-modal-l'
+    });
+    modal.present();
+    console.log(order);
+  }
 }
