@@ -1,0 +1,25 @@
+table th{cursor: pointer;}
+table th:hover{opacity: .80;}
+table th:active{opacity: .90;}
+ion-item ion-select { padding: 0px 13px; }
+ion-item {
+    margin: 0;
+    width: max-content;
+    --min-height: 38px;
+    --border-color: #0000000d;
+    --border-width: 1px;
+    --border-style: solid;
+    --border-radius: 5px;
+}
+.center {
+    display: flex;
+    justify-content: center;
+}
+.card.selected {background: #181818;color: white;}
+.card.selected:hover {background: #363636;color: white;}
+.card.selected:active {background: #000000;color: white;}
+.flex-stock {
+    display: flex;
+    align-items: center;grid-gap:5px
+}.danger{background: #fddddd;}
+.medium{background:#fff7c9;}

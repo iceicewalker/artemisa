@@ -30,3 +30,5 @@ ion-item {
     bottom: 0; left: 0; right: 0; text-align: center;
 }
 .pa-button{position: absolute; right: -3px; top: 1px; transform: scale(0.8);}
+ion-avatar {position: relative;}
+ion-avatar button{position: absolute;scale: 0.8;right: 0;bottom: 0;}

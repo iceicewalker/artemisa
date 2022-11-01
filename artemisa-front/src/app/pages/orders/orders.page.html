@@ -8,7 +8,7 @@
         </div>
         <div class="col-md-12 col-lg-12">
           <div class="row">
-            <div class="col-md-4 pb-3">
+            <div class="col-6 col-md-3 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
                   <h3>{{counter.p}}<br />
@@ -17,7 +17,7 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4 pb-3">
+            <div class="col-6 col-md-3 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
                   <h3>{{counter.c}}<br />
@@ -26,7 +26,16 @@
                 </div>
               </div>
             </div>
-            <div class="col-md-4 pb-3">
+            <div class="col-6 col-md-3 pb-3">
+              <div class="card htr">
+                <div class="card-body text-center">
+                  <h3>{{counter.cc}}<br />
+                    <ion-chip color="danger"> Cancelados </ion-chip>
+                  </h3>
+                </div>
+              </div>
+            </div>
+            <div class="col-6 col-md-3 pb-3">
               <div class="card htr">
                 <div class="card-body text-center">
                   <h3>{{counter.t}}<br />
@@ -36,8 +45,106 @@
               </div>
             </div>
           </div>
-          <div class="card mb-3">
+        </div>
+        <div class="col-md-12 col-lg-12 pb-3">
+          <div class="row">
+            <div class="col-md-6 pb-3">
+              <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                <ion-item style="width: 100%;">
+                  <ion-select style="width: 100%;" placeholder="Selecciona el campo a filtrar"
+                    (ionChange)="filter = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                    <ion-select-option *ngFor="let cat of types" [value]="cat.id">{{cat.name}}</ion-select-option>
+                    <ion-select-option value="All">Ninguno</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </div>
+            </div>
+            <div class="col-md-6 pb-3">
+              <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+                <input class="form-control" type="text" [(ngModel)]="searchInput[filter]" placeholder="Texto a buscar..."
+                  [disabled]="filter === ''">
+              </div>
+            </div>
+          </div>
+          <div class="card">
             <div class="card-body">
+              <table class="table table-hover table-dynamic" style="width:100%">
+                <thead class="datatable-header">
+                  <tr>
+                    <th (click)="sort('id')" class="btn-style">
+                      Identificador
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'sku'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'sku'">
+                      </ion-icon>
+                    </th>
+                    <th (click)="sort('cliente')" class="btn-style">
+                      Cliente
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'cliente'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'cliente'"></ion-icon>
+                    </th>
+                    <th (click)="sort('fecha')" class="btn-style">
+                      Fecha
+                      <ion-icon name="arrow-down-outline" *ngIf="sortDirection == 1 && orderHeader === 'fecha'">
+                      </ion-icon>
+                      <ion-icon name="arrow-up-outline" *ngIf="sortDirection == 2 && orderHeader === 'fecha'"></ion-icon>
+                    </th>
+                    <th class="btn-style">
+                      Total
+                    </th>
+                    <th>
+                      Opciones
+                    </th>
+                  </tr>
+                </thead>
+                <tbody class="datatable-body">
+                  <ng-container *ngFor="let order of orders | paginate: { itemsPerPage: 10, currentPage: p } | orderBy: orderHeader: isDescOrder | filterBy: searchInput ; let i = index">
+                    <tr [ngClass]="order?.estado === 2 ? 'danger' : (order?.estado === 0 ? 'medium' : '')">
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Identificador</b></h3>
+                          {{order?.id}}
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Cliente</b></h3>
+                          <h2>{{order?.usuarioData?.nombre }} {{order?.usuarioData?.apellido }}</h2>
+                          <h3>{{order?.usuarioData?.email}}</h3>
+                          <h3>{{order?.usuarioData?.documentoValor}}</h3>
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Fecha</b></h3>
+                          {{order?.fecha?.seconds * 1000 | date: 'fullDate'}}
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <ion-label>
+                          <h3 class="table-dynamic-hide"><b>Total</b></h3>
+                          {{ order?.total?.total | currency }}
+                        </ion-label>
+                      </td>
+                      <td class="align-middle">
+                        <div class="options-btn">
+                          <button type="button" class="btn btn-primary skyler" (click)="modify(order)">
+                            <ion-icon name="pencil-outline"></ion-icon>
+                          </button>
+                          <button type="button" class="btn btn-danger redline" (click)="delete(order)">
+                            <ion-icon name="trash-outline"></ion-icon>
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  </ng-container>
+                </tbody>
+              </table>
+              <ng-container *ngIf="(orders | filterBy: searchInput)?.length === 0">
+                <div class="text-center"><i>No se han encontrado orderos.</i></div><br/>
+              </ng-container>
+              <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
             </div>
           </div>
         </div>

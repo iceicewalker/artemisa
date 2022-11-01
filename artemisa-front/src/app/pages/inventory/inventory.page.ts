@@ -24,7 +24,7 @@ export class InventoryPage implements OnInit {
   sortDirection = 1;
   searchInput: any = { nombre: '' };
   filter: any = "";
-  products: any;
+  products: any = [];
   categories: any = [];
   types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'SKU', id: 'sku'}, {name: 'Categoría', id: 'categoryName'}, {name: 'Precio', id: 'precio'}, {name: 'Costo', id: 'costo'}, {name: 'Stock', id: 'stock'}, {name: 'Descripción', id: 'descripcion'}]
   

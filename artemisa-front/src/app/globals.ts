@@ -3,14 +3,14 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class Globals {
+  iva: number = 0;
   rangos: any = [
     {id: 0, name: "Sin rango"},
     {id: 1, name: "Administrador"},
     {id: 2, name: "Empleado"},
   ]
   NAVLIST = [
-      //{"link": "tsheets", "name": "Tsheets", "icon": "time-outline", "sublinks": [], "rank": []},
-      {"link": "dashboard", "name": "Dashboard", "icon": "stats-chart", "sublinks": [], "rank": [1]},
+      {"link": "dashboard", "name": "Dashboard", "icon": "stats-chart", "sublinks": [], "rank": [1, 2]},
       {"link": "customer", "name": "Clientes", "icon": "people-outline", "sublinks": [
         {"link": "add-customer", "name": "Ingresar Cliente", "icon": "add-outline", "rank": [1, 2]},
         {"link": "customers", "name": "Administrar Clientes", "icon": "id-card-outline", "rank": [1, 2]},

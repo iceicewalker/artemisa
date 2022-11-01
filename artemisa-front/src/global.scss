@@ -73,66 +73,7 @@ div#swal2-html-container { margin-top: 0; }
 .no-s{list-style: none;padding: 0;margin: 0;}
 a{cursor: pointer;}
 .icon-btn.active i {-webkit-text-fill-color: transparent;background: linear-gradient(45deg, #00c0ff, #3c00ff, #0090d3);background-clip: text;-webkit-background-clip: text;}
-.profile-manager{
-    max-width: 710px;
-    min-height: 860px;
-    display: flex;
-    border-radius: 15px;
-    border: 1px solid #e5e7e9;
-    background-color: #fff;
-    margin: 24.5px auto 124.5px;
-    margin-bottom: 25px
-}
-.profile-manager-tab {
-    max-width: 205px;
-    width: 100%;
-    border-right: 1px solid #e5e7e9;
-}
-.profile-manager-head-container {
-    min-height: 161px;
-    padding: 29px 39px;
-}
-.profile-manager-tab ul {
-    margin: unset;
-    padding: unset;
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-}
-.profile-manager-tab ul .active {
-    -webkit-text-fill-color: transparent;
-    background: linear-gradient(45deg, #fcb037, #e638c7, #31bcfd);
-    background-clip: text;
-    -webkit-background-clip: text;
-    font-weight: 900;
-    white-space: nowrap;
-}
-.profile-manager-tab ul li {
-    height: 24px;
-    padding: 0 10px 0 39px;
-    position: relative;
-    word-wrap: unset;
-    position: relative;
-    font-size: 15px;
-    white-space: nowrap;
-    font-weight: 500;
-    color: #7d868b;
-    cursor: pointer;
-    margin: 5px 0;
-}
 
-.profile-manager-tab ul li:before {
-    opacity: 0;
-    width: 5px;
-    height: 24px;
-    content: "";
-    background: linear-gradient(45deg, #fcb037, #e638c7, #31bcfd);
-    position: absolute;
-    left: -1px;
-}
-.profile-manager-tab ul .active:before {
-    opacity: 1;
-}
 @media (max-width: 767px){
     .home-theme .logo{text-decoration: none !important;font-family: "Nordic Alternative Regular"; -webkit-text-fill-color: transparent; background: linear-gradient(45deg,#fcb037,#e638c7,#31bcfd); background-clip: text; -webkit-background-clip: text; font-size: 5rem; font-weight: bold; line-height: 1; }
     .index-bg{background:white!important;}
@@ -329,3 +270,4 @@ body{font-family: 'Roboto', sans-serif;}
     width: fit-content;
     grid-gap: 5px;    margin: 0 auto;}
 ion-avatar{margin: 0 auto;}
+.card-body{overflow: auto;}

@@ -10,9 +10,8 @@ import { FormControl } from '@angular/forms';
 export class UserService {
 
   private db = getFirestore();
-
+  user: any = {};
   constructor(private router: Router) {}
-
   doc(uid){
     return doc(this.db, "usuarios", uid);
   }

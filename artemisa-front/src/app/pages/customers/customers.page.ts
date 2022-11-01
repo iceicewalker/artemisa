@@ -19,7 +19,7 @@ export class CustomersPage implements OnInit {
   orderHeader: String ='';
   sortDirection = 1;
   searchInput: any = { nombre: '', apellido: '' };
-  users: any;
+  users: any = [];
   categories: any = [];
   filter: any = "";
   types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'Apellido', id: 'apellido'}, {name: 'Documento', id: 'documentoValor'}, {name: 'Provincia', id: 'provincia'}, {name: 'Cantón', id: 'canton'}, {name: "Categoría", id: "categoryName"}]

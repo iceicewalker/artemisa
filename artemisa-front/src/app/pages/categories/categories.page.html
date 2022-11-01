@@ -48,6 +48,9 @@
                   </tr>
                 </tbody>
               </table>
+              <ng-container *ngIf="(cats | filterBy: searchInput)?.length === 0">
+                <div class="text-center"><i>No se han encontrado categorías.</i></div><br/>
+              </ng-container>
               <pagination-controls previousLabel="Anterior" nextLabel="Siguiente" (pageChange)="p = $event"></pagination-controls>
             </div>
           </div>
