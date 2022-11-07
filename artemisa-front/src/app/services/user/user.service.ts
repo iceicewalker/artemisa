@@ -15,6 +15,9 @@ export class UserService {
   doc(uid){ //Returns the doc from an user by id.
     return doc(this.db, "usuarios", uid);
   }
+  getAllByPar(par, value) { //Returns the query of all users by param and value.
+    return query(collection(this.db, "usuarios"), where(par, "==", value));
+  }
   getByPar(par, value) { //Returns the query of an user.
     return query(collection(this.db, "usuarios"), where(par, "==", value), limit(1));
   }
