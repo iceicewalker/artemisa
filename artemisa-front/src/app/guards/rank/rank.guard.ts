@@ -16,11 +16,11 @@ export class RankGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       const ranks = route.data['ranks'];
       const auth = getAuth();
-      return new Promise((resolve, reject) => {
+      return new Promise((resolve, reject) => { //Returns a promise, true if the user has the rank, else false.
         auth.onAuthStateChanged(async (user) => {
-          const docRef = await getDoc(this.userService.doc(user.uid))
+          const docRef = await getDoc(this.userService.doc(user.uid)) //Doc ref of the user
           if (docRef.exists()) {
-            if(ranks.indexOf(Number(docRef.data()['rango'])) > -1){
+            if(ranks.indexOf(Number(docRef.data()['rango'])) > -1){ //Validates the rank required
               resolve(true);
             }else{
               this.redirectTo("/");

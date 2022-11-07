@@ -96,7 +96,7 @@ export class AddOrderPage implements OnInit {
     });
   }
 
-  async submit(){
+  async submit(){ //Checks if the form is valid, and set the required information.
     this.spinner.show();
     let productos = this.products.filter((f) => f.selected === true && f.cantidad > 0);
     if(this.form.valid && productos.length > 0){
@@ -175,7 +175,7 @@ export class AddOrderPage implements OnInit {
     })
   }
 
-  async modify(){
+  async modify(){ //Modify the user
     const modal = await this.modalController.create({
       component: AddCustomerPage,
       componentProps: {data: this.customer},
@@ -190,7 +190,7 @@ export class AddOrderPage implements OnInit {
     })
   } 
   
-  async searchUser(){
+  async searchUser(){ //Search user
     let payload = {documentoValor: this.form.value['documentoValor']}
     const querySnapshot = await getDocs(this.customerService.getByPar("documentoValor", payload?.documentoValor));
     if(querySnapshot.empty){
@@ -240,7 +240,7 @@ export class AddOrderPage implements OnInit {
     })
   }
 
-  getCategories(){
+  getCategories(){ //Get categories from the database
     const q = this.productService.getProductCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.categories = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) });
@@ -248,7 +248,7 @@ export class AddOrderPage implements OnInit {
     });
   }
 
-  loadProducts(){
+  loadProducts(){ //Load products from the database
     const q = this.productService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.products = querySnapshot.docs.map((doc) => {
@@ -280,12 +280,7 @@ export class AddOrderPage implements OnInit {
       this.sortDirection =2
     this.orderHeader = headerName;
   }
-
-  quantity(product, fact){
-    product.cantidad += fact;
-  }
-
-  validateQuantity(product){
+  validateQuantity(product){ //Validates the quantity of the product based on the stock.
     if(product.stock < product.cantidad){
       product.cantidad = product.stock;
       this.cdr.markForCheck();
@@ -294,7 +289,7 @@ export class AddOrderPage implements OnInit {
     this.calculate();
   }
 
-  calculate(){
+  calculate(){ //Calculates the totals of the order.
     this.total.total = 0;
     this.total.iva = 0;
     this.products.forEach((prod) => { if(prod.selected){ this.total.total += prod?.precio * prod?.cantidad;  } })

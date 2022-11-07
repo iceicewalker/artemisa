@@ -12,29 +12,29 @@ export class CustomerService {
 
   constructor(private router: Router) {}
 
-  doc(uid){
+  doc(uid){ //Gets the document by id param
     return doc(this.db, "clientes", uid);
   }
-  getByPar(par, value) {
+  getByPar(par, value) { //Generates the query from customers by param.
     return query(collection(this.db, "clientes"), where(par, "==", value), limit(1));
   }
-  async set(record) {
+  async set(record) { //Sets the customers documents by id.
     return await setDoc(doc(this.db, "clientes", record['id']), record, { merge: true });
   }
-  async add(record) {
+  async add(record) { //Adds a new record.
     record.creacion = new Date()
     return await addDoc(collection(this.db, "clientes"), record);
   }
-  async get(uid) {
+  async get(uid) { //Returns the getDoc from the customer by id.
     return await getDoc(doc(this.db, "clientes", uid));
   }
-  async getAll() {
+  async getAll() { //Returns the docs from all customers
     return await getDocs(query(collection(this.db, "clientes")));
   }
-  async delete(id){
+  async delete(id){ //Deletes a customer by id.
     return await deleteDoc(doc(this.db, "clientes", id));
   }
-  getQuery(){
+  getQuery(){ //Returns the query from all customers
     return query(collection(this.db, "clientes"));
   }
 }

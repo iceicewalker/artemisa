@@ -29,14 +29,14 @@ export class EmployeesPage implements OnInit {
     this.loadUsers();
   }
 
-  loadUsers(){
+  loadUsers(){ //Load all employees from the database.
     const q = this.userService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.users = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) })
     });
   }
 
-  async modify(user){
+  async modify(user){ //Modifies employee info
     const modal = await this.modal.create({
       component: AddEmployeePage,
       componentProps: {data: user},
@@ -45,7 +45,7 @@ export class EmployeesPage implements OnInit {
     modal.present();
   } 
 
-  delete(user){
+  delete(user){ //Delete an employee
     this.alertService.fire({
       title: '¿Estás seguro de borrar el empleado?',
       text: 'Esta acción no se puede revertir.',

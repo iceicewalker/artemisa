@@ -25,11 +25,11 @@ export class HomePage implements OnInit {
 
   ngOnInit(){
     this.loadUser();
-    this.tab = (this.location.path().split("/"))[1];
-    this.location.onUrlChange(val => { this.tab = (val.split("/"))[1]; });
+    this.tab = (this.location.path().split("/"))[1]; //Current tab
+    this.location.onUrlChange(val => { this.tab = (val.split("/"))[1]; }); //Validates URL location changes
   }
   
-  loadUser(){
+  loadUser(){ //Load current user data.
     const auth = getAuth();
     auth.onAuthStateChanged((user) => {
       if(user){
@@ -41,7 +41,7 @@ export class HomePage implements OnInit {
     })
   }
 
-  async modify(){
+  async modify(){ //Modify the user
     const modal = await this.modal.create({
       component: AddEmployeePage,
       componentProps: {data: this.user, myProfile: true},
@@ -50,16 +50,13 @@ export class HomePage implements OnInit {
     modal.present();
   } 
   
-  toggleSideBar(){
+  toggleSideBar(){ //Toggles the navbar
     jQuery('#main-container').toggleClass("r-lx");
     jQuery('#navbar').toggleClass("r-ln");
     jQuery('#second-logo').toggle("slow");
   }
-  toggle(link){
 
-  }
-
-  navigate(url){
+  navigate(url){ //Navigates depending on the param
     if(url === "signOut")
       this.authService.signOut();
     else

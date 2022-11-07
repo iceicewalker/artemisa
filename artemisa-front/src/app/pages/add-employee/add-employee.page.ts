@@ -47,11 +47,11 @@ export class AddEmployeePage implements OnInit {
     }
   }
 
-  generatePassword(){
+  generatePassword(){ //Generates a random password
     this.form.controls['clave'].setValue(Math.random().toString(36).slice(-12));
   }
 
-  createForm(){
+  createForm(){ //Starts the form
     this.form = this.fb.group({ "documentoTipo": ["", [Validators.required]],
       "documentoValor": ["", [Validators.required, this.userService.idValidator]],
       "nombre": ["", [Validators.required]],
@@ -65,7 +65,7 @@ export class AddEmployeePage implements OnInit {
       "rango": ["", [Validators.required]],
       "direccion": ["", [Validators.required]] });
   }         
-  onFileSelected(event) {
+  onFileSelected(event) { //Uploads the file
     const storage = getStorage();
     // Create a storage reference from our storage service
     var n = Date.now();
@@ -110,7 +110,7 @@ export class AddEmployeePage implements OnInit {
     this.form.controls['canton'].setValue("");
   }      
   
-  async submit(){
+  async submit(){  //Checks if the form is valid, and set the required information.
     this.spinner.show();
     if(this.form.valid){
       var payload = this.form.value;

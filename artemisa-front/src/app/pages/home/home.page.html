@@ -23,7 +23,7 @@
           </a>
         </li>
         <ng-template #subLinks>
-          <li class="accordion-item" (click)="toggle(link.link)">
+          <li class="accordion-item">
             <a class="f-li align-items-center collapsed text-decoration-none accordion-button" data-bs-toggle="collapse" [attr.data-bs-target]="'#' + link.link" aria-expanded="false" aria-controls="collapseOne">
               <ion-icon name="{{link.icon}}"></ion-icon>
               <p>{{link.name}}</p>

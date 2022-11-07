@@ -12,38 +12,35 @@ export class UserService {
   private db = getFirestore();
   user: any = {};
   constructor(private router: Router) {}
-  doc(uid){
+  doc(uid){ //Returns the doc from an user by id.
     return doc(this.db, "usuarios", uid);
   }
-  getByPar(par, value) {
+  getByPar(par, value) { //Returns the query of an user.
     return query(collection(this.db, "usuarios"), where(par, "==", value), limit(1));
   }
-  getAllByPar(par, value) {
-    return query(collection(this.db, "usuarios"), where(par, "==", value), limit(1));
-  }
-  async set(record) {
+  async set(record) { ///Sets an user.
     return await setDoc(doc(this.db, "usuarios", record['id']), record, { merge: true });
   }
-  async add(record) {
+  async add(record) { //Adds a new user to the database.
     record.creacion = new Date()
     return await addDoc(collection(this.db, "usuarios"), record);
   }
-  async get(uid) {
+  async get(uid) { //Return the document of a specific user
     return await getDoc(doc(this.db, "usuarios", uid));
   }
-  async getAll() {
+  async getAll() { //Returns the docs from all users.
     return await getDocs(query(collection(this.db, "usuarios")));
   }
-  async delete(id){
+  async delete(id){ //Deletes an user by id
     return await deleteDoc(doc(this.db, "usuarios", id));
   }
-  getQuery(){
+  getQuery(){ //Returns a query of all users
     return query(collection(this.db, "usuarios"));
   }
-  getCategoryQuery(){
+  getCategoryQuery(){ //Returns a query of all categories
     return query(collection(this.db, "categorias"));
   }
-  getProductCategoryQuery(){
+  getProductCategoryQuery(){ //Returns a query of all product categories.
     return query(collection(this.db, "categorias-productos"));
   }
   
@@ -66,10 +63,7 @@ export class UserService {
               add += parseInt((digit % 10) + '') + parseInt(digit / 10 + '');
             }
             add = Math.round(add);
-            if (
-              Math.round(add % 10) == 0 &&
-              Math.round(add % 10) == validator
-            ) {
+            if (Math.round(add % 10) == 0 && Math.round(add % 10) == validator) {
               valid = true;
             } else if (10 - Math.round(add % 10) == validator) {
               valid = true;

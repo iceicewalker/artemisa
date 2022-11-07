@@ -20,7 +20,7 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
-  login(){
+  login(){ //Validates login form
     var email = this.loginForm.value['email'];
     var password = this.loginForm.value['password'];
     if(this.loginForm.valid){

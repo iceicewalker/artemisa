@@ -20,13 +20,13 @@ export class ForgotPasswordPage implements OnInit {
     this.forgotBuilder();
   }
 
-  forgotBuilder(){
+  forgotBuilder(){ //Form
     this.forgotForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
   }
 
-  submitForgot(){
+  submitForgot(){ //Submit the requirement to restore the password if the form is valid.
     if(this.forgotForm.valid){
       const auth = getAuth();
       sendPasswordResetEmail(auth, this.forgotForm.value.email).then((r) => {

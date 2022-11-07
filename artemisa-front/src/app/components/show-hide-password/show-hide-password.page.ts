@@ -10,7 +10,7 @@ export class ShowHidePasswordPage {
   showPassword = false;
   @ContentChild('input') input: ElementRef;
   constructor() {}
-  toggleShow() {
+  toggleShow() { // Toggle Show Hide password
     this.showPassword = !this.showPassword;
     this.input.nativeElement.type = this.showPassword ? 'text' : 'password';
   }

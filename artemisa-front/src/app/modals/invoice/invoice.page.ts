@@ -13,7 +13,7 @@ export class InvoicePage implements OnInit {
 
   ngOnInit() {
   } 
-  public captureScreen()  
+  public captureScreen()  //Generates the pdf file for the invoice
   {  
     var data = document.getElementById('contentToConvert');  
     html2canvas(data).then(canvas => {  

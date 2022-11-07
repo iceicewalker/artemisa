@@ -45,7 +45,7 @@ export class AddCustomerPage implements OnInit {
     }
   }
 
-  getCategories(){
+  getCategories(){ //Get categories of users
     const q = this.userService.getCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.categories = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) });
@@ -53,7 +53,7 @@ export class AddCustomerPage implements OnInit {
     });
   }
 
-  createForm(){
+  createForm(){ //Starts the form
     this.form = this.fb.group({ "documentoTipo": ["", [Validators.required]],
       "documentoValor": ["", [Validators.required, this.userService.idValidator]],
       "nombre": ["", [Validators.required]],
@@ -71,7 +71,7 @@ export class AddCustomerPage implements OnInit {
     this.form.controls['canton'].setValue("");
   }      
   
-  async submit(){
+  async submit(){ //Checks if the form is valid, and set the required information.
     this.spinner.show();
     if(this.form.valid){
       var payload = this.form.value;

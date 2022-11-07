@@ -27,11 +27,11 @@ export class AddProductCategoryPage implements OnInit {
       this.form.controls['nombre'].setValue(this.data?.nombre);
     }
   }
-  createForm(){
+  createForm(){ //Starts the form
     this.form = this.fb.group({ "nombre": ["", [Validators.required]] });
   }          
   
-  async submit(){
+  async submit(){ //Checks if the form is valid, and set the required information.
     this.spinner.show();
     if(this.form.valid){
       var payload = Object.assign(this.form.value, {nombreMin: this.form.value['nombre'].toLowerCase()});

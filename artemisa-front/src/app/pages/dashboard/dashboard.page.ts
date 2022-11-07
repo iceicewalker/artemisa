@@ -69,7 +69,7 @@ export class DashboardPage implements OnInit {
     this.spinner.hide();
   }
 
-  setDate(type){
+  setDate(type){ //Set the date depending on the param
     var date = new Date(), y = date.getFullYear(), m = date.getMonth(), d = date.getDay();
     date.setHours(0, 0, 0, 0);
     var dateTemp = new Date(date);
@@ -93,7 +93,7 @@ export class DashboardPage implements OnInit {
     this.charts();
   }
 
-  charts(){
+  charts(){ //Generates the charts
     let dates = [];
     let values = [];
     var toDate = new Date(this.range.value.end);
@@ -110,7 +110,7 @@ export class DashboardPage implements OnInit {
     this.cdr.markForCheck();
   }
 
-  filter(){
+  filter(){ //Filters all the data.
     if(this.range.valid){
       this.counter = { p: 0, c: 0, t: 0, cc: 0 }
       this.ordersFiltered = [];
@@ -133,10 +133,10 @@ export class DashboardPage implements OnInit {
     }
   }
 
-  clear(){
+  clear(){ //Clears the form
     this.range.reset();
   }
-  loadProducts(){
+  loadProducts(){ //Load all the products
     const q = this.productService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.products = querySnapshot.docs.map((doc) => {
@@ -152,7 +152,7 @@ export class DashboardPage implements OnInit {
     });
   }
 
-  loadUsers(){
+  loadUsers(){ //Load all the users
     const q = this.userService.getQuery();  
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.users = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref}) });

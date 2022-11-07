@@ -43,18 +43,15 @@ export class AddInventoryPage implements OnInit {
     }
   }
 
-  getCategories(){
+  getCategories(){ //Gets the categories of inventory products.
     const q = this.productService.getProductCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.categories = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) });
       this.spinner.hide();
     });
   }
-  generatePassword(){
-    this.form.controls['clave'].setValue(Math.random().toString(36).slice(-12));
-  }
 
-  createForm(){
+  createForm(){ //Creates the form
     this.form = this.fb.group({
       "sku": ["", [Validators.required]],
       "nombre": ["", [Validators.required]],
@@ -67,7 +64,7 @@ export class AddInventoryPage implements OnInit {
       "stockMedio": ["", [Validators.required, Validators.min(2)]],
       "foto": ["", [Validators.required]] });
   }         
-  onFileSelected(event) {
+  onFileSelected(event) { //Upload a file
     const storage = getStorage();
     // Create a storage reference from our storage service
     var n = Date.now();
@@ -107,7 +104,7 @@ export class AddInventoryPage implements OnInit {
     }
   }
   
-  async submit(){
+  async submit(){ //Checks if the form is valid, and set the required information.
     this.spinner.show();
     if(this.form.valid){
       var payload = this.form.value;
@@ -123,8 +120,8 @@ export class AddInventoryPage implements OnInit {
           this.spinner.hide();
         });
       }else{
-        const querySnapshot = await getDocs(this.productService.getByPar("sku", payload?.sku));
-        if(querySnapshot.empty){
+        const querySnapshot = await getDocs(this.productService.getByPar("sku", payload?.sku)); 
+        if(querySnapshot.empty){ //Validate that there is not a product with the same SKU.
           this.productService.add(payload).then((r) => {
             this.alertService.toast({ icon: 'success', title: '¡Buen trabajo!', text: 'El producto se ha registrado con éxito.' });
             this.form.reset();

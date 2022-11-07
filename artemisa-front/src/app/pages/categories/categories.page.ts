@@ -26,7 +26,7 @@ export class CategoriesPage implements OnInit {
     this.loadCategories();
   }
 
-  loadCategories(){
+  loadCategories(){ //Load all the data
     const q = this.userService.getCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.cats = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) })
@@ -34,7 +34,7 @@ export class CategoriesPage implements OnInit {
   }
 
 
-  async modify(cat){
+  async modify(cat){ //Modify a category
     const modal = await this.modal.create({
       component: AddCategoryPage,
       componentProps: {data: cat}
@@ -42,7 +42,7 @@ export class CategoriesPage implements OnInit {
     modal.present();
   } 
 
-  delete(cat){
+  delete(cat){ //Deletes a category
     this.alertService.fire({
       title: '¿Estás seguro de borrar la categoría?',
       text: 'Esta acción no se puede revertir.',
@@ -61,7 +61,7 @@ export class CategoriesPage implements OnInit {
     });
   }
 
-  sort(headerName){
+  sort(headerName){ //Sorts by header
     this.isDescOrder = !this.isDescOrder;
     if(this.isDescOrder)
       this.sortDirection = 1

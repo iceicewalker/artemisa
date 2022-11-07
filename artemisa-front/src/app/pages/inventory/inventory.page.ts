@@ -35,7 +35,7 @@ export class InventoryPage implements OnInit {
     this.getCategories();
   }
 
-  getCategories(){
+  getCategories(){ //Get all categories from the database
     const q = this.productService.getProductCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.categories = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) });
@@ -43,7 +43,7 @@ export class InventoryPage implements OnInit {
     });
   }
 
-  loadProducts(){
+  loadProducts(){ //Retrieve all products
     const q = this.productService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.products = querySnapshot.docs.map((doc) => {
@@ -60,7 +60,7 @@ export class InventoryPage implements OnInit {
     });
   }
 
-  async modify(product){
+  async modify(product){ //Opens a modal to modify te inventory
     const modal = await this.modal.create({
       component: AddInventoryPage,
       componentProps: {data: product},
@@ -69,7 +69,7 @@ export class InventoryPage implements OnInit {
     modal.present();
   } 
 
-  async logs(product){
+  async logs(product){ //Opens a modal with the log of the product.
     const modal = await this.modal.create({
       component: ProductLogPage,
       componentProps: {data: product},
@@ -78,7 +78,7 @@ export class InventoryPage implements OnInit {
     modal.present();
   }
 
-  async stock(product, type){
+  async stock(product, type){ //Opens a modal to increase or decrease the stock of the product
     const modal = await this.modal.create({
       component: StockPage,
       componentProps: {data: product, type: type}
@@ -86,7 +86,7 @@ export class InventoryPage implements OnInit {
     modal.present();
   }
 
-  delete(product){
+  delete(product){ //Deletes the product from the database
     this.alertService.fire({
       title: '¿Estás seguro de borrar el producto?',
       text: 'Esta acción no se puede revertir.',
@@ -105,7 +105,7 @@ export class InventoryPage implements OnInit {
     });
   }
 
-  sort(headerName){
+  sort(headerName){ //Sorts by header param
     this.isDescOrder = !this.isDescOrder;
     if(this.isDescOrder)
       this.sortDirection = 1

@@ -11,22 +11,22 @@ export class OrderService {
 
   constructor(private router: Router) {}
   
-  async set(record) {
+  async set(record) { //Sets an order doc by id.
     return await setDoc(doc(this.db, "pedidos", record['id']), record, { merge: true });
   }
-  async add(record) {
+  async add(record) { //Adds a new order.
     return await addDoc(collection(this.db, "pedidos"), record);
   }
-  async get(uid) {
+  async get(uid) { //Returns an order by id
     return await getDoc(doc(this.db, "pedidos", uid));
   }
-  async getAll() {
+  async getAll() { //Returns all orders (docs).
     return await getDocs(query(collection(this.db, "pedidos")));
   }
-  async delete(id){
+  async delete(id){ //Deletes an order by id
     return await deleteDoc(doc(this.db, "pedidos", id));
   }
-  getQuery(){
+  getQuery(){ //Returns the query from orders.
     return query(collection(this.db, "pedidos"), orderBy('estado', 'asc'), orderBy('fecha', 'desc'));
   }
 }

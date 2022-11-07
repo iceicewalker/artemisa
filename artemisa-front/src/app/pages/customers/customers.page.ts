@@ -31,14 +31,14 @@ export class CustomersPage implements OnInit {
     this.getCategories();
   }
 
-  getCategories(){
+  getCategories(){ //Loads all categories from the database.
     const q = this.usersService.getCategoryQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.categories = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref }) });
       this.loadUsers();
     });
   }
-  loadUsers(){
+  loadUsers(){ //Loads all users registered.
     const q = this.userService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.users = querySnapshot.docs.map((doc) => { return Object.assign(doc.data(), { id: doc.id, ref: doc.ref, categoryName: this.categories.find((cat) => cat.id === doc.data()['categoria'])['nombre']}) });
@@ -57,7 +57,7 @@ export class CustomersPage implements OnInit {
     });
   }
 
-  async modify(user){
+  async modify(user){ //Modifies the user
     const modal = await this.modal.create({
       component: AddCustomerPage,
       componentProps: {data: user},
@@ -66,7 +66,7 @@ export class CustomersPage implements OnInit {
     modal.present();
   } 
 
-  delete(user){
+  delete(user){ //Deletes the user
     this.alertService.fire({
       title: '¿Estás seguro de borrar el cliente?',
       text: 'Esta acción no se puede revertir.',
@@ -85,7 +85,7 @@ export class CustomersPage implements OnInit {
     });
   }
 
-  sort(headerName){
+  sort(headerName){ //Sorts by header param
     this.isDescOrder = !this.isDescOrder;
     if(this.isDescOrder)
       this.sortDirection = 1

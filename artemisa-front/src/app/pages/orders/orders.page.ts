@@ -33,7 +33,7 @@ export class OrdersPage implements OnInit {
     this.loadOrders();
   }
 
-  loadOrders(){
+  loadOrders(){ //Retrieves all orders from the database
     const q = this.orderService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       this.orders = querySnapshot.docs.map((doc) => {
@@ -54,7 +54,7 @@ export class OrdersPage implements OnInit {
   }
   
   
-  async modify(order){
+  async modify(order){ //Opens a modal to modify the order from the param
     const modal = await this.modal.create({
       component: AddOrderPage,
       componentProps: {data: order},
@@ -63,7 +63,7 @@ export class OrdersPage implements OnInit {
     modal.present();
   } 
 
-  delete(product){
+  delete(product){ //Deletes an order
     this.alertService.fire({
       title: '¿Estás seguro de borrar el pedido?',
       text: 'Esta acción no se puede revertir.',
@@ -82,7 +82,7 @@ export class OrdersPage implements OnInit {
     });
   }
 
-  sort(headerName){
+  sort(headerName){ //Sorts by header param
     this.isDescOrder = !this.isDescOrder;
     if(this.isDescOrder)
       this.sortDirection = 1
@@ -91,7 +91,7 @@ export class OrdersPage implements OnInit {
     this.orderHeader = headerName;
   }
   
-  async invoice(order){
+  async invoice(order){ //Opens the invoice of the order
     const modal = await this.modal.create({
       component: InvoicePage,
       componentProps: {data: order},
