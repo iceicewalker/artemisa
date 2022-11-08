@@ -127,7 +127,7 @@ export class AddEmployeePage implements OnInit {
           this.spinner.hide();
         });
       }else{
-        const querySnapshot = await getDocs(this.userService.getByPar("documentoValor", payload?.documento.valor));
+        const querySnapshot = await getDocs(this.userService.getByPar("documentoValor", payload?.documentoValor));
         if(querySnapshot.empty){
           const app2 = initializeApp(environment.firebaseConfig, "Secondary");
           const auth2 = getAuth(app2);
