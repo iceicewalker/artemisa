@@ -69,6 +69,8 @@ export class AddProductCategoryPage implements OnInit {
       this.spinner.hide();
     }
   }
-  
+  closeModal(){ //Close the modal
+    this.modalController.dismiss();
+  }
 
 }

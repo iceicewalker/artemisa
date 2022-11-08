@@ -2,6 +2,7 @@
   <ngx-spinner *ngIf="products" bdColor = "rgba(0, 0, 0, 0.8)" size = "medium" color = "#fff" type = "ball-spin" [fullScreen] = "true"><p style="color: white" > Cargando... </p></ngx-spinner>
   <div id="page-container">
     <div class="container pb-5 pt-3">
+      <div class="close-modal opacity" *ngIf="products" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></div>
       <div class="row pb-3">
         <div class="col-md-12 col-lg-12 pb-3">
           <h4><b>Seleccionar Productos</b></h4>

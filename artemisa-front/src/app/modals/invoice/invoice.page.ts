@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import { ModalController } from '@ionic/angular';
 
 @Component({
   selector: 'app-invoice',
@@ -9,7 +10,7 @@ import html2canvas from 'html2canvas';
 })
 export class InvoicePage implements OnInit {
   @Input() data: any = null;
-  constructor() { }
+  constructor(private modal: ModalController) { }
 
   ngOnInit() {
   } 
@@ -28,5 +29,8 @@ export class InvoicePage implements OnInit {
       pdf.save(`NOTA_VENTA_${this.data.id}.pdf`); // Generated PDF   
     });  
   }  
+  closeModal(){ //Close the modal
+    this.modal.dismiss();
+  }
 
 }

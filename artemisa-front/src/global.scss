@@ -273,3 +273,8 @@ body{font-family: 'Roboto', sans-serif;}
     grid-gap: 5px;    margin: 0 auto;}
 ion-avatar{margin: 0 auto;}
 .card-body{overflow: auto;}
+.close-modal {
+    position: absolute;
+    right: 37px;
+    font-size: 28px;
+}

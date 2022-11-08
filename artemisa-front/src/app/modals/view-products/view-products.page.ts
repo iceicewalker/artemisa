@@ -29,4 +29,8 @@ export class ViewProductsPage implements OnInit {
     this.modal.dismiss();
   }
 
+  closeModal(){ //Close the modal
+    this.modal.dismiss();
+  }
+
 }

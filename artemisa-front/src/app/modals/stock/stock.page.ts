@@ -69,5 +69,8 @@ export class StockPage implements OnInit {
     }
   }
   
+  closeModal(){ //Close the modal
+    this.modalController.dismiss();
+  }
 
 }

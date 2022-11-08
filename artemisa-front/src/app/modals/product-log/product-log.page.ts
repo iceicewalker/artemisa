@@ -30,5 +30,8 @@ export class ProductLogPage implements OnInit {
       this.sortDirection =2
     this.orderHeader = headerName;
   }
+  closeModal(){ //Close the modal
+    this.modal.dismiss();
+  }
 
 }

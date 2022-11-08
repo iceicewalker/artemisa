@@ -293,6 +293,9 @@ export class AddOrderPage implements OnInit {
     this.total.total *= (1 + this.total.ivaPorcentaje);
     this.total.total = Math.round(this.total.total * 100) / 100;
   }
+  closeModal(){ //Close the modal
+    this.modalController.dismiss();
+  }
 }
 function Int64(deltaQty: any): number {
   throw new Error('Function not implemented.');

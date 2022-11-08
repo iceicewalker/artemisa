@@ -1,6 +1,7 @@
 <ion-content>
     <div class="container pb-5 pt-3">
-      <div id="content" #content style="width: 100%; padding: 12px; text-align: right;">
+      <div class="close-modal opacity" *ngIf="data" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></div>
+      <div id="content" #content style="width: 100%; padding: 12px; text-align: left;">
         <button type="button" class="btn btn-primary skyler" (click)="captureScreen()">Descargar</button>
       </div>
   </div>

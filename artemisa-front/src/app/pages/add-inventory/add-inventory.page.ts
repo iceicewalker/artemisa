@@ -137,5 +137,8 @@ export class AddInventoryPage implements OnInit {
     }
   }
   
+  closeModal(){ //Close the modal
+    this.modalController.dismiss();
+  }
 
 }

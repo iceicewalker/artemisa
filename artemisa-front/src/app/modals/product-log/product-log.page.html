@@ -1,6 +1,7 @@
 <ion-content id="ion-content">
   <div id="page-container">
     <div class="container pb-5 pt-3">
+      <div class="close-modal opacity" *ngIf="data" (click)="closeModal()"><ion-icon name="close-circle-outline"></ion-icon></div>
       <div class="row pb-3">
         <h4><b>Log del producto</b></h4>
         <h6>En esta pestaña se podrá visualizar el historial del producto.</h6>
