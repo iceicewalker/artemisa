@@ -17,6 +17,8 @@ module.exports = function (config) {
         // you can add configuration options for Jasmine here
         // the possible options are listed at https://jasmine.github.io/api/edge/Configuration.html
         // for example, you can disable the random execution with `random: false`
+        random: false,
+        seed: 23
         // or set a specific seed with `seed: 4321`
       },
       clearContext: false // leave Jasmine Spec Runner output visible in browser

@@ -24,7 +24,7 @@ export class OrdersPage implements OnInit {
   filter: any = "";
   orders: any = [];
   categories: any = [];
-  types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'SKU', id: 'sku'}, {name: 'Categoría', id: 'categoryName'}, {name: 'Precio', id: 'precio'}, {name: 'Costo', id: 'costo'}, {name: 'Stock', id: 'stock'}, {name: 'Descripción', id: 'descripcion'}]
+  types: any = [{name: 'Descripción', id: 'descripcion'}, {name: 'Identificador', id: 'id'}, {name: 'Nombre y Apellido', id: 'usuarioNombre'}, {name: 'Correo', id: 'correo'}, {name: 'Documento (Cliente)', id: 'documentoValor'}]
   
   constructor(private customerService: CustomerService, private spinner: NgxSpinnerService, private orderService: OrderService, private alertService: AlertService, private modal: ModalController) { }
 
@@ -46,9 +46,10 @@ export class OrdersPage implements OnInit {
         this.counter.t++;
         const querySnapshot = getDoc(this.customerService.doc(doc.data()['usuario']));
         let payload = Object.assign(doc.data(), { id: doc.id, ref: doc.ref });
-        querySnapshot.then((r) => { if(r.exists()){ payload.usuarioData = Object.assign(r.data(), { id: r.id }); } })
+        querySnapshot.then((r) => { if(r.exists()){ payload.usuarioData = Object.assign(r.data(), { id: r.id }); payload.usuarioNombre = r.data()['nombre'] + " " + r.data()['apellido']; payload.correo = r.data()['correo']; payload.documentoValor = r.data()['documentoValor'] } })
         return payload;
       })
+      console.log(this.orders);
       this.spinner.hide();
     });
   }

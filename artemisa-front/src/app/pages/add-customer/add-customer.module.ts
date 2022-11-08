@@ -8,6 +8,7 @@ import { AddCustomerPageRoutingModule } from './add-customer-routing.module';
 
 import { AddCustomerPage } from './add-customer.page';
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { Globals } from 'src/app/globals';
 
 @NgModule({
   imports: [
@@ -18,6 +19,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
     AddCustomerPageRoutingModule,
     ReactiveFormsModule
   ],
-  declarations: [AddCustomerPage]
+  declarations: [AddCustomerPage],
+  providers: [Globals],
 })
 export class AddCustomerPageModule {}

@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
+import { Globals } from 'src/app/globals';
 
 import { HomePage } from './home.page';
 
@@ -10,7 +11,8 @@ describe('HomePage', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ HomePage ],
-      imports: [IonicModule.forRoot()]
+      imports: [IonicModule.forRoot()],
+      providers: [Globals]
     }).compileComponents();
 
     fixture = TestBed.createComponent(HomePage);
@@ -18,7 +20,4 @@ describe('HomePage', () => {
     fixture.detectChanges();
   }));
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
 });

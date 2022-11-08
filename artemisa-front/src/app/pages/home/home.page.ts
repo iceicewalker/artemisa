@@ -17,9 +17,10 @@ import { AddEmployeePage } from '../add-employee/add-employee.page';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
-  navLinks = this.globals.NAVLIST;
-  user: any;
-  tab: string;
+  
+  public navLinks = this.globals.NAVLIST;
+  public user: any;
+  public tab: string;
 
   constructor(private modal: ModalController, private alertService: AlertService, private globals: Globals, private router: Router, private userService: UserService, private authService: AuthService, private location: Location, private cdr: ChangeDetectorRef) { }
 
