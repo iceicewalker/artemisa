@@ -125,6 +125,8 @@ export class DashboardPage implements OnInit {
             this.counter.cc++;
           this.counter.t++;
           this.ordersFiltered.push(o);
+          this.cdr.markForCheck();
+          this.charts();
         }
       });
     }else{
