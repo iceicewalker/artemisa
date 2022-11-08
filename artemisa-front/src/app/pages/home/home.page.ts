@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Globals } from 'src/app/globals';
-import { AlertService } from 'src/app/services/alert/alert.service';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 import { getAuth } from 'firebase/auth';
@@ -22,7 +21,7 @@ export class HomePage implements OnInit {
   public user: any;
   public tab: string;
 
-  constructor(private modal: ModalController, private alertService: AlertService, private globals: Globals, private router: Router, private userService: UserService, private authService: AuthService, private location: Location, private cdr: ChangeDetectorRef) { }
+  constructor(private modal: ModalController, private globals: Globals, private router: Router, private userService: UserService, private authService: AuthService, private location: Location, private cdr: ChangeDetectorRef) { }
 
   ngOnInit(){
     this.loadUser();

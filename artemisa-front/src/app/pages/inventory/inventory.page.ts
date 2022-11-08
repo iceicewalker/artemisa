@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { onSnapshot } from 'firebase/firestore';
 import { NgxSpinnerService } from 'ngx-spinner';
-import { Globals } from 'src/app/globals';
 import { ProductLogPage } from 'src/app/modals/product-log/product-log.page';
 import { StockPage } from 'src/app/modals/stock/stock.page';
 import { AlertService } from 'src/app/services/alert/alert.service';
@@ -27,7 +26,7 @@ export class InventoryPage implements OnInit {
   public categories: any = [];
   public types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'SKU', id: 'sku'}, {name: 'Categoría', id: 'categoryName'}, {name: 'Precio', id: 'precio'}, {name: 'Costo', id: 'costo'}, {name: 'Stock', id: 'stock'}, {name: 'Descripción', id: 'descripcion'}]
   
-  constructor(private spinner: NgxSpinnerService, private globals: Globals, private productService: ProductService,  private alertService: AlertService, private modal: ModalController) { }
+  constructor(private spinner: NgxSpinnerService, private productService: ProductService,  private alertService: AlertService, private modal: ModalController) { }
 
   ngOnInit() {
     this.spinner.show();

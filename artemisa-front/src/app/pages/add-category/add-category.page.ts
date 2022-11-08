@@ -6,7 +6,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Globals } from 'src/app/globals';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { CategoryService } from 'src/app/services/category/category.service';
-import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-add-category',
@@ -20,7 +19,7 @@ export class AddCategoryPage implements OnInit {
   public provs = this.globals.provincias;
   public categories: any = [];
   
-  constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private categoryService: CategoryService, private userService: UserService, private alertService: AlertService, private modalController: ModalController) { }
+  constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private categoryService: CategoryService, private alertService: AlertService, private modalController: ModalController) { }
 
   ngOnInit() {
     this.createForm();
