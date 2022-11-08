@@ -15,13 +15,15 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class AddCustomerPage implements OnInit {
 
-  form: FormGroup;
-  @Input() data: any = null;
-  constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private customerService: CustomerService, private userService: UserService, private alertService: AlertService, private modalController: ModalController) { }
-  provs = this.globals.provincias;
-  categories: any = [];
-  cantones: any = [];
   @Input() newUser: any = null;
+  @Input() data: any = null;
+  public provs = this.globals.provincias;
+  public categories: any = [];
+  public cantones: any = [];
+  public form: FormGroup;
+  
+  constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private customerService: CustomerService, private userService: UserService, private alertService: AlertService, private modalController: ModalController) { }
+
 
   ngOnInit() {
     this.spinner.show();

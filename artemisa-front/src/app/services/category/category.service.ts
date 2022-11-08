@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { deleteUser, getAuth } from "firebase/auth";
-import { doc, setDoc, getDoc, getDocs, collection, query, deleteDoc, getFirestore, where, addDoc, limit } from "firebase/firestore";
+import { doc, setDoc, collection, query, deleteDoc, getFirestore, where, addDoc, limit } from "firebase/firestore";
 import { Router } from '@angular/router';
 
 @Injectable({

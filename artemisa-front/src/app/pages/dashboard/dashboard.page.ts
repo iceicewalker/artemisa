@@ -6,20 +6,7 @@ import { AlertService } from 'src/app/services/alert/alert.service';
 import { CustomerService } from 'src/app/services/customer/customer.service';
 import { OrderService } from 'src/app/services/order/order.service';
 import { ProductService } from 'src/app/services/product/product.service';
-
-import {
-  ApexAxisChartSeries,
-  ApexChart,
-  ChartComponent,
-  ApexDataLabels,
-  ApexPlotOptions,
-  ApexYAxis,
-  ApexLegend,
-  ApexStroke,
-  ApexXAxis,
-  ApexFill,
-  ApexTooltip
-} from "ng-apexcharts";
+import { ApexAxisChartSeries, ApexChart, ChartComponent, ApexDataLabels, ApexPlotOptions, ApexYAxis, ApexLegend, ApexStroke, ApexXAxis, ApexFill, ApexTooltip } from "ng-apexcharts";
 
 export type ChartOptions = {
   series: ApexAxisChartSeries;
@@ -43,21 +30,17 @@ export class DashboardPage implements OnInit {
 
   @ViewChild("chart") chart: ChartComponent;
   public chartOptions: Partial<ChartOptions>;
-  counter: any = { p: 0, c: 0, t: 0, cc: 0 }
-  counterC: any = { m: 0, y: 0, t: 0 }
-  counterP: any = { p: 0, c: 0, t: 0 }
-  orders: any = [];
-  users: any = [];
-  products: any = [];
-  ordersFiltered: any = [];
-  usersFiltered: any = [];
-  productsFiltered: any = [];
-  chartLoaded: boolean = false;
-  
-  range = new FormGroup({
-    start: new FormControl<Date | null>(null, Validators.required),
-    end: new FormControl<Date | null>(null, Validators.required),
-  });
+  public counter: any = { p: 0, c: 0, t: 0, cc: 0 }
+  public counterC: any = { m: 0, y: 0, t: 0 }
+  public counterP: any = { p: 0, c: 0, t: 0 }
+  public orders: any = [];
+  public users: any = [];
+  public products: any = [];
+  public ordersFiltered: any = [];
+  public usersFiltered: any = [];
+  public productsFiltered: any = [];
+  public chartLoaded: boolean = false;
+  public range = new FormGroup({ start: new FormControl<Date | null>(null, Validators.required), end: new FormControl<Date | null>(null, Validators.required) });
 
   constructor(private cdr: ChangeDetectorRef, private alertService: AlertService, private productService: ProductService, private spinner: NgxSpinnerService, private orderService: OrderService, private userService: CustomerService) { }
 

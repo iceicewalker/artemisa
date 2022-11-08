@@ -15,16 +15,16 @@ import { AddOrderPage } from '../add-order/add-order.page';
 })
 export class OrdersPage implements OnInit {
 
-  counter: any = { p: 0, c: 0, t: 0, cc: 0 }
-  p: number = 1; 
-  isDescOrder: boolean = true;
-  orderHeader: String ='';
-  sortDirection = 1;
-  searchInput: any = { };
-  filter: any = "";
-  orders: any = [];
-  categories: any = [];
-  types: any = [{name: 'Descripción', id: 'descripcion'}, {name: 'Identificador', id: 'id'}, {name: 'Nombre y Apellido', id: 'usuarioNombre'}, {name: 'Correo', id: 'correo'}, {name: 'Documento (Cliente)', id: 'documentoValor'}]
+  public counter: any = { p: 0, c: 0, t: 0, cc: 0 }
+  public p: number = 1; 
+  public isDescOrder: boolean = true;
+  public orderHeader: String ='';
+  public sortDirection = 1;
+  public searchInput: any = { };
+  public filter: any = "";
+  public orders: any = [];
+  public categories: any = [];
+  public types: any = [{name: 'Descripción', id: 'descripcion'}, {name: 'Identificador', id: 'id'}, {name: 'Nombre y Apellido', id: 'usuarioNombre'}, {name: 'Correo', id: 'correo'}, {name: 'Documento (Cliente)', id: 'documentoValor'}]
   
   constructor(private customerService: CustomerService, private spinner: NgxSpinnerService, private orderService: OrderService, private alertService: AlertService, private modal: ModalController) { }
 
@@ -49,7 +49,6 @@ export class OrdersPage implements OnInit {
         querySnapshot.then((r) => { if(r.exists()){ payload.usuarioData = Object.assign(r.data(), { id: r.id }); payload.usuarioNombre = r.data()['nombre'] + " " + r.data()['apellido']; payload.correo = r.data()['correo']; payload.documentoValor = r.data()['documentoValor'] } })
         return payload;
       })
-      console.log(this.orders);
       this.spinner.hide();
     });
   }
@@ -99,6 +98,5 @@ export class OrdersPage implements OnInit {
       cssClass: 'evaluate-modal-l'
     });
     modal.present();
-    console.log(order);
   }
 }

@@ -13,12 +13,12 @@ import { AddProductCategoryPage } from '../add-product-category/add-product-cate
 })
 export class ProductCategoriesPage implements OnInit {
 
-  p: number = 1; 
-  isDescOrder: boolean = true;
-  orderHeader: String ='';
-  sortDirection = 1;
-  searchInput: any = { nombre: '' };
-  cats: any;
+  public p: number = 1; 
+  public isDescOrder: boolean = true;
+  public orderHeader: String ='';
+  public sortDirection = 1;
+  public searchInput: any = { nombre: '' };
+  public cats: any;
   
   constructor(private userService: UserService, private categoryService: ProductService,  private alertService: AlertService, private modal: ModalController) { }
 

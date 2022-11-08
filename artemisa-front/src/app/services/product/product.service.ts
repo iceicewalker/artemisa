@@ -36,7 +36,7 @@ export class ProductService {
             }
         };
         const headers = new HttpHeaders({ 'Content-Type': 'application/json', 'Accept': 'application/json', 'Authorization': `Bearer ${environment.whatsAppKey}` });
-        this.http.post(`https://graph.facebook.com/v13.0/${environment.whatsAppId}/messages`, payload, { headers: headers }).subscribe((r) => { console.log(r) });
+        this.http.post(`https://graph.facebook.com/v13.0/${environment.whatsAppId}/messages`, payload, { headers: headers }).subscribe((r) => { });
     });
   }
 

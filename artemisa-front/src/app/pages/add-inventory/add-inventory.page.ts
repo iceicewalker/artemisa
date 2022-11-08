@@ -6,9 +6,6 @@ import { NgxSpinnerService } from 'ngx-spinner';
 import { Globals } from 'src/app/globals';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { getDownloadURL, getStorage, ref, uploadBytesResumable } from "firebase/storage";
-import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
-import { initializeApp } from 'firebase/app';
-import { environment } from 'src/environments/environment';
 import { ProductService } from 'src/app/services/product/product.service';
 
 @Component({
@@ -18,13 +15,14 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class AddInventoryPage implements OnInit {
 
-  form: FormGroup;
   @Input() data: any = null;
   @Input() myProfile: any = null;
+  public form: FormGroup;  
+  public provs = this.globals.provincias;
+  public ranks = this.globals.rangos;
+  public categories: any = [];
+
   constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private productService: ProductService, private alertService: AlertService, private modalController: ModalController) { }
-  provs = this.globals.provincias;
-  ranks = this.globals.rangos;
-  categories: any = [];
 
   ngOnInit() {
     this.createForm();

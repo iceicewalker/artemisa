@@ -13,9 +13,10 @@ import { ProductService } from 'src/app/services/product/product.service';
 })
 export class StockPage implements OnInit {
 
-  form: FormGroup;
   @Input() data: any = null;
   @Input() type: any = null;
+  public form: FormGroup;
+  
   constructor(private spinner: NgxSpinnerService, private fb: FormBuilder, private productService: ProductService, private alertService: AlertService, private modalController: ModalController) { }
 
   ngOnInit() {

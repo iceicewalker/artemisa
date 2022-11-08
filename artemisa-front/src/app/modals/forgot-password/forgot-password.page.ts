@@ -12,8 +12,7 @@ import { AlertService } from 'src/app/services/alert/alert.service';
 })
 export class ForgotPasswordPage implements OnInit {
 
- 
-  forgotForm: FormGroup;
+  public forgotForm: FormGroup;
   constructor(private formBuilder: FormBuilder, private modalController: ModalController, private alertService: AlertService, private globals: Globals) { }
 
   ngOnInit() {

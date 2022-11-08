@@ -68,6 +68,10 @@
                 <td>{{pro.precio * pro.cantidad | number : '1.2-2'}}</td>
               </tr>
               <tr>
+                <td colspan="3" style="text-align:right"><strong>IVA ({{data?.total.ivaPorcentaje * 100 | number : '1.2-2'}}%):</strong></td>
+                <td colspan="2">{{data?.total.iva | number : '1.2-2'}}</td>
+              </tr>
+              <tr>
                 <td colspan="3" style="text-align:right"><strong>VALOR TOTAL:</strong></td>
                 <td colspan="2">{{data?.total.total | number : '1.2-2'}}</td>
               </tr>

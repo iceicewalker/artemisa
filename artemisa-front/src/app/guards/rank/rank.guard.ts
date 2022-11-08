@@ -3,7 +3,6 @@ import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTr
 import { getAuth } from 'firebase/auth';
 import { getDoc } from 'firebase/firestore';
 import { Observable } from 'rxjs';
-import { AuthService } from 'src/app/services/auth/auth.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Injectable({

@@ -7,9 +7,12 @@ import { IonInput } from '@ionic/angular';
   styleUrls: ['./show-hide-password.page.scss'],
 })
 export class ShowHidePasswordPage {
-  showPassword = false;
+
   @ContentChild('input') input: ElementRef;
+  public showPassword = false;
+
   constructor() {}
+  
   toggleShow() { // Toggle Show Hide password
     this.showPassword = !this.showPassword;
     this.input.nativeElement.type = this.showPassword ? 'text' : 'password';

@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
 import { getAuth } from 'firebase/auth';
-import { arrayUnion, FieldValue, getDocs, increment, onSnapshot } from 'firebase/firestore';
+import { arrayUnion, getDocs, increment, onSnapshot } from 'firebase/firestore';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Globals } from 'src/app/globals';
 import { ViewProductsPage } from 'src/app/modals/view-products/view-products.page';
@@ -20,26 +20,22 @@ import { AddCustomerPage } from '../add-customer/add-customer.page';
 })
 export class AddOrderPage implements OnInit {
   @Input() data: any;
-  stage: Number = 0;
-  p: number = 1; 
-  isDescOrder: boolean = true;
-  orderHeader: String ='';
-  sortDirection = 1;
-  searchInput: any = { selected: true };
-  filter: any = "";
-  products: any;
-  categories: any = [];
-  cart: any = [];
-  form: FormGroup;
-  cantones: any = [];
-  total = {
-    total: 0,
-    iva: 0,
-    ivaPorcentaje: Number(this.globals.iva)
-  }
-  user: any = {};
-  customer: any = {};
-  provs = this.globals.provincias;
+  public stage: Number = 0;
+  public p: number = 1; 
+  public isDescOrder: boolean = true;
+  public orderHeader: String ='';
+  public sortDirection = 1;
+  public searchInput: any = { selected: true };
+  public filter: any = "";
+  public products: any;
+  public categories: any = [];
+  public cart: any = [];
+  public form: FormGroup;
+  public cantones: any = [];
+  public total = { total: 0, iva: 0, ivaPorcentaje: Number(this.globals.iva) }
+  public user: any = {};
+  public customer: any = {};
+  public provs = this.globals.provincias;
   constructor(private orderService: OrderService, private modalController: ModalController, private cdr: ChangeDetectorRef, private globals: Globals, private customerService: CustomerService, private userService: UserService, private fb: FormBuilder, private spinner: NgxSpinnerService, private productService: ProductService,  private alertService: AlertService) { }
 
   ngOnInit() {

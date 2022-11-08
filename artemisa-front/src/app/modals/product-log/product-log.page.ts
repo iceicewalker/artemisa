@@ -8,14 +8,14 @@ import { ModalController } from '@ionic/angular';
 })
 export class ProductLogPage implements OnInit {
 
-  counter: any = { p: 0, c: 0, t: 0 }
   @Input() data: any = null;
-  p: number = 1; 
-  isDescOrder: boolean = true;
-  orderHeader: String ='';
-  sortDirection = 1;
-  searchInput: any = { };
-  filter: any = "";
+  public counter: any = { p: 0, c: 0, t: 0 }
+  public p: number = 1; 
+  public isDescOrder: boolean = true;
+  public orderHeader: String ='';
+  public sortDirection = 1;
+  public searchInput: any = { };
+  public filter: any = "";
   
   constructor(private modal: ModalController) { }
 

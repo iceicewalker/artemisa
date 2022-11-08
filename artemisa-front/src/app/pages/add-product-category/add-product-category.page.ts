@@ -1,12 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ModalController } from '@ionic/angular';
-import { onSnapshot, getDocs } from 'firebase/firestore';
+import { getDocs } from 'firebase/firestore';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Globals } from 'src/app/globals';
 import { AlertService } from 'src/app/services/alert/alert.service';
 import { ProductService } from 'src/app/services/product/product.service';
-import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-add-product-category',
@@ -15,11 +14,12 @@ import { UserService } from 'src/app/services/user/user.service';
 })
 export class AddProductCategoryPage implements OnInit {
 
-  form: FormGroup;
-  @Input() data: any = null;
+  @Input() data: any = null;  
+  public form: FormGroup;
+  public provs = this.globals.provincias;
+  public categories: any = [];
+
   constructor(private spinner: NgxSpinnerService, private globals: Globals, private fb: FormBuilder, private categoryService: ProductService, private alertService: AlertService, private modalController: ModalController) { }
-  provs = this.globals.provincias;
-  categories: any = [];
 
   ngOnInit() {
     this.createForm();

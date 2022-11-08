@@ -16,17 +16,16 @@ import { AddInventoryPage } from '../add-inventory/add-inventory.page';
 })
 export class InventoryPage implements OnInit {
 
-  counter: any = { p: 0, c: 0, t: 0 }
-
-  p: number = 1; 
-  isDescOrder: boolean = true;
-  orderHeader: String ='';
-  sortDirection = 1;
-  searchInput: any = { nombre: '' };
-  filter: any = "";
-  products: any = [];
-  categories: any = [];
-  types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'SKU', id: 'sku'}, {name: 'Categoría', id: 'categoryName'}, {name: 'Precio', id: 'precio'}, {name: 'Costo', id: 'costo'}, {name: 'Stock', id: 'stock'}, {name: 'Descripción', id: 'descripcion'}]
+  public counter: any = { p: 0, c: 0, t: 0 }
+  public p: number = 1; 
+  public isDescOrder: boolean = true;
+  public orderHeader: String ='';
+  public sortDirection = 1;
+  public searchInput: any = { nombre: '' };
+  public filter: any = "";
+  public products: any = [];
+  public categories: any = [];
+  public types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'SKU', id: 'sku'}, {name: 'Categoría', id: 'categoryName'}, {name: 'Precio', id: 'precio'}, {name: 'Costo', id: 'costo'}, {name: 'Stock', id: 'stock'}, {name: 'Descripción', id: 'descripcion'}]
   
   constructor(private spinner: NgxSpinnerService, private globals: Globals, private productService: ProductService,  private alertService: AlertService, private modal: ModalController) { }
 

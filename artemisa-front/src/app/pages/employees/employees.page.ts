@@ -13,15 +13,15 @@ import { AddEmployeePage } from '../add-employee/add-employee.page';
 })
 export class EmployeesPage implements OnInit {
 
-  p: number = 1; 
-  isDescOrder: boolean = true;
-  orderHeader: String ='';
-  sortDirection = 1;
-  searchInput: any = { nombre: '', apellido: '', rango: '', documentoValor: '' };
-  filter: any = "";
-  users: any;
-  categories = this.globals.rangos;
-  types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'Apellido', id: 'apellido'}, {name: 'Documento', id: 'documentoValor'}, {name: 'Provincia', id: 'provincia'}, {name: 'Cantón', id: 'canton'}]
+  public p: number = 1; 
+  public isDescOrder: boolean = true;
+  public orderHeader: String ='';
+  public sortDirection = 1;
+  public searchInput: any = { nombre: '', apellido: '', rango: '', documentoValor: '' };
+  public filter: any = "";
+  public users: any;
+  public categories = this.globals.rangos;
+  public types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'Apellido', id: 'apellido'}, {name: 'Documento', id: 'documentoValor'}, {name: 'Provincia', id: 'provincia'}, {name: 'Cantón', id: 'canton'}]
   
   constructor(private globals: Globals, private userService: UserService,  private alertService: AlertService, private modal: ModalController) { }
 

@@ -14,16 +14,17 @@ import { NgxSpinnerService } from 'ngx-spinner';
 })
 export class CustomersPage implements OnInit {
 
-  p: number = 1; 
-  isDescOrder: boolean = true;
-  orderHeader: String ='';
-  sortDirection = 1;
-  searchInput: any = { nombre: '', apellido: '' };
-  users: any = [];
-  categories: any = [];
-  filter: any = "";
-  types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'Apellido', id: 'apellido'}, {name: 'Documento', id: 'documentoValor'}, {name: 'Provincia', id: 'provincia'}, {name: 'Cantón', id: 'canton'}, {name: "Categoría", id: "categoryName"}]
-  counter: any = { m: 0, y: 0, t: 0 }
+  public p: number = 1; 
+  public isDescOrder: boolean = true;
+  public orderHeader: String ='';
+  public sortDirection = 1;
+  public searchInput: any = { nombre: '', apellido: '' };
+  public users: any = [];
+  public categories: any = [];
+  public filter: any = "";
+  public types: any = [{name: 'Nombre', id: 'nombre'}, {name: 'Apellido', id: 'apellido'}, {name: 'Documento', id: 'documentoValor'}, {name: 'Provincia', id: 'provincia'}, {name: 'Cantón', id: 'canton'}, {name: "Categoría", id: "categoryName"}]
+  public counter: any = { m: 0, y: 0, t: 0 }
+  
   constructor(private spinner: NgxSpinnerService, private userService: CustomerService, private usersService: UserService, private alertService: AlertService, private modal: ModalController) { }
 
   ngOnInit() {
