@@ -14,7 +14,7 @@ David Andrés Barreno Montesdeoca
 Jorge Alarcón M.
 
 ## Universidad
-Pontificia Católica Universidad del Ecuador
+Pontificia Universidad Católica del Ecuador
 
 ## Tecnología
 - Angular CLI: 14.2.4
