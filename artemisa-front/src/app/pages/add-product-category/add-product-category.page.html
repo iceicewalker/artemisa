@@ -13,7 +13,7 @@
             <div class="card-body">
               <form class="row" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="mb-3 col-lg-12 col-ms-12">
-                  <label for="input" class="form-label">Nombre</label>
+                  <label for="input" class="form-label">Nombre *</label>
                   <input type="email" class="form-control" aria-describedby="help" placeholder="Zapatos" formControlName="nombre" [ngClass]="{'is-invalid' : form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)}">
                   <div class="form-text">Nombre de la categoría.</div>
                   <ng-container *ngIf="form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)">

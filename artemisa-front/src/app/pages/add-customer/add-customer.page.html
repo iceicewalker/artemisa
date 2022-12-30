@@ -13,7 +13,7 @@
             <div class="card-body">
               <form class="row" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="mb-3 col-lg-4 col-ms-4" *ngIf="!data">
-                  <label for="input" class="form-label">Tipo de documento</label>
+                  <label for="input" class="form-label">Tipo de documento *</label>
                   <select class="form-select" placeholder="Selecciona el tipo de documento" formControlName="documentoTipo" aria-label="Tipo de documento" [ngClass]="{'is-invalid' : form.controls['documentoTipo'].invalid && (form.controls['documentoTipo'].dirty || form.controls['documentoTipo'].touched)}">
                     <option selected value="">Selecciona el tipo de documento</option>
                     <option value="0">Cédula</option>
@@ -26,7 +26,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-8 col-ms-8" *ngIf="!data">
-                  <label for="input" class="form-label">Documento</label>
+                  <label for="input" class="form-label">Documento *</label>
                   <input type="text" formControlName="documentoValor" class="form-control" aria-describedby="help" placeholder="XXXXXXXXXX" [ngClass]="{'is-invalid' : form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)}">
                   <div class="form-text">Documento de identidad (Ej: 1710000091).</div>
                   <ng-container *ngIf="form.controls['documentoValor'].invalid && (form.controls['documentoValor'].dirty || form.controls['documentoValor'].touched)">
@@ -35,7 +35,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-6 col-ms-12">
-                  <label for="input" class="form-label">Nombre</label>
+                  <label for="input" class="form-label">Nombre *</label>
                   <input type="text" class="form-control" aria-describedby="help" placeholder="Juan" formControlName="nombre" [ngClass]="{'is-invalid' : form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)}">
                   <div class="form-text">Nombre del cliente (Ej: Juan).</div>
                   <ng-container *ngIf="form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)">
@@ -43,7 +43,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-6 col-ms-12">
-                  <label for="input" class="form-label">Apellido</label>
+                  <label for="input" class="form-label">Apellido *</label>
                   <input type="text" class="form-control" aria-describedby="help" placeholder="Perez" formControlName="apellido" [ngClass]="{'is-invalid' : form.controls['apellido'].invalid && (form.controls['apellido'].dirty || form.controls['apellido'].touched)}">
                   <div class="form-text">Apellido del cliente (Ej: Rodríguez).</div>
                   <ng-container *ngIf="form.controls['apellido'].invalid && (form.controls['apellido'].dirty || form.controls['apellido'].touched)">
@@ -51,7 +51,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-4">
-                  <label for="input" class="form-label">Correo</label>
+                  <label for="input" class="form-label">Correo *</label>
                   <input type="email" class="form-control" aria-describedby="help" placeholder="ejemplo@hotmail.com" formControlName="email" [ngClass]="{'is-invalid' : form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)}">
                   <div class="form-text">Correo del cliente (Ej: ejemplo@hotmail.com).</div>
                   <ng-container *ngIf="form.controls['email'].invalid && (form.controls['email'].dirty || form.controls['email'].touched)">
@@ -60,7 +60,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-4">
-                  <label for="input" class="form-label">Teléfono</label>
+                  <label for="input" class="form-label">Teléfono *</label>
                   <input type="phone" class="form-control" aria-describedby="help" placeholder="0989XXXXXX" formControlName="telefono" [ngClass]="{'is-invalid' : form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)}">
                   <div class="form-text">Teléfono del cliente (Ej: 0989300000).</div>
                   <ng-container *ngIf="form.controls['telefono'].invalid && (form.controls['telefono'].dirty || form.controls['telefono'].touched)">
@@ -68,7 +68,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-4">
-                  <label for="input" class="form-label">Categoría</label>
+                  <label for="input" class="form-label">Categoría *</label>
                   <select class="form-select" aria-describedby="help" placeholder="Selecciona la categoría" formControlName="categoria" [ngClass]="{'is-invalid' : form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)}">
                     <option selected value="">Selecciona la categoría del cliente</option>
                     <option *ngFor="let cat of categories" [value]="cat.id">{{cat.nombre}}</option>
@@ -79,7 +79,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-12">
-                  <label for="input" class="form-label">Provincia</label>
+                  <label for="input" class="form-label">Provincia *</label>
                   <select (change)="setCantones()" class="form-select" aria-describedby="help" placeholder="Pichincha" formControlName="provincia" [ngClass]="{'is-invalid' : form.controls['provincia'].invalid && (form.controls['provincia'].dirty || form.controls['provincia'].touched)}">
                     <option selected value="">Selecciona la Provincia</option>
                     <option *ngFor="let prov of provs" [value]="prov.id">{{prov.id}}</option>
@@ -90,7 +90,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-12" *ngIf="form.value?.provincia">
-                  <label for="input" class="form-label">Cantón</label>
+                  <label for="input" class="form-label">Cantón *</label>
                   <select class="form-select" aria-describedby="help" formControlName="canton" [ngClass]="{'is-invalid' : form.controls['canton'].invalid && (form.controls['canton'].dirty || form.controls['canton'].touched)}">
                     <option selected value="">Selecciona el Cantón</option>
                     <option *ngFor="let can of cantones" [value]="can">{{can}}</option>
@@ -101,7 +101,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-4 col-ms-12">
-                  <label for="input" class="form-label">Dirección</label>
+                  <label for="input" class="form-label">Dirección *</label>
                   <input type="email" class="form-control" aria-describedby="help" placeholder="Av. del Maestro" formControlName="direccion" [ngClass]="{'is-invalid' : form.controls['direccion'].invalid && (form.controls['direccion'].dirty || form.controls['direccion'].touched)}">
                   <div class="form-text">Dirección del cliente para los envíos.</div>
                   <ng-container *ngIf="form.controls['direccion'].invalid && (form.controls['direccion'].dirty || form.controls['direccion'].touched)">

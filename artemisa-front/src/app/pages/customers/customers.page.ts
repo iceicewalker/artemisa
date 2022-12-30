@@ -46,6 +46,7 @@ export class CustomersPage implements OnInit {
       var currentDate = new Date();
       var curMonth = currentDate.getMonth() + 1;
       var curYear = currentDate.getFullYear();
+      this.counter.y = 0;
       this.users.forEach((u) => {
         let date = new Date(u.creacion.toDate());
         if(date.getFullYear() === curYear){

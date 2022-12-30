@@ -44,6 +44,7 @@ export class InventoryPage implements OnInit {
   loadProducts(){ //Retrieve all products
     const q = this.productService.getQuery();
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
+      this.counter = { p: 0, c: 0, t: 0 }
       this.products = querySnapshot.docs.map((doc) => {
         let cat = this.categories.find((cat) => cat.id === doc.data()['categoria'])
         if(doc.data()['stock'] <= doc.data()['stockMinimo'])

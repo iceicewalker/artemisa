@@ -6,6 +6,24 @@
           <h4><b>Administrar Categorías</b></h4>
           <h6>En esta pestaña se podrá visualizar, modificar y eliminar categorías.</h6>
         </div>
+        <div class="row">
+          <div class="col-md-6 pb-3">
+            <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+              <ion-item style="width: 100%;">
+                <ion-select style="width: 100%;" placeholder="Selecciona la categoría a filtrar"
+                  (ionChange)="filter = $event.target['value'] === 'All' ? '' : $event.target['value']">
+                  <ion-select-option *ngFor="let cat of types" [value]="cat.id">{{cat.name}}</ion-select-option>
+                  <ion-select-option value="All">Todas</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </div>
+          </div>
+          <div class="col-md-6 pb-3">
+            <div style="width: 100%;width: 100%; height: 100%; display: flex; align-items: center;">
+              <input class="form-control" type="text" [(ngModel)]="searchInput[filter]" placeholder="Texto a buscar..." [disabled]="filter === ''">
+            </div>
+          </div>
+        </div>
         <div class="col-md-12 col-lg-12 pb-3">
           <div class="card">
             <div class="card-body">
@@ -30,13 +48,12 @@
                     <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>#</b></h3>
-                        {{ (i + 1) }}
+                        {{ (i + 1 + ((p - 1) * 10) ) }}
                       </ion-label></td>
                     <td class="align-middle">
                       <ion-label>
                         <h3 class="table-dynamic-hide"><b>Nombre</b></h3>
-                        <h2>{{cat.nombre}} {{ cat.apellido }}</h2>
-                        <h3>{{cat.email}}</h3>
+                        <h2>{{cat.nombre}}</h2>
                       </ion-label>
                     </td>
                     <td class="align-middle">

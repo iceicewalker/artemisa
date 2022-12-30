@@ -15,9 +15,11 @@ export class CategoriesPage implements OnInit {
 
   public p: number = 1; 
   public isDescOrder: boolean = true;
-  public orderHeader: String ='';
+  public orderHeader: String ='name';
   public sortDirection = 1;
   public searchInput: any = { nombre: '' };
+  public filter: any = "";
+  public types: any = [{name: 'Nombre', id: 'nombre'}]
   public cats: any;
   
   constructor(private userService: UserService, private categoryService: CategoryService,  private alertService: AlertService, private modal: ModalController) { }
@@ -66,7 +68,7 @@ export class CategoriesPage implements OnInit {
     if(this.isDescOrder)
       this.sortDirection = 1
     else
-      this.sortDirection =2
+      this.sortDirection = 2
     this.orderHeader = headerName;
   }
 

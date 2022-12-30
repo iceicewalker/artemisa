@@ -114,7 +114,8 @@ export class AddEmployeePage implements OnInit {
     this.spinner.show();
     if(this.form.valid){
       var payload = this.form.value;
-      payload.rango = Number(payload.rango)
+      if(payload?.rango)
+        payload.rango = Number(payload.rango)
       if(this.data){
         payload.id = this.data['id'];
         this.userService.set(payload).then((r) => {

@@ -24,7 +24,7 @@
                 <select class="form-select" placeholder="Selecciona el tipo de documento" formControlName="documentoTipo"
                   aria-label="Tipo de documento"
                   [ngClass]="{'is-invalid' : form.controls['documentoTipo'].invalid && (form.controls['documentoTipo'].dirty || form.controls['documentoTipo'].touched)}">
-                  <option selected value="">Selecciona el tipo de documento</option>
+                  <option selected value="">Selecciona el tipo de documento *</option>
                   <option value="0">Cédula</option>
                   <option value="1">RUC</option>
                   <option value="2">Otro</option>
@@ -37,7 +37,7 @@
                 </ng-container>
               </div>
               <div class="mb-3 col-lg-8 col-ms-8">
-                <label for="input" class="form-label">Documento</label>
+                <label for="input" class="form-label">Documento *</label>
                 <div style="position:relative">
                   <input type="text" formControlName="documentoValor" class="form-control" aria-describedby="help"
                     placeholder="XXXXXXXXXX"
@@ -261,7 +261,7 @@
           <div class="card mt-3">
             <div class="card-body row">
               <div class="mb-3 col-lg-4 col-ms-4">
-                <label for="input" class="form-label">Estado</label>
+                <label for="input" class="form-label">Estado *</label>
                 <select class="form-select" placeholder="Selecciona el estado del pedido" formControlName="estado"
                   aria-label="Tipo de documento"
                   [ngClass]="{'is-invalid' : form.controls['estado'].invalid && (form.controls['estado'].dirty || form.controls['estado'].touched)}">

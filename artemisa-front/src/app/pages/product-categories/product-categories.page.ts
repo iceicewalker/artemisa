@@ -18,6 +18,8 @@ export class ProductCategoriesPage implements OnInit {
   public orderHeader: String ='';
   public sortDirection = 1;
   public searchInput: any = { nombre: '' };
+  public filter: any = "";
+  public types: any = [{name: 'Nombre', id: 'nombre'}]
   public cats: any;
   
   constructor(private userService: UserService, private categoryService: ProductService,  private alertService: AlertService, private modal: ModalController) { }

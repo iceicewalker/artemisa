@@ -10,7 +10,7 @@ export class Globals {
     {id: 2, name: "Empleado"},
   ]
   NAVLIST = [
-      {"link": "dashboard", "name": "Dashboard", "icon": "stats-chart", "sublinks": [], "rank": [1, 2]},
+      {"link": "", "name": "Dashboard", "icon": "stats-chart", "sublinks": [], "rank": [1, 2]},
       {"link": "customer", "name": "Clientes", "icon": "people-outline", "sublinks": [
         {"link": "add-customer", "name": "Ingresar Cliente", "icon": "add-outline", "rank": [1, 2]},
         {"link": "customers", "name": "Administrar Clientes", "icon": "id-card-outline", "rank": [1, 2]},

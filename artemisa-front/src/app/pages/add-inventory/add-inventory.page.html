@@ -13,7 +13,7 @@
             <div class="card-body">
               <form class="row" [formGroup]="form" (ngSubmit)="submit()">
                 <div class="mb-3 col-lg-6 col-ms-12">
-                  <label for="input" class="form-label">SKU</label>
+                  <label for="input" class="form-label">SKU *</label>
                   <input type="text" class="form-control" aria-describedby="help" placeholder="XXXX-XXXX-XXXX" formControlName="sku" [ngClass]="{'is-invalid' : form.controls['sku'].invalid && (form.controls['sku'].dirty || form.controls['sku'].touched)}">
                   <div class="form-text">El número/código de referencia.</div>
                   <ng-container *ngIf="form.controls['sku'].invalid && (form.controls['sku'].dirty || form.controls['sku'].touched)">
@@ -21,7 +21,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-6 col-ms-12">
-                  <label for="input" class="form-label">Nombre</label>
+                  <label for="input" class="form-label">Nombre *</label>
                   <input type="text" class="form-control" aria-describedby="help" placeholder="Nombre del Producto" formControlName="nombre" [ngClass]="{'is-invalid' : form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)}">
                   <div class="form-text">Nombre del producto (Ej: Gorra negra).</div>
                   <ng-container *ngIf="form.controls['nombre'].invalid && (form.controls['nombre'].dirty || form.controls['nombre'].touched)">
@@ -29,7 +29,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-6 col-ms-12">
-                  <label for="input" class="form-label">Categoría</label>
+                  <label for="input" class="form-label">Categoría *</label>
                   <select class="form-select" aria-describedby="help" placeholder="Selecciona la categoría" formControlName="categoria" [ngClass]="{'is-invalid' : form.controls['categoria'].invalid && (form.controls['categoria'].dirty || form.controls['categoria'].touched)}">
                     <option selected value="">Selecciona la categoría del producto</option>
                     <option *ngFor="let cat of categories" [value]="cat.id">{{cat.nombre}}</option>
@@ -40,7 +40,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-3 col-ms-3">
-                  <label for="input" class="form-label">Costo</label>
+                  <label for="input" class="form-label">Costo *</label>
                   <input currencyMask  type="text" class="form-control" aria-describedby="help" placeholder="$0.00" formControlName="costo" [ngClass]="{'is-invalid' : form.controls['costo'].invalid && (form.controls['costo'].dirty || form.controls['costo'].touched)}">
                   <div class="form-text">Costo de compra o producción.</div>
                   <ng-container *ngIf="form.controls['costo'].invalid && (form.controls['costo'].dirty || form.controls['costo'].touched)">
@@ -49,7 +49,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-3 col-ms-3">
-                  <label for="input" class="form-label">Precio de venta</label>
+                  <label for="input" class="form-label">Precio de venta *</label>
                   <input currencyMask  type="text" class="form-control" aria-describedby="help" placeholder="$0.00" formControlName="precio" [ngClass]="{'is-invalid' : form.controls['precio'].invalid && (form.controls['precio'].dirty || form.controls['precio'].touched)}">
                   <div class="form-text">Precio de venta al público.</div>
                   <ng-container *ngIf="form.controls['precio'].invalid && (form.controls['precio'].dirty || form.controls['precio'].touched)">
@@ -58,7 +58,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-3 col-ms-3" *ngIf="!data">
-                  <label for="input" class="form-label">Stock</label>
+                  <label for="input" class="form-label">Stock *</label>
                   <input  type="number" class="form-control" aria-describedby="help" placeholder="100" formControlName="stock" [ngClass]="{'is-invalid' : form.controls['stock'].invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)}">
                   <div class="form-text">Cantidades en existencia.</div>
                   <ng-container *ngIf="form.controls['stock'].invalid && (form.controls['stock'].dirty || form.controls['stock'].touched)">
@@ -67,7 +67,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-3 col-ms-3">
-                  <label for="input" class="form-label">Stock Mínimo</label>
+                  <label for="input" class="form-label">Stock Mínimo *</label>
                   <input  type="number" class="form-control" aria-describedby="help" placeholder="100" formControlName="stockMinimo" [ngClass]="{'is-invalid' : form.controls['stockMinimo'].invalid && (form.controls['stockMinimo'].dirty || form.controls['stockMinimo'].touched)}">
                   <div class="form-text">Cantidades mínimas que deberían tener disponibles.</div>
                   <ng-container *ngIf="form.controls['stockMinimo'].invalid && (form.controls['stockMinimo'].dirty || form.controls['stockMinimo'].touched)">
@@ -76,7 +76,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-3 col-ms-3">
-                  <label for="input" class="form-label">Stock Medio</label>
+                  <label for="input" class="form-label">Stock Medio *</label>
                   <input  type="number" class="form-control" aria-describedby="help" placeholder="100" formControlName="stockMedio" [ngClass]="{'is-invalid' : form.controls['stockMedio'].invalid && (form.controls['stockMedio'].dirty || form.controls['stockMedio'].touched)}">
                   <div class="form-text">Cantidades mínimas que deberían tener disponibles.</div>
                   <ng-container *ngIf="form.controls['stockMedio'].invalid && (form.controls['stockMedio'].dirty || form.controls['stockMedio'].touched)">
@@ -85,7 +85,7 @@
                   </ng-container>
                 </div>
                 <div class="mb-3 col-lg-12 col-ms-12">
-                  <label for="input" class="form-label">Descripción</label>
+                  <label for="input" class="form-label">Descripción *</label>
                   <textarea type="text" class="form-control" aria-describedby="help" placeholder="Descripción" formControlName="descripcion" [ngClass]="{'is-invalid' : form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)}"></textarea>
                   <div class="form-text">Breve descripción del producto (puede incluir tamaños, etc).</div>
                   <ng-container *ngIf="form.controls['descripcion'].invalid && (form.controls['descripcion'].dirty || form.controls['descripcion'].touched)">
@@ -93,7 +93,7 @@
                   </ng-container>
                 </div>
                 <div class="photo-update pt-3 pb-3">
-                  <label for="input" class="form-label">Foto</label>
+                  <label for="input" class="form-label">Foto *</label>
                   <label for="file" class="input-file-btn">
                     <div class="newPhoto" *ngIf="form.value.foto" style="background: url({{form.value.foto}}) center center / cover;border-radius: 10px; height: 100%; left: 0px; position: absolute;top: 0px;width: 100%;z-index: 1;"></div>
                     <ion-icon name="cloud-upload-outline"></ion-icon>
